@@ -1,3 +1,5 @@
+> **Implemented connection:** Follow [the installation guide](INSTALL_AI_CONNECTION.md). It uses one round per submission and replaces the earlier two-form/manual design below. The earlier forms are not read by the automated worker. Installation, Google authorization and a live API test in your account are still required.
+
 # Google Forms setup — step by step
 
 ## What you will use
@@ -117,3 +119,4 @@ Test with fictional plates first:
 - A midnight boundary does not close a visit.
 
 These are acceptance scenarios for future implementation, not a claim that an analyzer is already installed.
+

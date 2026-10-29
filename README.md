@@ -10,15 +10,15 @@ Do not authorize a vehicle because it belongs to a tenant or employee, create te
 
 ## AI pattern review
 
-Use the [AI review workflow](docs/AI_Review_Workflow.md) and [reusable reviewer prompt](prompts/Parking_Pattern_Reviewer.md) to flag potential non-customer parking patterns with supporting check references. Review priorities are qualitative, not probabilities of a violation. The manual workflow is documented; the automatic AI connection is not deployed.
+Use the [AI review workflow](docs/AI_Review_Workflow.md) and [reusable reviewer prompt](prompts/Parking_Pattern_Reviewer.md) to flag potential non-customer parking patterns with supporting check references. Review priorities are qualitative, not probabilities of a violation. The automatic Google Forms → Sheets → OpenAI connection is implemented as installable Apps Script. Activation and a live test in your Google account are still required.
 
 ## Current status
 
-This repository documents the agreed requirements and proposed Google Forms workflow. It does not yet contain a deployed Google Form, automated analysis, or an AI service.
+The repository includes the Form installer, automated check/session analysis, OpenAI Responses API integration, private review-sheet output, a 15-minute worker, and automated tests. It has not been installed or authorized in a Google account here; no live API test has run.
 
 ## Start here
 
-1. Read [the Google Forms setup guide](docs/Google_Forms_Setup.md).
+1. Follow [Install Google Forms → Sheets → AI](docs/INSTALL_AI_CONNECTION.md). The installer uses one submission per completed or partial parking round.
 2. Record every vehicle present during each parking check.
 3. Mark the check complete, including a check where the area is empty.
 4. Use the rules below to interpret sightings.
@@ -75,8 +75,11 @@ This repository is public. Keep real plates, photos, response exports, vehicle-a
 
 Before operating, establish appropriate collection authority, access controls, retention/deletion rules, and provider evidence requirements. A parking restriction sign alone does not resolve the privacy requirements for systematic tracking.
 
-## Proposed implementation
+## Implementation
 
-Google Forms → restricted Google Sheets → deterministic session/pattern analysis → optional AI summaries → human review.
+Google Forms (one round per submission) → restricted Google Sheets / Apps Script → deterministic session analysis → pseudonymized OpenAI review → private Review sheet → human verification.
+
+Source: [Code.gs](apps-script/Code.gs), [Core.gs](apps-script/Core.gs). Test: `node --test tests/parking.test.cjs`. Scheduled runs check for changed data every 15 minutes; API use is disabled until configured. No external alerts or patrol calls are made.
 
 AI is optional: the core session rules should be reproducible calculations. Any AI summary should distinguish recorded facts from assumptions and can use internal vehicle IDs rather than actual plates.
+

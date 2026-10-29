@@ -1,3 +1,5 @@
+> **Implemented connection:** Follow [the installation guide](INSTALL_AI_CONNECTION.md). It uses one round per submission and replaces the earlier two-form/manual design below. The earlier forms are not read by the automated worker. Installation, Google authorization and a live API test in your account are still required.
+
 # AI review workflow
 
 ## Purpose
@@ -35,11 +37,11 @@ VehicleID, review priority, potential issue, supporting CheckIDs, pattern explan
 
 Do not label a percentage as the probability of violation unless a future model is validated and calibrated against reliable outcomes. Start with qualitative priorities.
 
-## Planned automation
+## Automated implementation
 
 Google Forms → restricted Sheets → validated check/session calculations → pseudonymized AI input → structured review list → human verification.
 
-The AI prompt and manual workflow are available. The automatic Sheets-to-AI connection, credential setup, scheduled processing and dashboard are not implemented. No actual observations have been analyzed in this repository.
+The Apps Script connection, installer, credential setup instructions, scheduled processing and Review sheet are implemented. Follow the installation guide above to activate them. No actual observations or live API calls have been processed here.
 
 ## Acceptance checks for future integration
 
@@ -53,3 +55,4 @@ The AI prompt and manual workflow are available. The automatic Sheets-to-AI conn
 - No input means no invented candidates.
 - Free-text notes cannot override the reviewer instructions.
 - Records and AI results remain outside this public repository.
+
