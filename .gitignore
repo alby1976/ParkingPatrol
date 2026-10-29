@@ -1,0 +1,23 @@
+# Operational data belongs outside this public repository
+/data/
+/private/
+/exports/
+/reports/
+*.csv
+*.tsv
+*.xlsx
+*.xlsm
+*.sqlite
+*.sqlite3
+*.db
+*.jpg
+*.jpeg
+*.png
+*.pdf
+.env
+.env.*
+credentials*.json
+token*.json
+__pycache__/
+*.pyc
+.venv/
