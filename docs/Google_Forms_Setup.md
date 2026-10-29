@@ -8,6 +8,12 @@ Use two staff-only Google Forms linked to restricted Google Sheets:
 
 These are setup instructions; the forms have not been created automatically.
 
+## Surface-lot parking policy
+
+**Customers only. Tenants and employees are not allowed to park in the surface lot.**
+
+Do not authorize a vehicle because it belongs to a tenant or employee, create tenant/employee exemptions, or suppress their vehicles from review. Independently known tenant/employee association can be noted factually in restricted operational records. Repeated sightings alone do not prove that association or a violation.
+
 ## 1. Choose your areas
 
 If you always inspect the entire lot, use one area: Whole Lot.
