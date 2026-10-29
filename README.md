@@ -2,6 +2,12 @@
 
 A parking-observation project for a private strip-mall surface lot with customer-only parking.
 
+## Surface-lot parking policy
+
+**Customers only. Tenants and employees are not allowed to park in the surface lot.**
+
+Do not authorize a vehicle because it belongs to a tenant or employee, create tenant/employee exemptions, or suppress their vehicles from review. Independently known tenant/employee association can be noted factually in restricted operational records. Repeated sightings alone do not prove that association or a violation.
+
 ## Current status
 
 This repository documents the agreed requirements and proposed Google Forms workflow. It does not yet contain a deployed Google Form, automated analysis, or an AI service.
@@ -50,7 +56,7 @@ Report: **Seen Monday at 09:00 and 12:00; absent at the 15:00 check.** Do not re
 - First and last sightings within each inferred visit.
 - First completed absence following each visit.
 - Repeated weekday routines and repeated observations outside configured business hours.
-- Authorized vehicle exceptions with effective and expiry dates.
+- Review of independently known tenant/employee vehicles under the no-tenant/no-employee surface-lot policy; no automatic exemptions.
 - A review list explaining the observations behind each flag.
 
 Time between sightings is an observation span, not proven continuous occupancy. Frequency or length alone does not establish that a vehicle belongs to a non-customer. Do not invent a time limit when the posted rule is customer-only.
@@ -61,7 +67,7 @@ Flags mean **review required**, not a confirmed violation. Verify the vehicle is
 
 ## Data handling
 
-This repository is public. Keep real plates, photos, response exports, authorization lists, credentials, and generated reports in restricted operational storage outside Git. Use fictional examples in code and documentation. Keep clinic patient records and appointment details out of parking records.
+This repository is public. Keep real plates, photos, response exports, vehicle-association records, credentials, and generated reports in restricted operational storage outside Git. Use fictional examples in code and documentation. Keep clinic patient records and appointment details out of parking records.
 
 Before operating, establish appropriate collection authority, access controls, retention/deletion rules, and provider evidence requirements. A parking restriction sign alone does not resolve the privacy requirements for systematic tracking.
 
