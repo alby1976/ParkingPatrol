@@ -8,6 +8,10 @@ A parking-observation project for a private strip-mall surface lot with customer
 
 Do not authorize a vehicle because it belongs to a tenant or employee, create tenant/employee exemptions, or suppress their vehicles from review. Independently known tenant/employee association can be noted factually in restricted operational records. Repeated sightings alone do not prove that association or a violation.
 
+## AI pattern review
+
+Use the [AI review workflow](docs/AI_Review_Workflow.md) and [reusable reviewer prompt](prompts/Parking_Pattern_Reviewer.md) to flag potential non-customer parking patterns with supporting check references. Review priorities are qualitative, not probabilities of a violation. The manual workflow is documented; the automatic AI connection is not deployed.
+
 ## Current status
 
 This repository documents the agreed requirements and proposed Google Forms workflow. It does not yet contain a deployed Google Form, automated analysis, or an AI service.
