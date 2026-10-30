@@ -1,3 +1,9 @@
+> **Current workflow:** Completed Form submissions start processing automatically. The 15-minute trigger is a recovery check. **CurrentRoundReview** and **RoundStatus** update without an API key, with AI disabled, or before an optional AI request fails. AI explanations remain in **Review** and must be checked against Runs for freshness.
+>
+> Basic rules flag verified tenant/employee vehicle associations and vehicles seen on at least three distinct local dates in the analysis window. These are review signals, not proof of non-customer use. Only vehicles seen in the latest check of each area appear in CurrentRoundReview; check the area's timestamp and completion status. InferredAreaVisits counts area visits, not proven property-wide visits. No exact departure times are assigned.
+>
+> **Existing Google installation:** GitHub sync does not deploy Apps Script. Replace Code.gs with the new repository version and run setupParkingPatrol once to install the Form submission trigger. No API key is needed for basic processing. Keep ENABLE_AI=false until optional AI is configured. Form results are asynchronous: open the Sheet after submission; they are not embedded live in the Google Form confirmation page. The older AI-specific instructions below apply only to optional AI.
+
 # Install Google Forms → Sheets → AI
 
 ## What this builds
