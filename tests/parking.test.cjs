@@ -132,11 +132,25 @@ test('worker pseudonymizes plates, writes private results, and skips unchanged i
   ctx.runAnalysis_();
   assert.equal(calls,1);
   assert.equal(state.CALL_COUNT,'1');
+  state.ENABLE_AI='false';
+  ctx.runAnalysis_();
+  assert.equal(calls,1);
+  assert.ok(writes.CurrentRoundReview);
+  assert.match(writes.Review.rows[0][0],/AI disabled/);
+  state.ENABLE_AI='true'; state.LAST_SUCCESS_HASH='';
+  ctx.requestAI_=()=>{throw Error('HTTP_429');};
+  ctx.book_=()=>({getSheetByName:()=>({getRange:()=>({setNote:()=>{}})})});
+  ctx.runAnalysis_();
+  assert.ok(writes.CurrentRoundReview);
+  assert.equal(logs[logs.length-1][0],'ERROR');
 });
 
-test('disabled worker makes no API call',()=>{
+test('basic review excludes presumed absent vehicles and flags recurring current sightings',()=>{
   const ctx=apiContext(()=>{throw Error('unexpected network');});
-  ctx.PropertiesService={getScriptProperties:()=>({getProperty:()=> 'false'})};
-  ctx.LockService={getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})};
-  assert.doesNotThrow(()=>ctx.runAnalysis_());
+  const d=analyze([round('a','09','ABC, AB',true,'Whole Lot','27'),round('b','09','ABC, AB',true,'Whole Lot','28'),round('c','09','ABC, AB\nXYZ, AB'),round('d','12','ABC, AB')]);
+  const rows=ctx.basicRows_(d,{'AB_ABC':'AB|ABC','AB_XYZ':'AB|XYZ'});
+  assert.equal(rows.length,1);
+  assert.equal(rows[0][1],'ABC');
+  assert.equal(rows[0][5],3);
+  assert.match(rows[0][7],/3 or more/);
 });
