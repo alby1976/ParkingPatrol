@@ -117,6 +117,7 @@ test('worker pseudonymizes plates, writes private results, and skips unchanged i
   ctx.Utilities={DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},computeDigest:(_,s)=>Array.from(crypto.createHash('sha256').update(s).digest()),formatDate:()=> '2026-10-29'};
   ctx.readRounds_=()=>[round('a','09','SECRET123, AB')];
   ctx.readAssociations_=()=>({});
+  ctx.readManualTags_=()=>({});
   ctx.write_=(name,headers,rows)=>{writes[name]={headers,rows};};
   ctx.log_=(s,d)=>logs.push([s,d]);
   ctx.requestAI_=(body)=>{
@@ -153,4 +154,15 @@ test('basic review excludes presumed absent vehicles and flags recurring current
   assert.equal(rows[0][1],'ABC');
   assert.equal(rows[0][5],3);
   assert.match(rows[0][7],/3 or more/);
+});
+
+test('status defaults, potential flags, manual confirmation and clearing',()=>{
+ const c=apiContext(()=>{});
+ assert.equal(c.parkingStatus_(false,false,null).status,'Assumed customer');
+ assert.equal(c.parkingStatus_(false,true,null).status,'Potential offender');
+ assert.equal(c.parkingStatus_(true,false,null).status,'Potential offender');
+ assert.equal(c.parkingStatus_(true,true,{status:'Confirmed offender',reason:'Verified'}).status,'Confirmed offender');
+ assert.equal(c.parkingStatus_(true,true,{status:'Assumed customer',reason:'Checked'}).status,'Assumed customer');
+ assert.equal(c.parkingStatus_(false,false,{status:'Clear tag'}).status,'Assumed customer');
+ assert.equal(c.parkingStatus_(true,false,{status:'Clear tag'}).status,'Potential offender');
 });
