@@ -1,3 +1,13 @@
+## Retention controls
+
+After installing the latest Code.gs and Retention.gs, run setupParkingPatrol to create **Settings**.
+**Settings!B2** is a dropdown: **Automatic** (default for a new Settings sheet) or **Manual**.
+Re-running setup preserves your chosen mode. Automatic removes expired records once per Edmonton calendar day through the scheduled/recovery or completed-round handler. Manual stops automatic deletion; round processing continues. In Manual mode, stored records can exceed three months until you press cleanup.
+
+Use **ParkingPatrol → Delete expired records now** in either mode. It asks for confirmation before permanent Form-response deletion, then rebuilds results. Optionally insert a drawing in Sheets and assign the script name **manualRetentionCleanup** (without parentheses) to use a visible sheet button. This repository provides the menu button; a drawing is optional and has not been inserted.
+
+Invalid or missing mode stops the scheduled handler rather than guessing permission to delete. Run setup if Settings is missing. Do not rename the Settings tab or move its B2 control. GitHub sync does not install these controls into your live Google account.
+
 ## Three-month retention cleanup
 
 Install **apps-script/Retention.gs** as a third script file alongside Code.gs and Core.gs, replace Code.gs with the current repository version, then run setupParkingPatrol. GitHub sync does not deploy this to Google.
