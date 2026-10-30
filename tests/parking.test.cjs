@@ -118,6 +118,7 @@ test('worker pseudonymizes plates, writes private results, and skips unchanged i
   ctx.readRounds_=()=>[round('a','09','SECRET123, AB')];
   ctx.readAssociations_=()=>({});
   ctx.readManualTags_=()=>({});
+  ctx.writeOffenders_=()=>{};
   ctx.readPatternHistory_=()=>[];
   ctx.recordPatterns_=()=>{};
   ctx.write_=(name,headers,rows)=>{writes[name]={headers,rows};};
@@ -180,4 +181,16 @@ test('same AI pattern requires a calendar month of distinct observed dates',()=>
  assert.equal(c.statusRows_(d,{'AB_ABC':'AB|ABC'})[0][10],'Most likely offender');
  d.manual_tags={'AB|ABC':{status:'Confirmed offender',reason:'Verified'}};
  assert.equal(c.statusRows_(d,{'AB_ABC':'AB|ABC'})[0][10],'Confirmed offender');
+});
+
+test('offender register includes absent flagged and manual-only confirmed plates; excludes customers',()=>{
+ const c=apiContext(()=>{});
+ const d=analyze([round('a','09','ABC, AB\nXYZ, AB'),round('b','12','')]);
+ d.vehicles.push({vehicle_id:'AB_MANUAL',sightings:[],visits:[]});
+ const rows=c.offenderRows_(d,{'AB_ABC':'AB|ABC','AB_XYZ':'AB|XYZ','AB_MANUAL':'AB|MANUAL'},
+ {'AB|MANUAL':{status:'Confirmed offender',reason:'Checked'}},[{id:'AB_ABC',code:'recurring_weekday',day:'2026-09-01',check:'a'}]);
+ assert.equal(rows.length,2);
+ assert.ok(rows.some(r=>r[0]==='ABC' && r[2]==='Potential offender'));
+ assert.ok(rows.some(r=>r[0]==='MANUAL' && r[2]==='Confirmed offender'));
+ assert.ok(!rows.some(r=>r[0]==='XYZ'));
 });
