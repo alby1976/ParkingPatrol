@@ -17,3 +17,10 @@ test('ambiguous linked sheet aborts before source deletion',()=>{
  c.Utilities={formatDate:()=> '2026-10-30',parseDate:()=>new Date('2026-07-30T06:00:00Z')};
  assert.throws(()=>c.cleanupRetention(),/NOT_UNIQUE/);assert.equal(deleted,0);
 });
+test('manual mode never auto-deletes; automatic runs once per local day',()=>{
+ const c=core();
+ assert.equal(c.retentionAutomaticDue_('Manual','yesterday','today'),false);
+ assert.equal(c.retentionAutomaticDue_('Automatic','today','today'),false);
+ assert.equal(c.retentionAutomaticDue_('Automatic','yesterday','today'),true);
+ assert.throws(()=>c.retentionAutomaticDue_('typo','','today'),/INVALID_MODE/);
+});
