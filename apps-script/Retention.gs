@@ -58,3 +58,40 @@ function cleanupRetention() {
     log_('RETENTION', 'Cutoff ' + retentionDate_(day) + '; removed ' + deletions.length + ' Form responses and ' + expiredRows.length + ' response-sheet rows.');
   } finally { lock.releaseLock(); }
 }
+
+/** Sheet-controlled deletion; automatic is the initial default only. */
+function setupRetentionSettings_() {
+  var ss = book_(), s = ss.getSheetByName('Settings');
+  if (!s) {
+    s = ss.insertSheet('Settings');
+    s.getRange('A1:B4').setValues([
+      ['Setting', 'Value'],
+      ['Retention deletion mode', 'Automatic'],
+      ['Retention period', '3 calendar months'],
+      ['Manual cleanup', 'ParkingPatrol menu > Delete expired records now']
+    ]);
+    s.getRange('B2').setDataValidation(SpreadsheetApp.newDataValidation()
+      .requireValueInList(['Automatic', 'Manual'], true).setAllowInvalid(false).build());
+    s.setFrozenRows(1);
+  }
+}
+function retentionMode_() {
+  var s = book_().getSheetByName('Settings');
+  if (!s) throw new Error('RETENTION_SETTINGS_MISSING_RUN_SETUP');
+  return String(s.getRange('B2').getValue()).trim();
+}
+function retentionAutomaticDue_(mode, lastDay, today) {
+  if (mode !== 'Automatic' && mode !== 'Manual') throw new Error('RETENTION_INVALID_MODE');
+  return mode === 'Automatic' && lastDay !== today;
+}
+/** A Sheets drawing/button can also be assigned this public function name. */
+function manualRetentionCleanup() {
+  var ui = SpreadsheetApp.getUi();
+  var answer = ui.alert('Delete expired parking records?',
+    'Permanently delete Form responses older than three calendar months and remove their linked rows. Generated reports will be rebuilt. This cannot be undone in Google Forms.',
+    ui.ButtonSet.YES_NO);
+  if (answer !== ui.Button.YES) return;
+  cleanupRetention();
+  runAnalysis_();
+  book_().toast('Expired records deleted. Check Runs and CurrentRoundReview.');
+}
