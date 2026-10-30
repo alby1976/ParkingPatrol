@@ -1,3 +1,11 @@
+## Offenders sheet
+
+**Offenders** lists all retained Potential offender, Most likely offender and Confirmed offender vehicles, including those absent from the latest round and confirmed manual tags with no retained sightings. Columns include plate/province, status/source, manual reason, first/last sightings, distinct days, number of sightings, areas and supporting CheckIDs. It is a historical register, not a claim of current presence.
+
+It refreshes during round processing, Analyze now and Apply manual status changes, without an API key. Successful optional AI analysis refreshes it again with newly recorded findings. Stored flagged AI evidence remains available beyond three months under the flagged-vehicle retention exception. Assumed customers are excluded.
+
+Install the latest Code.gs and run setupParkingPatrol to create the tab. Use Analyze now to populate it. No actual plate data is stored in this public repository.
+
 ## Retention exception: flagged vehicles are preserved
 
 Only expired **Assumed customer** source records are eligible for deletion. Potential offenders (recurring-use rules, verified prohibited association or stored AI finding), most likely offenders, and manually confirmed offenders are protected. Confirmation tags no longer expire automatically. Use a dated explicit ManualTags **Assumed customer** correction to release protection; Clear tag returns to automatic classification.
