@@ -194,3 +194,12 @@ test('offender register includes absent flagged and manual-only confirmed plates
  assert.ok(rows.some(r=>r[0]==='MANUAL' && r[2]==='Confirmed offender'));
  assert.ok(!rows.some(r=>r[0]==='XYZ'));
 });
+test('today filter excludes old sightings and manual-only confirmed plates',()=>{
+ const c=apiContext(()=>{});
+ const d=analyze([round('old','09','OLD, AB',true,'Whole Lot','28'),round('new','09','NEW, AB')]);
+ d.vehicles.push({vehicle_id:'AB_MANUAL',sightings:[],visits:[]});
+ const tags={};['OLD','NEW','MANUAL'].forEach(k=>tags['AB|'+k]={status:'Confirmed offender',reason:'Checked'});
+ const rows=c.offenderRows_(d,{'AB_OLD':'AB|OLD','AB_NEW':'AB|NEW','AB_MANUAL':'AB|MANUAL'},tags,[],'2026-10-29');
+ assert.equal(rows.length,1);assert.equal(rows[0][0],'NEW');
+ assert.equal(c.offenderRows_(d,{'AB_OLD':'AB|OLD','AB_NEW':'AB|NEW','AB_MANUAL':'AB|MANUAL'},tags,[],'2026-10-30').length,0);
+});
