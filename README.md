@@ -1,3 +1,5 @@
+> **Offenders view: today only.** The Offenders tab now shows flagged vehicles with at least one sighting on today's America/Edmonton calendar date. It refreshes with processing, including scheduled runs. Historical observations and tags remain stored under the retention rules. Seen today does not mean still present now. The previous all-history description below describes the retained backing data, not the current display filter.
+
 ## Offenders sheet
 
 **Offenders** lists all retained Potential offender, Most likely offender and Confirmed offender vehicles, including those absent from the latest round and confirmed manual tags with no retained sightings. Columns include plate/province, status/source, manual reason, first/last sightings, distinct days, number of sightings, areas and supporting CheckIDs. It is a historical register, not a claim of current presence.
