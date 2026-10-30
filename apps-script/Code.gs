@@ -22,6 +22,7 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu('ParkingPatrol')
     .addItem('1. Install / repair', 'setupParkingPatrol')
     .addItem('2. Analyze now', 'analyzeNow')
+    .addItem('Delete expired records now', 'manualRetentionCleanup')
     .addItem('Pause AI', 'pauseAI')
     .addToUi();
 }
@@ -66,6 +67,7 @@ function setupParkingPatrol() {
       f.addMultipleChoiceItem().setTitle('Every vehicle in this area recorded?').setChoiceValues(['Yes', 'No']).setRequired(true);
       f.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
     }
+    setupRetentionSettings_();
     var expected = ['Area', 'Observation time (optional)', 'Plates present', 'Every vehicle in this area recorded?'];
     var titles = f.getItems().map(function (i) { return i.getTitle(); });
     if (expected.some(function (t) { return titles.indexOf(t) < 0; })) throw new Error('Form setup incomplete: restore required questions before continuing.');
@@ -100,7 +102,7 @@ function setupParkingPatrol() {
 function pauseAI() { props_().setProperty('ENABLE_AI', 'false'); book_().toast('AI paused. Form responses remain available.'); }
 function scheduledAnalysis() {
   var day = Utilities.formatDate(new Date(), 'America/Edmonton', 'yyyy-MM-dd');
-  if (props_().getProperty('LAST_RETENTION_DAY') !== day) cleanupRetention();
+  if (retentionAutomaticDue_(retentionMode_(), props_().getProperty('LAST_RETENTION_DAY'), day)) cleanupRetention();
   runAnalysis_();
 }
 /** Installable Form trigger. Saving a partial round does not request a new analysis. */
@@ -110,9 +112,9 @@ function processCompletedRound(e) {
     return item.getItem().getTitle() === 'Every vehicle in this area recorded?' &&
       String(item.getResponse()) === 'Yes';
   });
-  if (complete) { cleanupRetention(); runAnalysis_(); }
+  if (complete) scheduledAnalysis();
 }
-function analyzeNow() { cleanupRetention(); runAnalysis_(); book_().toast('Check the Runs and Review tabs for results.'); }
+function analyzeNow() { scheduledAnalysis(); book_().toast('Check the Runs and Review tabs for results.'); }
 
 function digest_(s) {
   return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, s, Utilities.Charset.UTF_8)
