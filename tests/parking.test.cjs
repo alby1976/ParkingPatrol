@@ -49,7 +49,7 @@ test('malformed metadata and duplicate response IDs stop analysis', () => {
   assert.throws(()=>analyze([round('a','09',''),round('a','12','')]));
   assert.throws(()=>analyze([{id:'a',at:'bad',area:'Lot',platesText:''}]));
 });
-const candidate = () => ({vehicle_id:'AB_ABC',priority:'medium',summary:'Possible routine',evidence_check_ids:['a'],alternative_explanation:'Customer visits',next_check:'Verify current use'});
+const candidate = () => ({vehicle_id:'AB_ABC',pattern_code:'recurring_weekday',priority:'medium',summary:'Possible routine',evidence_check_ids:['a'],alternative_explanation:'Customer visits',next_check:'Verify current use'});
 test('accepts supported evidence including first-absent check', () => {
   const data = analyze([round('a','09','ABC, AB'),round('b','12','')]);
   const c = candidate(); c.evidence_check_ids.push('b');
@@ -118,6 +118,8 @@ test('worker pseudonymizes plates, writes private results, and skips unchanged i
   ctx.readRounds_=()=>[round('a','09','SECRET123, AB')];
   ctx.readAssociations_=()=>({});
   ctx.readManualTags_=()=>({});
+  ctx.readPatternHistory_=()=>[];
+  ctx.recordPatterns_=()=>{};
   ctx.write_=(name,headers,rows)=>{writes[name]={headers,rows};};
   ctx.log_=(s,d)=>logs.push([s,d]);
   ctx.requestAI_=(body)=>{
@@ -165,4 +167,17 @@ test('status defaults, potential flags, manual confirmation and clearing',()=>{
  assert.equal(c.parkingStatus_(true,true,{status:'Assumed customer',reason:'Checked'}).status,'Assumed customer');
  assert.equal(c.parkingStatus_(false,false,{status:'Clear tag'}).status,'Assumed customer');
  assert.equal(c.parkingStatus_(true,false,{status:'Clear tag'}).status,'Potential offender');
+});
+
+test('same AI pattern requires a calendar month of distinct observed dates',()=>{
+ const c=apiContext(()=>{});
+ const h=(code,day)=>({id:'V1',code,day,check:day});
+ assert.equal(c.escalatedVehicles_([h('recurring_weekday','2026-09-30'),h('recurring_weekday','2026-10-29')]).length,0);
+ assert.equal(c.escalatedVehicles_([h('recurring_weekday','2026-09-30'),h('recurring_weekday','2026-10-30')])[0],'V1');
+ assert.equal(c.escalatedVehicles_([h('recurring_weekday','2026-09-30'),h('outside_business_hours','2026-10-30')]).length,0);
+ assert.equal(c.escalatedVehicles_([h('other','2026-09-30'),h('other','2026-10-30')]).length,0);
+ const d=analyze([round('a','09','ABC, AB')]);d.escalated_ids=['AB_ABC'];
+ assert.equal(c.statusRows_(d,{'AB_ABC':'AB|ABC'})[0][10],'Most likely offender');
+ d.manual_tags={'AB|ABC':{status:'Confirmed offender',reason:'Verified'}};
+ assert.equal(c.statusRows_(d,{'AB_ABC':'AB|ABC'})[0][10],'Confirmed offender');
 });
