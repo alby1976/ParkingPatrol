@@ -68,8 +68,8 @@ var PP = (function () {
   function schema() {
     return {type: 'object', additionalProperties: false, required: ['candidates'], properties: {
       candidates: {type: 'array', items: {type: 'object', additionalProperties: false,
-        required: ['vehicle_id', 'priority', 'summary', 'evidence_check_ids', 'alternative_explanation', 'next_check'],
-        properties: {vehicle_id: {type: 'string'}, priority: {type: 'string', enum: ['higher', 'medium', 'low']},
+        required: ['vehicle_id', 'pattern_code', 'priority', 'summary', 'evidence_check_ids', 'alternative_explanation', 'next_check'],
+        properties: {vehicle_id: {type: 'string'}, pattern_code: {type: 'string', enum: ['recurring_weekday', 'repeated_broad_span', 'outside_business_hours', 'verified_prohibited_association', 'other']}, priority: {type: 'string', enum: ['higher', 'medium', 'low']},
           summary: {type: 'string'}, evidence_check_ids: {type: 'array', items: {type: 'string'}},
           alternative_explanation: {type: 'string'}, next_check: {type: 'string'}}}}
     }};
@@ -80,6 +80,7 @@ var PP = (function () {
     var seen = {};
     result.candidates.forEach(function (c) {
       var v = data.vehicles.find(function (x) { return x.vehicle_id === c.vehicle_id; });
+      if (['recurring_weekday','repeated_broad_span','outside_business_hours','verified_prohibited_association','other'].indexOf(c.pattern_code) < 0) throw new Error('Invalid pattern code.');
       if (!v || seen[c.vehicle_id]) throw new Error('Unknown/duplicate AI vehicle.');
       seen[c.vehicle_id] = true;
       if (['higher', 'medium', 'low'].indexOf(c.priority) < 0) throw new Error('Invalid AI priority.');
