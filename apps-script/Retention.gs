@@ -45,13 +45,20 @@ function cleanupRetention() {
       if (keys.length !== 1) throw new Error('RETENTION_INVALID_ASSOCIATION');
       if (!active[keys[0]]) assocRows.push(i + 2);
     });
+    var tags = ss.getSheetByName('ManualTags'), tagRows = [];
+    if (tags) tags.getDataRange().getValues().slice(1).forEach(function (r, i) {
+      if (r.every(function (v) { return v === ''; })) return;
+      if (retentionOld_(r[4], cutoff)) tagRows.push(i + 2);
+    });
     // Validation above completes before any irreversible source deletion.
     // Clear derived history first so a later failure cannot leave expired reports visible.
     ['Review','CurrentRoundReview','RoundStatus','Sessions','DataIssues','Runs'].forEach(function (name) {
       var s = ss.getSheetByName(name); if (s) { s.clearContents(); s.getRange('A1').setValue('Retention cleanup ran; awaiting next successful analysis.'); }
     });
     p.deleteProperty('LAST_SUCCESS_HASH');
+    p.deleteProperty('LAST_AI_FLAGS');
     expiredRows.reverse().forEach(function (n) { raw.deleteRow(n); });
+    tagRows.reverse().forEach(function (n) { tags.deleteRow(n); });
     assocRows.reverse().forEach(function (n) { assoc.deleteRow(n); });
     deletions.forEach(function (id) { form.deleteResponse(id); });
     p.setProperty('LAST_RETENTION_DAY', day);
