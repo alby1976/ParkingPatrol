@@ -23,6 +23,7 @@ function onOpen() {
     .addItem('1. Install / repair', 'setupParkingPatrol')
     .addItem('2. Analyze now', 'analyzeNow')
     .addItem('Delete expired records now', 'manualRetentionCleanup')
+    .addItem('Apply manual status changes', 'applyManualStatusChanges')
     .addItem('Pause AI', 'pauseAI')
     .addToUi();
 }
@@ -68,6 +69,7 @@ function setupParkingPatrol() {
       f.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
     }
     setupRetentionSettings_();
+    setupManualTags_();
     var expected = ['Area', 'Observation time (optional)', 'Plates present', 'Every vehicle in this area recorded?'];
     var titles = f.getItems().map(function (i) { return i.getTitle(); });
     if (expected.some(function (t) { return titles.indexOf(t) < 0; })) throw new Error('Form setup incomplete: restore required questions before continuing.');
@@ -177,7 +179,9 @@ function runAnalysis_() {
     write_('DataIssues', ['Issue'], data.issues.map(function (s) { return [s]; }));
     data.window_days = days;
     data.business_hours = p.getProperty('BUSINESS_HOURS') || 'Unknown';
+    data.manual_tags = readManualTags_();
     writeBasicReview_(data, mapping);
+    delete data.manual_tags;
     if (p.getProperty('ENABLE_AI') !== 'true') {
       write_('Review', ['Status'], [['AI disabled. Use CurrentRoundReview for automatic pattern checks.']]);
       return;
@@ -188,7 +192,12 @@ function runAnalysis_() {
     var body = JSON.stringify(data);
     if (body.length > 180000) throw new Error('LIMIT_PAYLOAD_SIZE');
     var hash = digest_(PP_PROMPT + p.getProperty('OPENAI_MODEL') + body);
-    if (hash === p.getProperty('LAST_SUCCESS_HASH')) return;
+    if (hash === p.getProperty('LAST_SUCCESS_HASH')) {
+      data.manual_tags = readManualTags_();
+      data.ai_flags = JSON.parse(p.getProperty('LAST_AI_FLAGS') || '[]');
+      writeBasicReview_(data, mapping);
+      return;
+    }
     if (!data.checks.length) {
       write_('Review', ['Status'], [['No observations in analysis window.']]);
       p.setProperty('LAST_SUCCESS_HASH', hash); log_('EMPTY', 'No observations in window.'); return;
@@ -200,6 +209,10 @@ function runAnalysis_() {
     p.setProperties({CALL_DAY: day, CALL_COUNT: String(count + 1)});
     var result = data.vehicles.length ? requestAI_(body, p) : {candidates: []};
     PP.validateResult(result, data);
+    data.manual_tags = readManualTags_();
+    data.ai_flags = result.candidates.map(function (x) { return x.vehicle_id; });
+    writeBasicReview_(data, mapping);
+    delete data.manual_tags;
     var rows = result.candidates.map(function (c) {
       var parts = mapping[c.vehicle_id].split('|');
       var v = data.vehicles.find(function (x) { return x.vehicle_id === c.vehicle_id; });
@@ -213,6 +226,7 @@ function runAnalysis_() {
       data.vehicles.reduce(function (all, v) { return all.concat(v.visits.map(function (s) {
         return [v.vehicle_id, s.area, s.first_seen_at, s.last_seen_at, s.first_absent_check_at || '', s.absent_check_id || ''];
       })); }, []));
+    p.setProperty('LAST_AI_FLAGS', JSON.stringify(data.ai_flags || []));
     p.setProperty('LAST_SUCCESS_HASH', hash);
     log_('SUCCESS', result.candidates.length + ' potential candidates; ' + data.vehicles.length + ' vehicles; ' + data.checks.length + ' checks.');
   } catch (err) {
@@ -268,8 +282,49 @@ function basicRows_(data, mapping) {
 }
 function writeBasicReview_(data, mapping) {
   write_('CurrentRoundReview', ['VehicleID', 'Plate (private)', 'Province', 'Area', 'LatestSeenLocal',
-    'DistinctDaysInWindow', 'InferredAreaVisits', 'Rule signal — not a violation', 'LatestCheckIDs', 'Next step'], basicRows_(data, mapping));
+    'DistinctDaysInWindow', 'InferredAreaVisits', 'Rule signal — not a violation', 'LatestCheckIDs', 'Next step', 'Parking status', 'Status source', 'Manual reason'], statusRows_(data, mapping));
   write_('RoundStatus', ['Area', 'LatestCheckID', 'ObservedAt', 'Complete', 'VehiclesRecorded'],
     data.checks.filter(function (c, i, all) { return !all.slice(i + 1).some(function (x) { return x.area === c.area; }); })
       .map(function (c) { return [c.area, c.check_id, c.local_time, c.complete, c.vehicle_count]; }));
 }
+
+function setupManualTags_() {
+  if (book_().getSheetByName('ManualTags')) return;
+  write_('ManualTags', ['Plate', 'Province', 'Status', 'Reason (no names)', 'ReviewedAt'], []);
+  var s = sheet_('ManualTags');
+  s.getRange('C2:C1000').setDataValidation(SpreadsheetApp.newDataValidation()
+    .requireValueInList(['Confirmed offender', 'Assumed customer', 'Clear tag'], true).setAllowInvalid(false).build());
+  s.getRange('E2:E1000').setNumberFormat('yyyy-mm-dd hh:mm');
+}
+function readManualTags_() {
+  var s = book_().getSheetByName('ManualTags'), out = {};
+  if (!s) return out;
+  var cutoff = Utilities.parseDate(retentionDate_(Utilities.formatDate(new Date(), 'America/Edmonton', 'yyyy-MM-dd')) + ' 00:00',
+    'America/Edmonton', 'yyyy-MM-dd HH:mm').getTime();
+  s.getDataRange().getValues().slice(1).forEach(function (r) {
+    if (r.every(function (v) { return v === ''; })) return;
+    var parsed = PP.parsePlates(r[0] + ', ' + r[1]), at = r[4] instanceof Date ? r[4].getTime() : Date.parse(String(r[4]));
+    if (parsed.keys.length !== 1 || parsed.issues.length || !Number.isFinite(at) || at > Date.now() ||
+        ['Confirmed offender', 'Assumed customer', 'Clear tag'].indexOf(String(r[2])) < 0)
+      throw new Error('INVALID_MANUAL_TAG: supply plate, province, status and valid ReviewedAt');
+    if (at < cutoff) return;
+    var key = parsed.keys[0];
+    if (out[key] && out[key].at === at) throw new Error('INVALID_MANUAL_TAG: duplicate review timestamp');
+    if (!out[key] || at > out[key].at) out[key] = {status: String(r[2]), reason: String(r[3]), at: at};
+  });
+  return out;
+}
+function parkingStatus_(ruleFlag, aiFlag, tag) {
+  if (tag && tag.status !== 'Clear tag') return {status: tag.status, source: 'Manual', reason: tag.reason};
+  return {status: ruleFlag || aiFlag ? 'Potential offender' : 'Assumed customer',
+    source: aiFlag ? 'AI review' : ruleFlag ? 'Pattern rules' : 'Default', reason: ''};
+}
+function statusRows_(data, mapping) {
+  return basicRows_(data, mapping).map(function (row) {
+    var tag = (data.manual_tags || {})[mapping[row[0]]];
+    var status = parkingStatus_(row[7] !== 'No recurring-use flag yet',
+      (data.ai_flags || []).indexOf(row[0]) >= 0, tag);
+    return row.concat([status.status, status.source, status.reason]);
+  });
+}
+function applyManualStatusChanges() { runAnalysis_(); book_().toast('Manual statuses applied. Check CurrentRoundReview and Runs.'); }
