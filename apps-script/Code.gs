@@ -92,12 +92,17 @@ function setupParkingPatrol() {
     f.setConfirmationMessage('Round saved. Completed rounds start automatic pattern checks; AI explanations are optional. Open your private Review sheet and check Runs for a successful analysis after this submission before acting: ' + ss.getUrl());
 
     owned.slice(1).forEach(function (t) { ScriptApp.deleteTrigger(t); });
+    // Existing 15-minute recovery trigger also performs daily retention with AI off.
     ss.toast('Installed. Restrict Form access, set API properties, then run Analyze now.');
   } finally { lock.releaseLock(); }
 }
 
 function pauseAI() { props_().setProperty('ENABLE_AI', 'false'); book_().toast('AI paused. Form responses remain available.'); }
-function scheduledAnalysis() { runAnalysis_(); }
+function scheduledAnalysis() {
+  var day = Utilities.formatDate(new Date(), 'America/Edmonton', 'yyyy-MM-dd');
+  if (props_().getProperty('LAST_RETENTION_DAY') !== day) cleanupRetention();
+  runAnalysis_();
+}
 /** Installable Form trigger. Saving a partial round does not request a new analysis. */
 function processCompletedRound(e) {
   if (!e || !e.response) return;
@@ -105,9 +110,9 @@ function processCompletedRound(e) {
     return item.getItem().getTitle() === 'Every vehicle in this area recorded?' &&
       String(item.getResponse()) === 'Yes';
   });
-  if (complete) runAnalysis_();
+  if (complete) { cleanupRetention(); runAnalysis_(); }
 }
-function analyzeNow() { runAnalysis_(); book_().toast('Check the Runs and Review tabs for results.'); }
+function analyzeNow() { cleanupRetention(); runAnalysis_(); book_().toast('Check the Runs and Review tabs for results.'); }
 
 function digest_(s) {
   return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, s, Utilities.Charset.UTF_8)
