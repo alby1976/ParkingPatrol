@@ -1,3 +1,13 @@
+## Monthly AI escalation
+
+The same vehicle and stable AI pattern code, supported by distinct dated sightings across at least one calendar month, escalates to **Most likely offender**. **Confirmed offender** manual tags remain unchanged. Explicit manual Assumed customer overrides are also respected until cleared or expired.
+
+AIPatternHistory stores VehicleID, pattern code, observation date and source CheckID privately. Each successful AI review records only its latest supported sighting date for that pattern; re-running unchanged evidence cannot age a flag, absence checks cannot count as sightings, and a first retrospective analysis cannot create a month of prior AI detections. At least two separately dated AI-supported findings must span the calendar-month anniversary (month-end clamped). This does not claim continuous parking or observation between checks. General “other” patterns never escalate.
+
+Pattern findings older than three months stop influencing status even when Manual deletion is selected. Physical history deletion follows the retention mode. Automatic rules alone cannot cause this AI escalation; AI must be enabled and successfully run. Review labels are not probabilities or proof of violations.
+
+Update **Code.gs, Core.gs and Retention.gs**, then run setupParkingPatrol to create AIPatternHistory. This change is on GitHub and not yet installed in the live Google account.
+
 ## Vehicle status logic
 
 CurrentRoundReview now includes Parking status and Status source. Every newly seen vehicle defaults to **Assumed customer**, unless recurring-use rules, a verified prohibited association, or optional AI flags it as **Potential offender**. Neither rules nor AI can assign Confirmed offender.
