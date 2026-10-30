@@ -79,11 +79,18 @@ function setupParkingPatrol() {
       ['Form edit link', f.getEditUrl()], ['Spreadsheet', ss.getUrl()],
       ['Policy', 'Customers only; no tenant or employee parking.'],
       ['AI configuration', 'Apps Script > Project Settings > Script properties. See GitHub setup guide.'],
-      ['Schedule', 'Checks every 15 minutes; only changed input is sent.'],
+      ['Schedule', 'Processes after a completed Form submission; 15-minute retry checks remain.'],
       ['Privacy', 'Restrict Sheet, Form and script editors. Script editors can access API credentials.']
     ]);
     var owned = ScriptApp.getProjectTriggers().filter(function (t) { return t.getHandlerFunction() === 'scheduledAnalysis'; });
     if (!owned.length) ScriptApp.newTrigger('scheduledAnalysis').timeBased().everyMinutes(15).create();
+    var submitTriggers = ScriptApp.getProjectTriggers().filter(function (t) {
+      return t.getHandlerFunction() === 'processCompletedRound';
+    });
+    if (!submitTriggers.length) ScriptApp.newTrigger('processCompletedRound').forForm(f).onFormSubmit().create();
+    submitTriggers.slice(1).forEach(function (t) { ScriptApp.deleteTrigger(t); });
+    f.setConfirmationMessage('Round saved. Completed rounds start automatic pattern checks; AI explanations are optional. Open your private Review sheet and check Runs for a successful analysis after this submission before acting: ' + ss.getUrl());
+
     owned.slice(1).forEach(function (t) { ScriptApp.deleteTrigger(t); });
     ss.toast('Installed. Restrict Form access, set API properties, then run Analyze now.');
   } finally { lock.releaseLock(); }
@@ -91,6 +98,15 @@ function setupParkingPatrol() {
 
 function pauseAI() { props_().setProperty('ENABLE_AI', 'false'); book_().toast('AI paused. Form responses remain available.'); }
 function scheduledAnalysis() { runAnalysis_(); }
+/** Installable Form trigger. Saving a partial round does not request a new analysis. */
+function processCompletedRound(e) {
+  if (!e || !e.response) return;
+  var complete = e.response.getItemResponses().some(function (item) {
+    return item.getItem().getTitle() === 'Every vehicle in this area recorded?' &&
+      String(item.getResponse()) === 'Yes';
+  });
+  if (complete) runAnalysis_();
+}
 function analyzeNow() { runAnalysis_(); book_().toast('Check the Runs and Review tabs for results.'); }
 
 function digest_(s) {
@@ -139,11 +155,9 @@ function readAssociations_() {
 
 function runAnalysis_() {
   var lock = LockService.getScriptLock();
-  if (!lock.tryLock(1000)) return;
+  if (!lock.tryLock(30000)) return; // Scheduled retry recovers a busy/failed submission run.
   try {
     var p = props_();
-    if (p.getProperty('ENABLE_AI') !== 'true') return;
-    if (!p.getProperty('OPENAI_API_KEY') || !p.getProperty('OPENAI_MODEL')) throw new Error('CONFIGURE_API_KEY_AND_MODEL');
     var days = Number(p.getProperty('LOOKBACK_DAYS')), cap = Number(p.getProperty('MAX_CALLS_PER_DAY'));
     if (!Number.isInteger(days) || days < 1 || days > 365 || !Number.isInteger(cap) || cap < 1 || cap > 96) throw new Error('INVALID_CONFIG');
     var now = Date.now(), mapping = {}, associations = readAssociations_();
@@ -156,6 +170,12 @@ function runAnalysis_() {
     write_('DataIssues', ['Issue'], data.issues.map(function (s) { return [s]; }));
     data.window_days = days;
     data.business_hours = p.getProperty('BUSINESS_HOURS') || 'Unknown';
+    writeBasicReview_(data, mapping);
+    if (p.getProperty('ENABLE_AI') !== 'true') {
+      write_('Review', ['Status'], [['AI disabled. Use CurrentRoundReview for automatic pattern checks.']]);
+      return;
+    }
+    if (!p.getProperty('OPENAI_API_KEY') || !p.getProperty('OPENAI_MODEL')) throw new Error('CONFIGURE_API_KEY_AND_MODEL');
     // Raw notes, plates, names and observer identities are never part of data.
     if (data.vehicles.length > 100 || data.checks.length > 1000) throw new Error('LIMIT_HISTORY_SIZE');
     var body = JSON.stringify(data);
@@ -218,4 +238,31 @@ function requestAI_(inputJSON, p) {
     if (part.type === 'output_text') text += part.text;
   }); });
   try { return JSON.parse(text); } catch (err) { throw new Error('AI_INVALID_JSON'); }
+}
+
+/** Rules always run locally in Google, before any optional AI request. */
+function basicRows_(data, mapping) {
+  var latest = {};
+  data.checks.forEach(function (c) { latest[c.area] = c; });
+  return data.vehicles.reduce(function (rows, v) {
+    var current = v.sightings.filter(function (s) { return latest[s.area].check_id === s.check_id; });
+    if (!current.length) return rows;
+    var days = {};
+    v.sightings.forEach(function (s) { days[s.local_time.slice(0, 10)] = true; });
+    var count = Object.keys(days).length, parts = mapping[v.vehicle_id].split('|');
+    var signal = v.verified_prohibited_association ? 'Verified tenant/employee vehicle association: verify current prohibited use' :
+      count >= 3 ? 'Seen on 3 or more distinct days: review recurring use' : 'No recurring-use flag yet';
+    rows.push([v.vehicle_id, parts[1], parts[0], current.map(function (s) { return s.area; }).join(', '),
+      current.map(function (s) { return s.local_time; }).join(', '), count, v.visits.length, signal,
+      current.map(function (s) { return s.check_id; }).join(', '),
+      'Latest sighting only; verify current presence and non-customer use before contacting patrol.']);
+    return rows;
+  }, []);
+}
+function writeBasicReview_(data, mapping) {
+  write_('CurrentRoundReview', ['VehicleID', 'Plate (private)', 'Province', 'Area', 'LatestSeenLocal',
+    'DistinctDaysInWindow', 'InferredAreaVisits', 'Rule signal — not a violation', 'LatestCheckIDs', 'Next step'], basicRows_(data, mapping));
+  write_('RoundStatus', ['Area', 'LatestCheckID', 'ObservedAt', 'Complete', 'VehiclesRecorded'],
+    data.checks.filter(function (c, i, all) { return !all.slice(i + 1).some(function (x) { return x.area === c.area; }); })
+      .map(function (c) { return [c.area, c.check_id, c.local_time, c.complete, c.vehicle_count]; }));
 }
