@@ -312,7 +312,7 @@ function readManualTags_() {
     if (parsed.keys.length !== 1 || parsed.issues.length || !Number.isFinite(at) || at > Date.now() ||
         ['Confirmed offender', 'Assumed customer', 'Clear tag'].indexOf(String(r[2])) < 0)
       throw new Error('INVALID_MANUAL_TAG: supply plate, province, status and valid ReviewedAt');
-    if (at < cutoff) return;
+    if (at < cutoff && String(r[2]) !== 'Confirmed offender') return;
     var key = parsed.keys[0];
     if (out[key] && out[key].at === at) throw new Error('INVALID_MANUAL_TAG: duplicate review timestamp');
     if (!out[key] || at > out[key].at) out[key] = {status: String(r[2]), reason: String(r[3]), at: at};
