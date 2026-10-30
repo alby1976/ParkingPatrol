@@ -12,7 +12,7 @@ test('cutoff boundary retained; strictly older records deleted',()=>{
 test('ambiguous linked sheet aborts before source deletion',()=>{
  const c=core();let deleted=0;
  c.LockService={getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})};
- c.props_=()=>({getProperty:()=> 'form'});c.book_=()=>({getSheets:()=>[]});
+ c.props_=()=>({getProperty:()=> 'form'});c.book_=()=>({getSheets:()=>[],getSheetByName:()=>null});c.readAssociations_=()=>({});
  c.FormApp={openById:()=>({getResponses:()=>[],deleteResponse:()=>deleted++})};
  c.Utilities={formatDate:()=> '2026-10-30',parseDate:()=>new Date('2026-07-30T06:00:00Z')};
  assert.throws(()=>c.cleanupRetention(),/NOT_UNIQUE/);assert.equal(deleted,0);
@@ -23,4 +23,18 @@ test('manual mode never auto-deletes; automatic runs once per local day',()=>{
  assert.equal(c.retentionAutomaticDue_('Automatic','today','today'),false);
  assert.equal(c.retentionAutomaticDue_('Automatic','yesterday','today'),true);
  assert.throws(()=>c.retentionAutomaticDue_('typo','','today'),/INVALID_MODE/);
+});
+
+test('retention preserves recurring and confirmed vehicles; explicit customer correction releases protection',()=>{
+ const c=core();c.PP=require('../apps-script/Core.gs');
+ c.props_=()=>({getProperty:()=> 'salt'});c.digest_=s=>s; c.readAssociations_=()=>({});
+ c.Utilities={formatDate:d=>new Date(d).toISOString().slice(0,10)};
+ const response=(day)=>({getTimestamp:()=>new Date(day),getItemResponses:()=>[{getItem:()=>({getTitle:()=> 'Plates present'}),getResponse:()=> 'ABC, AB'}]});
+ const rs=['2026-01-01','2026-01-02','2026-01-03'].map(response);
+ const ss={getSheetByName:()=>null};
+ assert.equal(c.retentionProtectedKeys_(rs,ss)['AB|ABC'],true);
+ const tagSheet=status=>({getSheetByName:n=>n==='ManualTags'?{getDataRange:()=>({getValues:()=>[[],['ABC','AB',status,'Verified',new Date('2026-01-01')]]})}:null});
+ assert.equal(c.retentionProtectedKeys_([rs[0]],tagSheet('Confirmed offender'))['AB|ABC'],true);
+ assert.equal(c.retentionProtectedKeys_(rs,tagSheet('Assumed customer'))['AB|ABC'],undefined);
+ assert.equal(c.retentionProtectedKeys_([rs[0]],ss)['AB|ABC'],undefined);
 });
