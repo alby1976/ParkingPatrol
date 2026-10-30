@@ -71,6 +71,7 @@ function setupParkingPatrol() {
     }
     setupRetentionSettings_();
     setupManualTags_();
+    if (!book_().getSheetByName('Offenders')) write_('Offenders', ['Status'], [['Run Analyze now to populate all flagged vehicles.']]);
     if (!book_().getSheetByName('AIPatternHistory')) write_('AIPatternHistory', ['VehicleID','PatternCode','ObservationDay','CheckID'], []);
     var expected = ['Area', 'Observation time (optional)', 'Plates present', 'Every vehicle in this area recorded?'];
     var titles = f.getItems().map(function (i) { return i.getTitle(); });
@@ -129,7 +130,7 @@ function log_(status, details) { sheet_('Runs').appendRow([new Date().toISOStrin
 function readRounds_(now, days) {
   var responses = FormApp.openById(props_().getProperty('FORM_ID')).getResponses();
   if (responses.length > 5000) throw new Error('LIMIT_FORM_RESPONSES');
-  var cutoff = now - days * 86400000, rounds = [];
+  var cutoff = days === null ? -Infinity : now - days * 86400000, rounds = [];
   responses.forEach(function (response) {
     var a = {};
     response.getItemResponses().forEach(function (i) { a[i.getItem().getTitle()] = String(i.getResponse()); });
@@ -184,6 +185,7 @@ function runAnalysis_() {
     data.escalated_ids = escalatedVehicles_(readPatternHistory_());
     data.manual_tags = readManualTags_();
     writeBasicReview_(data, mapping);
+    writeOffenders_();
     delete data.manual_tags;
     if (p.getProperty('ENABLE_AI') !== 'true') {
       write_('Review', ['Status'], [['AI disabled. Use CurrentRoundReview for automatic pattern checks.']]);
@@ -343,7 +345,7 @@ function readPatternHistory_() {
   return s.getDataRange().getValues().slice(1).map(function (r) {
     return {id:String(r[0]), code:String(r[1]), day:r[2] instanceof Date ?
       Utilities.formatDate(r[2], 'America/Edmonton', 'yyyy-MM-dd') : String(r[2]), check:String(r[3])};
-  }).filter(function (r) { return r.day >= retentionDate_(Utilities.formatDate(new Date(), 'America/Edmonton', 'yyyy-MM-dd')); });
+  });
 }
 function escalatedVehicles_(history) {
   var groups = {}, ids = {};
@@ -380,4 +382,42 @@ function recordPatterns_(result, data) {
       }
     });
   });
+}
+
+/** Historical flagged-vehicle register; presence is never inferred from this list. */
+function offenderRows_(data, mapping, tags, history) {
+  var escalated = escalatedVehicles_(history), ai = {};
+  history.forEach(function (h) { ai[h.id] = true; });
+  return data.vehicles.map(function (v) {
+    var key=mapping[v.vehicle_id], tag=tags[key], days={};
+    v.sightings.forEach(function (s) { days[s.local_time.slice(0,10)]=true; });
+    var count=Object.keys(days).length;
+    var status=parkingStatus_(count>=3 || v.verified_prohibited_association, ai[v.vehicle_id]===true, tag);
+    if(status.source!=='Manual' && escalated.indexOf(v.vehicle_id)>=0)
+      status={status:'Most likely offender',source:'Repeated AI pattern over one calendar month',reason:''};
+    if(status.status==='Assumed customer') return null;
+    var parts=key.split('|'), first=v.sightings[0], last=v.sightings[v.sightings.length-1];
+    return [parts[1],parts[0],status.status,status.source,status.reason,
+      first?first.local_time:'No retained sightings',last?last.local_time:'No retained sightings',
+      count,v.sightings.length,Array.from(new Set(v.sightings.map(function(s){return s.area;}))).join(', '),
+      v.sightings.map(function(s){return s.check_id;}).join(', '),
+      'Historical flag only — verify current presence and prohibited use.'];
+  }).filter(Boolean).sort(function(a,b){return a[2].localeCompare(b[2]) || a[0].localeCompare(b[0]);});
+}
+function writeOffenders_() {
+  var mapping={},p=props_(),tags=readManualTags_(),associations=readAssociations_();
+  var idFor=function(key) {
+    var id='V'+digest_(p.getProperty('VEHICLE_SALT')+'|'+key).slice(0,24);
+    mapping[id]=key;return id;
+  };
+  var data=PP.analyze(readRounds_(Date.now(),null),idFor);
+  Object.keys(tags).forEach(function(key) {
+    var id=idFor(key);
+    if(tags[key].status==='Confirmed offender' && !data.vehicles.some(function(v){return v.vehicle_id===id;}))
+      data.vehicles.push({vehicle_id:id,sightings:[],visits:[]});
+  });
+  data.vehicles.forEach(function(v){v.verified_prohibited_association=associations[mapping[v.vehicle_id]]===true;});
+  write_('Offenders',['Plate (private)','Province','Parking status','Status source','Manual reason','First seen','Last seen',
+    'Distinct days (all retained history)','Sightings','Areas','Evidence CheckIDs','Presence caution'],
+    offenderRows_(data,mapping,tags,readPatternHistory_()));
 }
