@@ -385,10 +385,11 @@ function recordPatterns_(result, data) {
 }
 
 /** Historical flagged-vehicle register; presence is never inferred from this list. */
-function offenderRows_(data, mapping, tags, history) {
+function offenderRows_(data, mapping, tags, history, today) {
   var escalated = escalatedVehicles_(history), ai = {};
   history.forEach(function (h) { ai[h.id] = true; });
   return data.vehicles.map(function (v) {
+    if (today && !v.sightings.some(function (s) { return s.local_time.slice(0,10) === today; })) return null;
     var key=mapping[v.vehicle_id], tag=tags[key], days={};
     v.sightings.forEach(function (s) { days[s.local_time.slice(0,10)]=true; });
     var count=Object.keys(days).length;
@@ -419,5 +420,5 @@ function writeOffenders_() {
   data.vehicles.forEach(function(v){v.verified_prohibited_association=associations[mapping[v.vehicle_id]]===true;});
   write_('Offenders',['Plate (private)','Province','Parking status','Status source','Manual reason','First seen','Last seen',
     'Distinct days (all retained history)','Sightings','Areas','Evidence CheckIDs','Presence caution'],
-    offenderRows_(data,mapping,tags,readPatternHistory_()));
+    offenderRows_(data,mapping,tags,readPatternHistory_(),Utilities.formatDate(new Date(),'America/Edmonton','yyyy-MM-dd')));
 }
