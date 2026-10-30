@@ -1,3 +1,13 @@
+## Vehicle status logic
+
+CurrentRoundReview now includes Parking status and Status source. Every newly seen vehicle defaults to **Assumed customer**, unless recurring-use rules, a verified prohibited association, or optional AI flags it as **Potential offender**. Neither rules nor AI can assign Confirmed offender.
+
+Run setupParkingPatrol after updating Code.gs and Retention.gs to create **ManualTags**. Enter Plate, Province, Status, factual Reason (no names), and ReviewedAt (a Google Sheets date/time). The status dropdown allows **Confirmed offender**, **Assumed customer**, or **Clear tag**. Use **ParkingPatrol → Apply manual status changes** to refresh. The newest valid tag wins; duplicate timestamps are rejected. Assumed customer is an explicit manual override of automatic flags; Clear tag removes that override and lets current rules/AI decide again. Manual tags stay private and are not sent to AI.
+
+Tags stop affecting status after three calendar months from ReviewedAt, even in Manual deletion mode. Physical tag-row deletion follows the selected retention mode. A continued/new sighting alone does not refresh a manual confirmation. Re-review and date a tag to renew it. No tag identifies the driver or proves the vehicle is still present.
+
+These changes are synced to GitHub; the Google installation must be updated and setupParkingPatrol rerun before the ManualTags sheet and menu appear.
+
 ## Retention controls
 
 After installing the latest Code.gs and Retention.gs, run setupParkingPatrol to create **Settings**.
