@@ -50,6 +50,12 @@ function cleanupRetention() {
       if (r.every(function (v) { return v === ''; })) return;
       if (retentionOld_(r[4], cutoff)) tagRows.push(i + 2);
     });
+    var history = ss.getSheetByName('AIPatternHistory'), historyRows = [];
+    if (history) history.getDataRange().getValues().slice(1).forEach(function (r,i) {
+      if (r.every(function (v) { return v === ''; })) return;
+      var day = r[2] instanceof Date ? Utilities.formatDate(r[2], 'America/Edmonton', 'yyyy-MM-dd') : String(r[2]);
+      if (day < retentionDate_(Utilities.formatDate(new Date(), 'America/Edmonton', 'yyyy-MM-dd'))) historyRows.push(i+2);
+    });
     // Validation above completes before any irreversible source deletion.
     // Clear derived history first so a later failure cannot leave expired reports visible.
     ['Review','CurrentRoundReview','RoundStatus','Sessions','DataIssues','Runs'].forEach(function (name) {
@@ -58,6 +64,7 @@ function cleanupRetention() {
     p.deleteProperty('LAST_SUCCESS_HASH');
     p.deleteProperty('LAST_AI_FLAGS');
     expiredRows.reverse().forEach(function (n) { raw.deleteRow(n); });
+    historyRows.reverse().forEach(function (n) { history.deleteRow(n); });
     tagRows.reverse().forEach(function (n) { tags.deleteRow(n); });
     assocRows.reverse().forEach(function (n) { assoc.deleteRow(n); });
     deletions.forEach(function (id) { form.deleteResponse(id); });
