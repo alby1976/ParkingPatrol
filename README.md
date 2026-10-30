@@ -1,3 +1,15 @@
+## Three-month retention cleanup
+
+Install **apps-script/Retention.gs** as a third script file alongside Code.gs and Core.gs, replace Code.gs with the current repository version, then run setupParkingPatrol. GitHub sync does not deploy this to Google.
+
+Cleanup runs before analysis of a submitted completed round, before Analyze now, and at least daily through the existing 15-minute recovery trigger, even with AI disabled. Cutoff is the start of the Edmonton calendar day three months earlier, clamped to the last valid day of the target month. Records exactly at the cutoff are retained.
+
+It deletes expired Form responses and the corresponding linked response-sheet rows by observation time (submission time when observation time is blank). Independently stored copies in both sources are checked. Invalid dates or ambiguous linked-sheet identification stop cleanup before source deletion. Source deletion is permanent and not transactional; after a partial failure the next scheduled run retries. Generated Review, CurrentRoundReview, RoundStatus, Sessions, DataIssues and Runs are cleared before deletion and rebuilt by subsequent analysis. VerifiedAssociations plates with no retained sightings are removed as well, including pre-entered vehicles not yet observed.
+
+No exports, personal copies, Google version history/backups, provider logs or data already sent to an AI service can be erased by this script. This is application-level cleanup, not a guarantee of provider-level permanent erasure. No automatic archives are created. The analysis lookback window remains separate from the storage-retention period.
+
+Run all tests with `node --test tests/*.test.cjs`. Local tests passed; live deletion has not been run or verified in your Google account.
+
 > **Current workflow:** Completed Form submissions start processing automatically. The 15-minute trigger is a recovery check. **CurrentRoundReview** and **RoundStatus** update without an API key, with AI disabled, or before an optional AI request fails. AI explanations remain in **Review** and must be checked against Runs for freshness.
 >
 > Basic rules flag verified tenant/employee vehicle associations and vehicles seen on at least three distinct local dates in the analysis window. These are review signals, not proof of non-customer use. Only vehicles seen in the latest check of each area appear in CurrentRoundReview; check the area's timestamp and completion status. InferredAreaVisits counts area visits, not proven property-wide visits. No exact departure times are assigned.
