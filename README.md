@@ -1,3 +1,13 @@
+## Retention exception: flagged vehicles are preserved
+
+Only expired **Assumed customer** source records are eligible for deletion. Potential offenders (recurring-use rules, verified prohibited association or stored AI finding), most likely offenders, and manually confirmed offenders are protected. Confirmation tags no longer expire automatically. Use a dated explicit ManualTags **Assumed customer** correction to release protection; Clear tag returns to automatic classification.
+
+Cleanup considers all stored observations rather than the analysis lookback, so an old flagged vehicle is not silently reclassified just because it disappeared from the current review window. Stored AI findings continue protecting their vehicle until manually cleared as an assumed customer. Associated evidence/tag records are preserved with the plate.
+
+A Form response contains a whole round and cannot selectively redact one original answer. If an expired round contains a protected vehicle or an uncertain plate reading, **the entire round and linked row are retained**, including any customer observations in that same round. No source record is deleted merely because it is old while classification is uncertain. Generated views may still be cleared and rebuilt from protected source history; exports and Google revision history are outside the cleanup scope.
+
+Automatic/Manual controls remain in Settings. Manual suppresses all automatic source deletion; it does not erase flags. This repository change must also be installed in the live Google project.
+
 ## Monthly AI escalation
 
 The same vehicle and stable AI pattern code, supported by distinct dated sightings across at least one calendar month, escalates to **Most likely offender**. **Confirmed offender** manual tags remain unchanged. Explicit manual Assumed customer overrides are also respected until cleared or expired.
