@@ -76,7 +76,7 @@ Never commit raw licence plates, identifiable visit records, Google credentials,
 - [Academic integrity and course policies](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md)
 - [Generative AI use log](AI_USE_LOG.md)
 - [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
-- [Instructions for AI coding agents](AGENT.md) (also discoverable through [AGENTS.md](AGENTS.md))
+- [Instructions for AI coding agents](AGENTS.md)
 
 Assignment-specific instructor instructions control whether and how AI may assist with assessed work. The public repository is not a confidential assignment-submission space.
 - [Git commit message template](COMMIT_TEMPLATE.txt) and [beginner's setup guide](GIT_COMMIT_GUIDE.md) for AI coding assistants
