@@ -64,12 +64,23 @@ Other governance documents and instructions already in this directory remain app
 
 ```powershell
 git pull origin main
-py -3 -m venv .venv
+py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r python/requirements.txt
 .\.venv\Scripts\python.exe -m jupyter lab
 ```
 
-Using `py -3` requires the Windows Python launcher; if unavailable use `python -m venv .venv`. Python **3.11 or 3.12** is a conservative course setup target (check instructor's environment). The local `.venv` is ignored by Git.
+Use **CPython 3.13** for all local development, notebooks and tests. `py -3.13` requires the Windows Python launcher and an installed Python 3.13; alternatively invoke the installed 3.13 interpreter explicitly. Check `.venv\\Scripts\\python.exe --version` before installing dependencies. The local `.venv` is ignored by Git.
+
+## Object-oriented architecture
+
+Use **low coupling and high cohesion** (assuming "high collision" meant "high cohesion"). Each small class/module has one clear responsibility, communicates through well-defined types and protocols, and can be replaced/tested independently. Avoid unnecessary layers for a mini capstone.
+
+- **Repository/Adapter:** Google Sheets reader and synthetic fixture reader implement a shared read interface.
+- **Dependency injection:** Supply a reader to the analysis service, rather than importing a concrete Google API client into every module.
+- **Strategy:** Swap a transparent rules baseline and an exploratory anomaly detector behind a narrow model interface.
+- **Pipeline:** Explicit validate → transform → features → model → evaluation steps, with immutable configuration where appropriate.
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a diagram and design principles. These are design goals; no production integration is implemented yet.
 
 ## Planned learning order
 
@@ -79,7 +90,7 @@ Using `py -3` requires the Windows Python launcher; if unavailable use `python -
 4. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
 5. **Build observation-aware features** such as distinct days seen.
 6. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
-6. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
+7. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
 See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
 
