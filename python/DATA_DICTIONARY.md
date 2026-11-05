@@ -2,6 +2,21 @@
 
 **Status:** Proposed normalized research schema. These are *candidate analytical fields*, not a verified copy of Google Sheet column headers. Actual mappings must be checked **without uploading real plates or private rows**.
 
+## Google Sheets as the Python data source
+
+**Planned connection:** An authorized, read-only Google Sheets API client will retrieve selected worksheets from the existing Google Forms/Sheets/Apps Script system into Python pandas DataFrames. Map actual worksheet names and column headers before implementing the connector. Credentials, source rows and vehicle identifiers remain private and must never be committed to this public repository.
+
+**Proposed extraction metadata (not necessarily columns already in the Sheet):**
+
+| Field | Meaning |
+| --- | --- |
+| `sheet_name` | Name of source worksheet used for this import |
+| `extracted_at` | Timestamp of the API retrieval |
+| `source_row_number` | Optional internal location for error diagnosis; keep private |
+| `schema_version` | Locally assigned version of the verified column mapping |
+
+The connector should read both vehicle sightings and completed/empty area checks when such data is available. The operational Google Sheet is the **data source**, not the prediction output target.
+
 ## Source record concepts
 
 | Suggested field | Type | Description | Critical caveat |
@@ -56,6 +71,8 @@ Avoid reconstructing an empty check solely from the `sightings` table. Verify ev
 - [ ] How a completed **empty check** is represented
 - [ ] Time zone and timestamp parsing conventions
 - [ ] Whether independently validated review outcomes exist at all
-- [ ] Approved export and pseudonymization method
+- [ ] Approved Google Sheets read-only access, private credentials and pseudonymization method
+- [ ] Which worksheets contain sightings and completed/empty parking rounds
+- [ ] Whether worksheet access and API quotas support the intended refresh frequency
 
 This dictionary is a design aid, not proof that all fields are already collected.
