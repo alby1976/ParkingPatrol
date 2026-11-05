@@ -33,6 +33,14 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Evaluate with chronology-aware splits, leakage checks, and honest discussion of false positives and bias. Never invent prediction accuracy.
 - No model, rule, or GAI output may automatically order, justify, or trigger ticketing/towing. Require independent human verification and applicable authorization.
 
+## Python 3.13 and design patterns
+
+- Target **CPython 3.13** for the Python coursework, including tests and notebooks. Do not silently downgrade Python to resolve a package conflict; report and document compatibility issues.
+- Design for **low coupling and high cohesion**: single-purpose modules, explicit data contracts, and replaceable dependencies.
+- Apply the Repository/Adapter pattern for data access, dependency injection for the Google Sheets reader, Strategy for alternate scoring methods, and a clear sequence for data validation/features/model/evaluation. Keep the architecture proportional to a DATA120 mini capstone.
+- Pure data and feature code must not import Google auth clients or trigger network calls. Keep credentials and operational records outside Git.
+- See [ARCHITECTURE.md](ARCHITECTURE.md) before creating new modules. Explain any new abstraction to the student in simple terms.
+
 ## Repository workflow
 
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
