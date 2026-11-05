@@ -11,7 +11,7 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 1. Read [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AI_USE_LOG.md](AI_USE_LOG.md), and [CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md) before suggesting assessment-related changes.
 2. **Do not assume that AI-generated assignment work is permitted.** The course permits GAI only within each assignment's instructor-defined rules. Request/verify those rules before providing submission-ready AI-produced answers or interpretations. Planning, explanation, learning scaffolds, and code review must remain within permitted boundaries.
 3. The student owns research choices, analysis, calculations, interpretation, and conclusions. Teach and explain; do not substitute GAI-generated judgment for the student's own work.
-4. Log material AI assistance in `AI_USE_LOG.md`; do not falsely claim independent student authorship or claim that an AI-use log replaces formal disclosure/citation.
+4. **Automatically log material AI assistance during each AI-assisted task**: run `python python/log_ai_use.py --tool "Tool (model if known)" --activity "Brief factual contribution"` or, if running code is unavailable, update [AI_USE_LOG.md](AI_USE_LOG.md) directly through the repository connector. Include the change with the associated commit whenever possible. See [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). Record student verification as pending until it actually happens. Do not falsely claim independent student authorship or that the log replaces formal disclosure/citation.
 5. Cite permitted AI usage and third-party datasets, code, methods, references, visual assets, and reused personal work following assignment instructions (APA recommended in supplied policy). Check each citation against real sources. Never invent references.
 6. Do not upload classmates' assignments or peer work to an AI system without explicit consent. Ask instructor if assignment-specific GAI permissions are unclear.
 
@@ -37,6 +37,7 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
 - Do not modify or deploy `apps-script/` as part of routine DATA120 development.
+- Before committing AI-assisted work, check the AI log has a truthful entry for this task. AI involvement is not universally detectable: this rule applies only to assistants following these instructions. Avoid duplicate entries for the same task.
 - Prefer small, reviewable commits with clear messages; do not overwrite work.
 - For all changes under `python/`, draft commit messages using [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) and the [Git commit guide](GIT_COMMIT_GUIDE.md). Inspect the actual staged diff; report test results truthfully; specify AI assistance accurately; never fabricate test results, user approval, or course compliance. Show the student the proposed message and changes for review before committing. The template is not a substitute for formal course AI citation/disclosure.
 - Keep project documentation and the [DATA_DICTIONARY.md](DATA_DICTIONARY.md) updated when fields or assumptions change.
