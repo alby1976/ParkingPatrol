@@ -9,18 +9,19 @@ Whenever an AI assistant materially helps with DATA120 planning, code, debugging
 1. Check the assignment's specific GAI allowance before providing assessable work.
 2. Describe **what AI actually did** and identify the tool/model when known.
 3. From the repository root, run the logging command **during the same task**, before final commit or pull request.
-4. Review the generated Markdown diff for accuracy and sensitive information, then include it in the relevant commit.
-5. If unable to run the command (for example, via a GitHub connector only), **directly edit AI_USE_LOG.md** in the same task/commit.
-6. Do not claim that a student verified material they have not yet verified: mark verification pending.
-7. The student reviews the log and adds the required instructor-specified formal citation/disclosure before submission.
+4. Present the material to the student and require explicit read confirmation, then explicit acceptance, each recorded with its real timestamp. Run `python python/log_ai_use.py check` before the next substantive step. See [AI_REVIEW_GATE_GUIDE.md](AI_REVIEW_GATE_GUIDE.md).
+5. Review the generated Markdown diff for accuracy and sensitive information, then include it in the relevant commit.
+6. If unable to run the command (for example, via a GitHub connector only), **directly edit AI_USE_LOG.md** in the same task/commit.
+7. Do not claim that a student verified material they have not yet verified: mark verification pending.
+8. The student reviews the log and adds the required instructor-specified formal citation/disclosure before submission.
 
 ### Example command (PowerShell, from repository root)
 
 ```powershell
-python python/log_ai_use.py --tool "ChatGPT (OpenAI)" --activity "Explained feature engineering using synthetic examples" --verification "Student verification pending" --citation "Citation/disclosure pending"
+python python/log_ai_use.py add --tool "ChatGPT (OpenAI)" --activity "Explained feature engineering using synthetic examples" --verification "Student verification pending" --citation "Citation/disclosure pending"
 ```
 
-The script timestamps entries using the **America/Edmonton** local date and inserts a new row under the log's *Assistance history* heading. It uses Python's standard library only.
+The script timestamps entries in **America/Edmonton**, writes an Assistance history row and a pending review-register row, and blocks the next task until `read` followed by `accept` are recorded. It uses Python's standard library only.
 
 ### Limits of automation
 
