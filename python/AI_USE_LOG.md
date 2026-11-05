@@ -1,6 +1,6 @@
 # DATA120 Generative AI Use Log
 
-Use this file to **record assistance transparently**. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
+Use this file to **record assistance transparently**. AI assistants following [AGENTS.md](AGENTS.md) must append an entry for each material AI-assisted task using [log_ai_use.py](log_ai_use.py) or direct repository editing; see [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not automatically detect AI use by every tool. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
 
 ## Assignment permission gate
 
@@ -20,6 +20,8 @@ Use this file to **record assistance transparently**. This is not permission to 
 | --- | --- | --- | --- | --- |
 | 2026-11-04 | ChatGPT (OpenAI) | Suggested DATA120 Python directory organization, research question, preliminary modeling plan, data dictionary, and starter dependencies | Student must review, revise, and decide what to adopt | To be completed if used |
 | 2026-11-04 | ChatGPT (OpenAI) | Drafted course-policy summary, AI-use log template, and citation/privacy checklist from student-provided syllabus excerpt | Student must compare against course outline and instructor guidance | To be completed if used |
+
+| 2026-11-04 | ChatGPT (OpenAI) | Created an agent-invoked Python AI-use logging script and guide; updated AGENTS.md, Git commit guide, and README to require task-level logging | Student verification pending; tool workflow is not automatic detection of all AI use | Citation/disclosure pending |
 
 ## Copy this row for each future use
 
