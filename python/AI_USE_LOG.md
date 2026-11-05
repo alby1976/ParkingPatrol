@@ -25,6 +25,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-04 | ChatGPT (OpenAI) | Implemented requested explicit read/accept confirmation gate with timestamped statuses, agent instructions, and supporting documentation | Student explicitly confirmed reading and acceptance on 2026-11-05; see entry review-gate-20261104 | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Regenerated DATA120 Python directory organization, primary research question, preliminary modeling plan, data dictionary and starter dependency list; added placeholder folder READMEs | Student reading and acceptance pending; see entry capstone-regeneration-20261105 | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -37,6 +39,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | Entry ID | Status | Logged at | Read confirmed at | Decision at | Material / scope | Student response |
 | --- | --- | --- | --- | --- | --- | --- |
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
+
+| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | Regenerated DATA120 planning materials in python/README.md, CAPSTONE_PLAN.md, DATA_DICTIONARY.md, requirements.txt, and folder guides | — |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
