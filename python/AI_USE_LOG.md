@@ -29,6 +29,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Revised Python DATA120 planning documents to specify planned restricted read-only Google Sheets API integration as the data source for pandas and ML | Revised material awaiting student reading and acceptance; capstone-regeneration-20261105 | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Revised DATA120 plan, README, AGENTS.md, dependencies and architecture documentation for Python 3.13 and low-coupling/high-cohesion design patterns | Student review and acceptance pending for updated plan; capstone-regeneration-20261105 | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -42,7 +44,7 @@ AI-generated material must receive two **explicit student confirmations** before
 | --- | --- | --- | --- | --- | --- | --- |
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
-| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | Regenerated DATA120 planning materials, revised 2026-11-05T07:08:23-07:00 to include planned read-only Python connection to Google Sheets | Initial version read at 2026-11-05T07:02:58-07:00. Student requested Google Sheets link as a revision at 2026-11-05T07:07:49-07:00; revised version now awaits fresh reading and acceptance. |
+| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | DATA120 revised plan: read-only Google Sheets connection, CPython 3.13 baseline, low-coupling/high-cohesion design and architecture patterns; latest revision 2026-11-05T07:45:58-07:00 | Initial version read 2026-11-05T07:02:58-07:00; latest revised material awaits renewed reading and acceptance. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
