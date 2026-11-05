@@ -1,6 +1,6 @@
 # DATA120 Generative AI Use Log
 
-Use this file to **record assistance transparently**. AI assistants following [AGENTS.md](AGENTS.md) must append an entry for each material AI-assisted task using [log_ai_use.py](log_ai_use.py) or direct repository editing; see [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not automatically detect AI use by every tool. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
+Use this file to **record assistance transparently**. AI assistants following [AGENTS.md](AGENTS.md) must append an entry for each material AI-assisted task using [log_ai_use.py](log_ai_use.py) or direct repository editing; see [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not automatically detect AI use by every tool. The [reading/acceptance gate](AI_REVIEW_GATE_GUIDE.md) blocks the next substantive step for cooperating agents until the student has explicitly confirmed reading and acceptance; it does not authenticate the student or control unrelated tools. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
 
 ## Assignment permission gate
 
@@ -23,10 +23,20 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-04 | ChatGPT (OpenAI) | Created an agent-invoked Python AI-use logging script and guide; updated AGENTS.md, Git commit guide, and README to require task-level logging | Student verification pending; tool workflow is not automatic detection of all AI use | Citation/disclosure pending |
 
+| 2026-11-04 | ChatGPT (OpenAI) | Implemented requested explicit read/accept confirmation gate with timestamped statuses, agent instructions, and supporting documentation | Student reading and acceptance pending; see entry review-gate-20261104 | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
 | --- | --- | --- | --- | --- |
+
+## AI material reading and acceptance register
+
+AI-generated material must receive two **explicit student confirmations** before the agent can proceed to the next substantive step: (1) **Read**, then (2) **Accepted**. "Revision requested" remains blocked. Recorded times use `America/Edmonton` with UTC offset where available. Agents must never record reading or acceptance from silence, a generic acknowledgment, or their own judgment. For connector edits, do not invent a timestamp; if precise time is unavailable, leave it pending and use the local logger when the student confirms.
+
+| Entry ID | Status | Logged at | Read confirmed at | Decision at | Material / scope | Student response |
+| --- | --- | --- | --- | --- | --- | --- |
+| review-gate-20261104 | Pending reading | 2026-11-04 (time unavailable) | — | — | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | — |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
