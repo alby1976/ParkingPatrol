@@ -4,7 +4,7 @@ Use [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) when preparing commits for work i
 
 ## Before generating a commit message
 
-1. Read `python/AGENT.md` and the academic-integrity documents.
+1. Read `python/AGENTS.md` and the academic-integrity documents.
 2. Inspect the **actual staged diff** (`git diff --cached`) and `git status`. Do not describe work absent from the diff.
 3. Check for sensitive content before staging or committing: no real licence plates, customer details, raw exports, tokens, secrets, or keys.
 4. Check which tests really ran and what they reported; never claim a pass without evidence.
@@ -50,7 +50,7 @@ Use a short subject; explain **what**, **why**, **validation**, and **AI assista
 
 ## AI assistant prompt
 
-> Review the actual staged diff, applicable `python/AGENT.md` rules, and test output. Draft a Git commit message using `python/COMMIT_TEMPLATE.txt`. Explain what changed, why, and what validation actually ran. State any AI contribution accurately and do not claim independent authorship, test results, approval, or course permission that is unverified. Do not include private data. Return the message for student review before committing.
+> Review the actual staged diff, applicable `python/AGENTS.md` rules, and test output. Draft a Git commit message using `python/COMMIT_TEMPLATE.txt`. Explain what changed, why, and what validation actually ran. State any AI contribution accurately and do not claim independent authorship, test results, approval, or course permission that is unverified. Do not include private data. Return the message for student review before committing.
 
 ## Responsibility
 
