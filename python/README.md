@@ -1,84 +1,93 @@
-# DATA120 Mini Capstone — Parking Pattern Analysis
+# DATA120 Mini Capstone — Parking Observation Patterns
 
-This folder is for **DATA120 Python and machine-learning coursework**. It is separate from the operational Google Forms → Google Sheets → Apps Script parking workflow in the repository root.
+> **Status:** Planning material generated with AI; **student reading and acceptance pending**. Course-specific AI permission also needs to be confirmed. See [AI_USE_LOG.md](AI_USE_LOG.md).
 
-## Project question
+## In one sentence
 
-**Can patterns in manually observed parking sightings help staff prioritize vehicles for human review, without claiming that a vehicle is parked illegally?**
+Use Python and machine learning to examine **unusual patterns in manually observed vehicle sightings**, while never claiming that a repeated sighting proves unauthorized parking.
 
-A staff member walks through a customer-only surface lot and records plates and observation date/time. Checks are intermittent; exact arrivals, departures, drivers, and customer status are not directly observed. Tenants, staff, and service providers are not permitted to use customer parking, but a plate's repeated appearance does not establish the driver's role or a parking violation.
+This folder is a **coursework sandbox**. The working Google Forms → Google Sheets → Apps Script parking patrol system remains in `apps-script/` and is not modified by this capstone.
 
-## Data flow
+## Research question
+
+**To what extent can features derived from intermittent, manually recorded vehicle sightings identify unusual repeat-sighting patterns, compared with a simple transparent rule, after accounting for how often staff inspect the parking areas?**
+
+This is a question about **pattern discovery and review prioritization**, not predicting actual violations unless trustworthy, independently verified outcome labels become available.
+
+## How the data travels
 
 ```text
-Staff walk-around
-       |
-Google Form → Google Sheet → Apps Script (existing production workflow)
-                       |
-            Restricted, approved export
-                       |
-              De-identify vehicle IDs
-                       |
-          Python / pandas (DATA120)
-                       |
-      Features → baseline → ML experiment
-                       |
-        Plots, evaluation, report
-                       |
-           Human-reviewed findings
+STAFF walk through parking lot
+                 |
+    Google Form observations
+                 |
+     Google Sheet + Apps Script         [existing operational system]
+                 |
+     APPROVED restricted export
+                 |
+   REMOVE identifiable plate details
+                 |
+      Python DATA120 workspace          [separate research workflow]
+                 |
+   pandas → charts → features → ML
+                 |
+   validation → report → presentation
 ```
 
-**No automatic ticketing or towing from model output.** Findings are leads for verification, not evidence of misconduct.
+**Important:** The parking observations do not record actual arrival or departure times. A missing observation is not always an absence. Staff check frequency changes how often a plate can be seen.
 
-## DATA120 deliverables
+## Directory map
 
-- [ ] Define the research question, objective, and success measures
-- [ ] Confirm instructor expectations and allowed ML methods
-- [ ] Prepare a de-identified or synthetic dataset
-- [ ] Clean and explore sightings using pandas
-- [ ] Engineer features without inventing departure times
-- [ ] Establish an explainable, rules-based baseline
-- [ ] Train an appropriate ML model, if reliable labels or sufficient anomaly data exist
-- [ ] Evaluate with a time-based split and explicit limits
-- [ ] Create readable charts, presentation, and final report
+```text
+python/
+├── README.md                 ← start here
+├── CAPSTONE_PLAN.md          ← question, hypotheses, method, evaluation
+├── DATA_DICTIONARY.md        ← original/proposed data fields and features
+├── requirements.txt          ← initial dependencies
+├── AGENTS.md                 ← AI-agent and academic-integrity instructions
+├── AI_USE_LOG.md             ← AI contribution + review/acceptance record
+├── notebooks/                ← exploratory and modeling notebooks (future)
+├── src/                      ← reusable Python logic (future)
+├── tests/                    ← synthetic tests for feature calculations (future)
+└── reports/                  ← public-safe figures/report outline (future)
+```
 
-See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) and [DATA_DICTIONARY.md](DATA_DICTIONARY.md).
+Other governance documents and instructions already in this directory remain applicable. Folder-specific README files keep the proposed folders in Git; no model or private dataset has been added.
 
-## Getting started
+## First-time setup from the repository root
 
-1. Keep recording observations through the existing Google workflow; do not edit the production Apps Script for this assignment.
-2. Start with **synthetic examples** until de-identification and export approval are established.
-3. Create a Python virtual environment, then install packages:
+```powershell
+git pull origin main
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r python/requirements.txt
+.\.venv\Scripts\python.exe -m jupyter lab
+```
 
-   ```bash
-   python -m venv .venv
-   # Windows PowerShell:
-   .venv\\Scripts\\python -m pip install -r python/requirements.txt
-   ```
+Using `py -3` requires the Windows Python launcher; if unavailable use `python -m venv .venv`. Python **3.11 or 3.12** is a conservative course setup target (check instructor's environment). The local `.venv` is ignored by Git.
 
-4. Add a notebook or script here when the dataset fields are confirmed.
+## Planned learning order
 
-## Data protection
+1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
+2. **Create synthetic data** with completed and incomplete checks.
+3. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
+4. **Build observation-aware features** such as distinct days seen.
+5. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
+6. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
-Never commit raw licence plates, identifiable visit records, Google credentials, API keys, live spreadsheet exports, or mapping tables from pseudonymous IDs back to plates. Keep such material private and access-controlled. Because this is a **public repository**, use synthetic or carefully disclosure-reviewed aggregate results only. See the repository retention policy; the capstone export is not an excuse to keep production observations indefinitely.
+See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
 
-## Important measurement limits
+## Privacy and academic integrity
 
-- One recorded plate means **seen at that check**, not an arrival.
-- Several sightings do **not** prove continuous occupancy.
-- Missing from a *complete* later check in the same area permits a **presumed absence** only, not an exact departure.
-- Absence from an incomplete check, different area, or unobserved period is unknown.
-- Frequency reflects staff checking schedules as well as parking behaviour.
-- Without independently verified outcomes, **classification of actual offenders cannot be validated**. Consider anomaly detection or pattern clustering as exploratory learning rather than confirmed predictions.
+This repository is **public**: do not commit raw plates, time-stamped operational exports, private vehicle-ID mappings, credentials, or confidential evidence. Use synthetic demo records. Any real data must remain in approved private storage, outside Git, with authorized access and appropriate retention.
 
-## Course policies and coding-agent guidance
+The University of Calgary allows GAI only as specified for each assessment. AI output supports learning, not a substitute for the student's analysis. All material assistance must be logged and cited as required. See [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AGENTS.md](AGENTS.md), and [AI_REVIEW_GATE_GUIDE.md](AI_REVIEW_GATE_GUIDE.md).
 
-- [Academic integrity and course policies](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md)
+No AI result will authorize a ticket, tow, or allegation of parking misconduct.
+
+## Reference documents
+
 - [Generative AI use log](AI_USE_LOG.md)
+- [AI logging instructions](AI_LOGGING_GUIDE.md)
+- [AI reading and acceptance checkpoint](AI_REVIEW_GATE_GUIDE.md)
 - [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
-- [Instructions for AI coding agents](AGENTS.md)
-
-Assignment-specific instructor instructions control whether and how AI may assist with assessed work. The public repository is not a confidential assignment-submission space.
-- [Git commit message template](COMMIT_TEMPLATE.txt) and [beginner's setup guide](GIT_COMMIT_GUIDE.md) for AI coding assistants
-- [Automatic AI-use logging workflow](AI_LOGGING_GUIDE.md) and [logger script](log_ai_use.py)
-- [Mandatory AI-generated material reading and acceptance checkpoint](AI_REVIEW_GATE_GUIDE.md)
+- [Git commit message template](COMMIT_TEMPLATE.txt) and [guide](GIT_COMMIT_GUIDE.md)
