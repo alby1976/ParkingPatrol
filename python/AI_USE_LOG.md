@@ -1,0 +1,35 @@
+# DATA120 Generative AI Use Log
+
+Use this file to **record assistance transparently**. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
+
+## Assignment permission gate
+
+| Item | Answer |
+| --- | --- |
+| Assignment or learning activity | DATA120 mini capstone — confirm exact title |
+| Instructor AI instructions checked? | **Pending confirmation** |
+| Permitted tasks / limits | **Pending confirmation** |
+| Required disclosure/citation format | **Pending confirmation** |
+| Instructor clarification (if needed) | Not yet recorded |
+
+**Until confirmed:** Treat AI-drafted assignment material as a planning aid, not automatically as acceptable submitted work.
+
+## Assistance history
+
+| Date | Tool | What the tool helped with | Student's verification / independent contribution | Reference in submission |
+| --- | --- | --- | --- | --- |
+| 2026-11-04 | ChatGPT (OpenAI) | Suggested DATA120 Python directory organization, research question, preliminary modeling plan, data dictionary, and starter dependencies | Student must review, revise, and decide what to adopt | To be completed if used |
+| 2026-11-04 | ChatGPT (OpenAI) | Drafted course-policy summary, AI-use log template, and citation/privacy checklist from student-provided syllabus excerpt | Student must compare against course outline and instructor guidance | To be completed if used |
+
+## Copy this row for each future use
+
+| YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
+| --- | --- | --- | --- | --- |
+
+## Draft disclosure wording — customize only if the use was permitted
+
+> Generative AI tools were used as permitted by the course instructions to assist with [specific tasks]. I independently checked the generated suggestions, implemented/verified [specific work], and performed the analysis and interpretation. The relevant uses are documented in the project AI use log and cited according to the course requirements.
+
+**Do not paste this as a claim of compliance without confirming the actual assignment rules and citations.**
+
+Course-provided guidance: https://conted.ucalgary.ca/info/writing.jsp
