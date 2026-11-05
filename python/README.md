@@ -70,3 +70,12 @@ Never commit raw licence plates, identifiable visit records, Google credentials,
 - Absence from an incomplete check, different area, or unobserved period is unknown.
 - Frequency reflects staff checking schedules as well as parking behaviour.
 - Without independently verified outcomes, **classification of actual offenders cannot be validated**. Consider anomaly detection or pattern clustering as exploratory learning rather than confirmed predictions.
+
+## Course policies and coding-agent guidance
+
+- [Academic integrity and course policies](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md)
+- [Generative AI use log](AI_USE_LOG.md)
+- [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
+- [Instructions for AI coding agents](AGENT.md) (also discoverable through [AGENTS.md](AGENTS.md))
+
+Assignment-specific instructor instructions control whether and how AI may assist with assessed work. The public repository is not a confidential assignment-submission space.
