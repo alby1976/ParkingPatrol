@@ -80,3 +80,4 @@ Never commit raw licence plates, identifiable visit records, Google credentials,
 
 Assignment-specific instructor instructions control whether and how AI may assist with assessed work. The public repository is not a confidential assignment-submission space.
 - [Git commit message template](COMMIT_TEMPLATE.txt) and [beginner's setup guide](GIT_COMMIT_GUIDE.md) for AI coding assistants
+- [Automatic AI-use logging workflow](AI_LOGGING_GUIDE.md) and [logger script](log_ai_use.py)
