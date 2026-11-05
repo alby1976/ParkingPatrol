@@ -1,0 +1,57 @@
+# DATA120 — Git Commit Messages for AI Coding Assistants
+
+Use [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) when preparing commits for work in `python/`. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
+
+## Before generating a commit message
+
+1. Read `python/AGENT.md` and the academic-integrity documents.
+2. Inspect the **actual staged diff** (`git diff --cached`) and `git status`. Do not describe work absent from the diff.
+3. Check for sensitive content before staging or committing: no real licence plates, customer details, raw exports, tokens, secrets, or keys.
+4. Check which tests really ran and what they reported; never claim a pass without evidence.
+5. If AI helped generate code, documentation, analyses, or the message itself, represent that assistance accurately. Update `AI_USE_LOG.md` when material and appropriate. Log entries **do not replace** required formal AI citations/disclosures.
+6. Ask the student to review the message and changes. Do not invent user approvals or assert that assignment-specific AI use is permitted without confirmation.
+
+## Configure the commit message template (Windows PowerShell)
+
+From the **repository root**, run:
+
+```powershell
+git config --local commit.template python/COMMIT_TEMPLATE.txt
+```
+
+This affects this local clone only. Verify:
+
+```powershell
+git config --local --get commit.template
+```
+
+Then use `git commit` (without `-m`) to open the editor with the template. If Git does not open an editor, configure your preferred `core.editor` first. **GitHub does not automatically apply the template to web-created commits or connector-written commits.** AI assistants writing commits through an API should follow the same structure manually.
+
+To turn the template off:
+
+```powershell
+git config --local --unset commit.template
+```
+
+## Conventional subject
+
+```text
+type(scope): imperative summary
+```
+
+Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `data`, `experiment`.
+
+Examples (illustrative, not claims of completed work):
+- `docs(data120): document observation-data limitations`
+- `feat(features): count distinct observed dates per window`
+- `test(features): cover incomplete-check edge cases`
+
+Use a short subject; explain **what**, **why**, **validation**, and **AI assistance** in the body. Do not include confidential data in messages: commit messages are part of public Git history.
+
+## AI assistant prompt
+
+> Review the actual staged diff, applicable `python/AGENT.md` rules, and test output. Draft a Git commit message using `python/COMMIT_TEMPLATE.txt`. Explain what changed, why, and what validation actually ran. State any AI contribution accurately and do not claim independent authorship, test results, approval, or course permission that is unverified. Do not include private data. Return the message for student review before committing.
+
+## Responsibility
+
+The student decides what to stage, verifies the resulting commit, and independently completes the assessed analysis. Assignment-specific instructor rules take precedence over this guide.
