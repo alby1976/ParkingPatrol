@@ -23,7 +23,7 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-04 | ChatGPT (OpenAI) | Created an agent-invoked Python AI-use logging script and guide; updated AGENTS.md, Git commit guide, and README to require task-level logging | Student verification pending; tool workflow is not automatic detection of all AI use | Citation/disclosure pending |
 
-| 2026-11-04 | ChatGPT (OpenAI) | Implemented requested explicit read/accept confirmation gate with timestamped statuses, agent instructions, and supporting documentation | Student reading and acceptance pending; see entry review-gate-20261104 | Citation/disclosure pending |
+| 2026-11-04 | ChatGPT (OpenAI) | Implemented requested explicit read/accept confirmation gate with timestamped statuses, agent instructions, and supporting documentation | Student explicitly confirmed reading and acceptance on 2026-11-05; see entry review-gate-20261104 | Citation/disclosure pending |
 
 ## Copy this row for each future use
 
@@ -36,7 +36,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | Entry ID | Status | Logged at | Read confirmed at | Decision at | Material / scope | Student response |
 | --- | --- | --- | --- | --- | --- | --- |
-| review-gate-20261104 | Pending reading | 2026-11-04 (time unavailable) | — | — | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | — |
+| review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
