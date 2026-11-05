@@ -59,11 +59,25 @@ Google Form → Google Sheets / Apps Script [production]
       aggregate charts and course report
 ```
 
-## 5. Proposed Python workflow
+## 5. Python 3.13 architecture and design quality
+
+- Runtime: **CPython 3.13**. Record exact dependency versions in a reproducible environment snapshot when work begins.
+- **High cohesion**: a module/class handles one main job (read, validate, engineer features, fit/score, evaluate); avoid oversized manager classes.
+- **Low coupling**: higher-level analysis should depend on small interfaces/protocols, not Google Sheets implementation details.
+- **Adapter/Repository pattern**: interchangeable read-only Google Sheets and synthetic-data readers.
+- **Dependency injection**: pass a data source to the analysis pipeline at construction or call time.
+- **Strategy pattern**: compare explainable rule scores and experimental ML without rewriting data loading.
+- **Pipeline separation**: notebooks orchestrate reusable functions and do not contain essential business logic.
+- No global mutable state, implicit network calls at import time, or model training with side effects.
+- Start simple: prefer plain functions or dataclasses over classes when an abstraction would add complexity without testability.
+
+See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with a synthetic reader and verify that feature logic never contacts Google directly.
+
+## 6. Proposed Python workflow
 
 | Phase | Student learning task | Output |
 | --- | --- | --- |
-| A. Sheets connectivity and data audit | Configure authorized read-only connection, match column headers, missing values, completed-check coverage | Source map and quality summary | Match real column headers, missing values, completed-check coverage | Source map and quality summary |
+| A. Sheets connectivity and data audit | Configure authorized read-only connection, map headers and completed-check coverage | Source mapping and quality summary |
 | B. pandas exploration | Summarize sightings/checks over days, hours, and areas | Descriptive tables and charts |
 | C. Features | Count unique check sightings and distinct dates; measure completed-check opportunity | Reproducible feature table |
 | D. Baseline | Example: 3+ **distinct observed dates** in 30 days | Transparent review-priority indicator |
@@ -73,7 +87,7 @@ Google Form → Google Sheets / Apps Script [production]
 
 **Optional supervised alternative:** If an independently verified, appropriately authorized outcome dataset becomes available, compare a simple classifier (e.g. logistic regression or decision tree) to the baseline. Review labeling policy, class imbalance, leakage, and chronological testing before training. Operational AI/manual review flags are **not** automatically reliable truth labels.
 
-## 6. Proposed features (not yet implemented)
+## 7. Proposed features (not yet implemented)
 
 - `sightings_30d`: unique vehicle-check appearances in 30 days
 - `distinct_days_30d`: distinct local dates seen
@@ -86,15 +100,16 @@ Google Form → Google Sheets / Apps Script [production]
 
 **Data leakage protection:** Do not use future sightings or future operational statuses when constructing a historical feature row.
 
-## 7. What success will and will not mean
+## 8. What success will and will not mean
 
 A useful capstone should demonstrate **correct reproducible feature calculations**, honest descriptive visualizations, a justified ML technique, and interpretation of why model findings differ from a simple rule. Check changes in review rankings when inspection schedules differ. Validate with chronological holdout periods where possible.
 
 Do **not** report "85% accuracy detecting illegal parkers" without verified external ground truth; anomaly scores, clusters, and rule flags are not legal or factual violation labels. The final judgment about a particular vehicle remains with a properly authorized human using additional evidence.
 
-## 8. Proposed deliverables
+## 9. Proposed deliverables
 
 - `notebooks/01_exploration.ipynb` — pandas exploratory work
+- `ARCHITECTURE.md` — low-coupling/high-cohesion design and dependencies
 - `src/google_sheets_reader.py` — authorized read-only Google Sheets import into pandas
 - `src/features.py` — modular features with docstrings
 - `tests/test_features.py` — synthetic edge-case tests
@@ -104,7 +119,7 @@ Do **not** report "85% accuracy detecting illegal parkers" without verified exte
 
 These are **planned filenames**; no notebook or model exists yet.
 
-## 9. Approval and integrity checkpoints
+## 10. Approval and integrity checkpoints
 
 - [ ] Confirm assessment-specific rules for GAI assistance with the instructor.
 - [ ] Student reviews and accepts this AI-generated **planning proposal**, and read/accept times are recorded in `AI_USE_LOG.md`.
