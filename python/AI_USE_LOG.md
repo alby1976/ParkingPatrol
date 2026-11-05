@@ -27,6 +27,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Regenerated DATA120 Python directory organization, primary research question, preliminary modeling plan, data dictionary and starter dependency list; added placeholder folder READMEs | Student reading and acceptance pending; see entry capstone-regeneration-20261105 | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Revised Python DATA120 planning documents to specify planned restricted read-only Google Sheets API integration as the data source for pandas and ML | Revised material awaiting student reading and acceptance; capstone-regeneration-20261105 | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -40,7 +42,7 @@ AI-generated material must receive two **explicit student confirmations** before
 | --- | --- | --- | --- | --- | --- | --- |
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
-| capstone-regeneration-20261105 | Read; awaiting decision | 2026-11-05T06:59:31-07:00 | 2026-11-05T07:02:58-07:00 | — | Regenerated DATA120 planning materials in python/README.md, CAPSTONE_PLAN.md, DATA_DICTIONARY.md, requirements.txt, and folder guides | Student explicitly confirmed having read the suggestions; acceptance not yet provided. |
+| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | Regenerated DATA120 planning materials, revised 2026-11-05T07:08:23-07:00 to include planned read-only Python connection to Google Sheets | Initial version read at 2026-11-05T07:02:58-07:00. Student requested Google Sheets link as a revision at 2026-11-05T07:07:49-07:00; revised version now awaits fresh reading and acceptance. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
