@@ -1,6 +1,18 @@
+# DATA120 beginner environment: install from repository root
+# Python 3.11 or 3.12 recommended for this starter setup.
+# Use a fresh virtual environment; record actual installed versions for reproducibility.
+# Core data cleaning and table operations
 pandas>=2.2,<3
 numpy>=1.26,<3
+
+# Readable course charts
 matplotlib>=3.8,<4
+
+# Introductory ML experiments: preprocess, simple models, anomaly detection
 scikit-learn>=1.5,<2
+
+# Interactive notebooks for learning and exploration
 jupyterlab>=4,<5
+
+# IANA time zone database on Windows (America/Edmonton)
 tzdata>=2025.1; platform_system == 'Windows'
