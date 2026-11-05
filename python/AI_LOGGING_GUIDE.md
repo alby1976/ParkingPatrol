@@ -18,7 +18,7 @@ Whenever an AI assistant materially helps with DATA120 planning, code, debugging
 ### Example command (PowerShell, from repository root)
 
 ```powershell
-python python/log_ai_use.py add --tool "ChatGPT (OpenAI)" --activity "Explained feature engineering using synthetic examples" --verification "Student verification pending" --citation "Citation/disclosure pending"
+python python/log_ai_use.py add --tool "ChatGPT (OpenAI)" --activity "Explained feature engineering using synthetic examples"
 ```
 
 The script timestamps entries in **America/Edmonton**, writes an Assistance history row and a pending review-register row, and blocks the next task until `read` followed by `accept` are recorded. It uses Python's standard library only.
