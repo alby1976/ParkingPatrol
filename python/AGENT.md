@@ -38,6 +38,7 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
 - Do not modify or deploy `apps-script/` as part of routine DATA120 development.
 - Prefer small, reviewable commits with clear messages; do not overwrite work.
+- For all changes under `python/`, draft commit messages using [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) and the [Git commit guide](GIT_COMMIT_GUIDE.md). Inspect the actual staged diff; report test results truthfully; specify AI assistance accurately; never fabricate test results, user approval, or course compliance. Show the student the proposed message and changes for review before committing. The template is not a substitute for formal course AI citation/disclosure.
 - Keep project documentation and the [DATA_DICTIONARY.md](DATA_DICTIONARY.md) updated when fields or assumptions change.
 - Add lightweight tests for important data cleaning and feature calculations. Do not claim a test was run unless it was actually run.
 - Prefer `pandas`, `numpy`, `matplotlib`, `scikit-learn` and standard-library modules; pin or document new dependencies.
