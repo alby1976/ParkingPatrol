@@ -1,0 +1,32 @@
+# DATA120 commit message template
+# Lines beginning with # are guidance and are normally removed by Git's editor.
+# If an AI assistant generates the final message, remove all placeholder/comment lines.
+# Format: type(scope): concise imperative summary (about 50-72 chars)
+# Types: feat, fix, docs, refactor, test, chore, data, experiment
+# Scope normally: data120, pandas, features, model, evaluation, docs
+#
+# Example subject: feat(features): add distinct-sighting-day counts
+
+type(scope): summarize what changed
+
+# What: describe actual changes; Why: explain the purpose and context.
+What changed:
+- 
+
+Why:
+- 
+
+# Only report tests actually run. If not run, state "Not run" and why.
+Validation:
+- 
+
+# AI transparency: specify none / assisted with message only / code or docs assisted.
+# List tool and scope truthfully. Keep academic AI use log and assignment citations separate.
+AI assistance:
+- Tool: 
+- Contribution: 
+- Student review: 
+
+# Optional: cite a related issue/PR, but don't invent one.
+# References:
+# - 
