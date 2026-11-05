@@ -6,6 +6,8 @@
 
 Use Python and machine learning to examine **unusual patterns in manually observed vehicle sightings**, while never claiming that a repeated sighting proves unauthorized parking.
 
+**The planned Python model will connect to Google Sheets to retrieve authorized observation data using a read-only connection.** This link is a future implementation, not currently live. The Python model will not alter the production Google Sheet or deploy to Apps Script.
+
 This folder is a **coursework sandbox**. The working Google Forms → Google Sheets → Apps Script parking patrol system remains in `apps-script/` and is not modified by this capstone.
 
 ## Research question
@@ -23,9 +25,13 @@ STAFF walk through parking lot
                  |
      Google Sheet + Apps Script         [existing operational system]
                  |
-     APPROVED restricted export
+   AUTHORIZED read-only Sheets API
                  |
-   REMOVE identifiable plate details
+     Restricted access to Sheet
+                 |
+   Private Python data connector        [new DATA120 component]
+                 |
+    Pseudonymize / validate locally
                  |
       Python DATA120 workspace          [separate research workflow]
                  |
@@ -47,7 +53,7 @@ python/
 ├── AGENTS.md                 ← AI-agent and academic-integrity instructions
 ├── AI_USE_LOG.md             ← AI contribution + review/acceptance record
 ├── notebooks/                ← exploratory and modeling notebooks (future)
-├── src/                      ← reusable Python logic (future)
+├── src/                      ← Sheets connector + Python ML logic (future)
 ├── tests/                    ← synthetic tests for feature calculations (future)
 └── reports/                  ← public-safe figures/report outline (future)
 ```
@@ -68,10 +74,11 @@ Using `py -3` requires the Windows Python launcher; if unavailable use `python -
 ## Planned learning order
 
 1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
-2. **Create synthetic data** with completed and incomplete checks.
-3. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
-4. **Build observation-aware features** such as distinct days seen.
-5. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
+2. **Implement a read-only Google Sheets API connector**, after consent, secure credentials, privacy controls, and student approval; load data into pandas in memory. Use restricted scopes and least privilege. Do not store credentials in Git.
+3. **Create synthetic data** with completed and incomplete checks.
+4. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
+5. **Build observation-aware features** such as distinct days seen.
+6. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
 6. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
 See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
