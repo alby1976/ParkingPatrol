@@ -79,3 +79,4 @@ Never commit raw licence plates, identifiable visit records, Google credentials,
 - [Instructions for AI coding agents](AGENT.md) (also discoverable through [AGENTS.md](AGENTS.md))
 
 Assignment-specific instructor instructions control whether and how AI may assist with assessed work. The public repository is not a confidential assignment-submission space.
+- [Git commit message template](COMMIT_TEMPLATE.txt) and [beginner's setup guide](GIT_COMMIT_GUIDE.md) for AI coding assistants
