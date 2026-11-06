@@ -14,6 +14,7 @@ Module inventory (items marked planned are not implemented):
 - `features.py`: rolling features calculated without using future observations
 - `pipeline.py`: orchestration using dependency injection, no hardwired Google service
 - `pattern_detection.py`: **implemented** same-day repeat-check review rule, observation features, and exploratory IsolationForest anomaly scoring
+- `verification.py`: **proposed** pure records for independent human verification, confirmed-blacklist status, and separately reported on-site manual ticket/tag actions; no actual enforcement integration
 - `modeling.py`: other scoring strategies (planned)
 
 All functions should have clear names and Google-style docstrings. Keep production Apps Script unchanged.
