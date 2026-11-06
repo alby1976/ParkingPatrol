@@ -50,6 +50,8 @@ python/
 ├── CAPSTONE_PLAN.md          ← question, hypotheses, method, evaluation
 ├── DATA_DICTIONARY.md        ← original/proposed data fields and features
 ├── requirements.txt          ← initial dependencies
+├── .env.example              ← safe template only (tracked)
+├── .env                      ← local secrets (ignored, never committed)
 ├── AGENTS.md                 ← AI-agent and academic-integrity instructions
 ├── AI_USE_LOG.md             ← AI contribution + review/acceptance record
 ├── notebooks/                ← exploratory and modeling notebooks (future)
@@ -64,12 +66,16 @@ Other governance documents and instructions already in this directory remain app
 
 ```powershell
 git pull origin main
+Copy-Item python/.env.example python/.env
+# Edit python/.env locally; never put credentials in Git
 py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r python/requirements.txt
 .\.venv\Scripts\python.exe -m jupyter lab
 ```
 
 Use **CPython 3.13** for all local development, notebooks and tests. `py -3.13` requires the Windows Python launcher and an installed Python 3.13; alternatively invoke the installed 3.13 interpreter explicitly. Check `.venv\\Scripts\\python.exe --version` before installing dependencies. The local `.venv` is ignored by Git.
+
+Read [ENV_SETUP.md](ENV_SETUP.md) before adding any Google Sheets credentials. The `.env.example` contains no secrets; `python/.env` and real credential JSON files are excluded from Git. Do not use your Google account password to authenticate the Sheets API.
 
 ## Object-oriented architecture
 
@@ -108,4 +114,5 @@ No AI result will authorize a ticket, tow, or allegation of parking misconduct.
 - [AI logging instructions](AI_LOGGING_GUIDE.md)
 - [AI reading and acceptance checkpoint](AI_REVIEW_GATE_GUIDE.md)
 - [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
+- [Local .env and Google Sheets credential setup](ENV_SETUP.md)
 - [Git commit message template](COMMIT_TEMPLATE.txt) and [guide](GIT_COMMIT_GUIDE.md)
