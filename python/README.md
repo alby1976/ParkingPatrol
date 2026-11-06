@@ -126,6 +126,10 @@ Generate fictional observations without accessing Google Sheets:
 
 Synthetic 45/90-day examples support software testing and exploratory demonstrations, not claims about actual parking violations. Output stays in the Git-ignored `python/generated/` folder.
 
+## Guided sprints with ChatGPT
+
+Start with the [31-session calendar](docs/planning/GUIDED_SPRINT_SESSIONS.md), use the [ChatGPT coaching instructions](docs/planning/CHATGPT_SPRINT_COACH.md), and update the [sprint progress tracker](docs/planning/SPRINT_PROGRESS.md) with actual outcomes. Sundays are always free. ChatGPT should walk through one action at a time, use TDD, log AI assistance, and obtain explicit reading and acceptance before the next substantive step.
+
 ## Planned learning order
 
 1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
