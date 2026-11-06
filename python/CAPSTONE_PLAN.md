@@ -80,12 +80,13 @@ See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with 
 | Phase | Student learning task | Output |
 | --- | --- | --- |
 | A. Sheets connectivity and data audit | Configure authorized read-only connection, map headers and completed-check coverage | Source mapping and quality summary |
-| B. pandas exploration | Summarize sightings/checks over days, hours, and areas | Descriptive tables and charts |
-| C. Features | Count unique check sightings and distinct dates; measure completed-check opportunity | Reproducible feature table |
-| D. Baseline | Example: 3+ **distinct observed dates** in 30 days | Transparent review-priority indicator |
-| E. ML | Explore IsolationForest or clustering **only if sample size and variation are adequate** | Unusual-pattern score/group, not violation likelihood |
-| F. Evaluation | Check sensitivity, stability over later periods, false-alarm potential, and comparison with baseline | Honest method comparison |
-| G. Communicate | Explain what the features mean, limitations, privacy, and decisions that require a human | Student-authored report/presentation |
+| B. Data cleaning and normalization | Standardize check IDs, area labels, pseudonymous IDs, datetimes and completion flags; quarantine invalid records and de-duplicate within checks | Reproducible cleaned data plus an issue report |
+| C. pandas exploration | Summarize sightings/checks over days, hours, and areas | Descriptive tables and charts |
+| D. Features | Count unique check sightings and distinct dates; measure completed-check opportunity | Reproducible feature table |
+| E. Baseline | Example: 3+ **distinct observed dates** in 30 days | Transparent review-priority indicator |
+| F. ML | Explore IsolationForest or clustering **only if sample size and variation are adequate** | Unusual-pattern score/group, not violation likelihood |
+| G. Evaluation | Check sensitivity, stability over later periods, false-alarm potential, and comparison with baseline | Honest method comparison |
+| H. Communicate | Explain what the features mean, limitations, privacy, and decisions that require a human | Student-authored report/presentation |
 
 **Optional supervised alternative:** If an independently verified, appropriately authorized outcome dataset becomes available, compare a simple classifier (e.g. logistic regression or decision tree) to the baseline. Review labeling policy, class imbalance, leakage, and chronological testing before training. Operational AI/manual review flags are **not** automatically reliable truth labels.
 
@@ -113,13 +114,15 @@ Do **not** report "85% accuracy detecting illegal parkers" without verified exte
 - `notebooks/01_exploration.ipynb` — pandas exploratory work
 - `ARCHITECTURE.md` — low-coupling/high-cohesion design and dependencies
 - `src/google_sheets_reader.py` — authorized read-only Google Sheets import into pandas
+- `src/cleaning.py` — implemented normalization of approved pseudonymous checks/sightings; not a plate anonymizer
+- `tests/test_cleaning.py` — synthetic cleaning edge cases (execution pending)
 - `src/features.py` — modular features with docstrings
 - `tests/test_features.py` — synthetic edge-case tests
 - `notebooks/02_model_comparison.ipynb` — baseline/ML comparison
 - `reports/` — public-safe charts and student-authored findings
 - `DATA_DICTIONARY.md` — source mapping, derived-feature definitions, and limitations
 
-These are **planned filenames**; no notebook or model exists yet.
+Cleaning and its synthetic test module are now implemented. Other listed analysis modules and notebooks remain planned; no model or live Sheets connection exists yet.
 
 ## 10. Approval and integrity checkpoints
 
