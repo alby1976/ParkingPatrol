@@ -99,6 +99,12 @@ See [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for a diagram and desig
 - Implemented in [src/pattern_detection.py](src/pattern_detection.py), tested with synthetic cases in [tests/test_pattern_detection.py](tests/test_pattern_detection.py). No live Google Sheets connection or deployment.
 - Read [the pattern-model design](docs/planning/SUSPICIOUS_PATTERN_MODEL.md) and confirm the proposed interpretation of an "event" as one distinct survey/check.
 
+## Human verification and on-site actions
+
+A vehicle that triggers the rule or anomaly review indicator is **suspicious only**. An authorized human verifies whether a parking violation actually occurred. If verified, the vehicle may be recorded as **blacklisted**; any ticket or tag issued on site is a separate staff action with its own timestamp and reference. No Python module or ML model issues tickets or tags automatically.
+
+See [Human Verification Workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md) and [verification.py](src/verification.py) for the proposed offline record design (not deployed).
+
 ## Test-driven development: required
 
 All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](docs/guides/TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
