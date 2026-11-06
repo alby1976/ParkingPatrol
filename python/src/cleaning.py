@@ -47,7 +47,7 @@ def _parse_time(value: object) -> pd.Timestamp | pd.NaT:
         if ts.tzinfo is None:
             return ts.tz_localize(TIME_ZONE, ambiguous="raise", nonexistent="raise")
         return ts.tz_convert(TIME_ZONE)
-    except (ValueError, TypeError, OverflowError):
+    except Exception:  # pandas may raise timezone-library-specific DST exceptions.
         return pd.NaT
 
 
