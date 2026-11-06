@@ -43,6 +43,15 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Read [ENV_SETUP.md](ENV_SETUP.md): store approved local settings and secrets in `python/.env`; commit **only** empty `python/.env.example`. The real `.env`, OAuth token caches, credential files, private keys and passwords must never be committed. Use `python-dotenv` from a centralized configuration module and inject settings rather than spreading `os.getenv` calls across ML classes. Never request or store a Google account password for Sheets API access.
 - See [ARCHITECTURE.md](ARCHITECTURE.md) before creating new modules. Explain any new abstraction to the student in simple terms.
 
+## Mandatory test-driven development (TDD)
+
+- Follow [TDD_GUIDE.md](TDD_GUIDE.md) for **each new behavior or bug fix** in `python/`: **RED** write/run a test and verify it fails for the intended reason; **GREEN** implement the minimum necessary and rerun; **REFACTOR** improve internal design and rerun tests.
+- Use `pytest` on Python 3.13 with synthetic inputs and fake readers for Google Sheets. No private credentials or live customer observations in public tests.
+- Cover normal, missing, duplicate, empty, invalid and time-zone edge cases. Use regression tests before fixing discovered defects.
+- Record the actual commands and outcomes for RED, GREEN and REFACTOR in commit evidence. If any phase was not run, explicitly say so; never claim TDD was followed without evidence.
+- The existing cleaning module predates adoption of TDD. Do not retroactively describe it as developed test-first.
+- Keep the student's **read → accept** gate independent of TDD. Completing tests does not imply student acceptance, permission to use AI in coursework, or authorization to proceed.
+
 ## Repository workflow
 
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
