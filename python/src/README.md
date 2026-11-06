@@ -2,7 +2,7 @@
 
 **Target interpreter:** Python 3.13.
 
-Each module should have **one cohesive job** and communicate using narrow, typed interfaces. Keep external APIs at the edge so the analysis code is loosely coupled. See [../ARCHITECTURE.md](../ARCHITECTURE.md).
+Each module should have **one cohesive job** and communicate using narrow, typed interfaces. Keep external APIs at the edge so the analysis code is loosely coupled. See [../ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md).
 
 Module inventory (items marked planned are not implemented):
 - `settings.py`: load ignored `python/.env` with `python-dotenv` and validate settings in one place (planned)

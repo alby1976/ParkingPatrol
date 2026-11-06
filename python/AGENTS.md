@@ -8,10 +8,10 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 
 ## Academic integrity: required first step
 
-1. Read [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AI_USE_LOG.md](AI_USE_LOG.md), and [CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md) before suggesting assessment-related changes.
+1. Read [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](docs/policies/ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AI_USE_LOG.md](docs/ai/AI_USE_LOG.md), and [CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md](docs/policies/CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md) before suggesting assessment-related changes.
 2. **Do not assume that AI-generated assignment work is permitted.** The course permits GAI only within each assignment's instructor-defined rules. Request/verify those rules before providing submission-ready AI-produced answers or interpretations. Planning, explanation, learning scaffolds, and code review must remain within permitted boundaries.
 3. The student owns research choices, analysis, calculations, interpretation, and conclusions. Teach and explain; do not substitute GAI-generated judgment for the student's own work.
-4. **Mandatory approval gate:** for each material AI-assisted task, record a Pending reading entry using `python python/log_ai_use.py add --tool "Tool (model if known)" --activity "Brief factual contribution"`, or update [AI_USE_LOG.md](AI_USE_LOG.md) directly if no execution tool is available. Show the work. **STOP** and wait for the student's explicit confirmation that they have read it; then record `read --id ENTRY_ID` with the actual confirmation time. **STOP** again until the student explicitly accepts or requests changes. Record `accept --id ENTRY_ID` only after acceptance; reject/revise otherwise. Run `check` before any next substantive step. Do not infer consent from silence or the AI's own assessment. See [AI_REVIEW_GATE_GUIDE.md](AI_REVIEW_GATE_GUIDE.md) and [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not replace formal course AI citation/disclosure.
+4. **Mandatory approval gate:** for each material AI-assisted task, record a Pending reading entry using `python python/log_ai_use.py add --tool "Tool (model if known)" --activity "Brief factual contribution"`, or update [AI_USE_LOG.md](docs/ai/AI_USE_LOG.md) directly if no execution tool is available. Show the work. **STOP** and wait for the student's explicit confirmation that they have read it; then record `read --id ENTRY_ID` with the actual confirmation time. **STOP** again until the student explicitly accepts or requests changes. Record `accept --id ENTRY_ID` only after acceptance; reject/revise otherwise. Run `check` before any next substantive step. Do not infer consent from silence or the AI's own assessment. See [AI_REVIEW_GATE_GUIDE.md](docs/ai/AI_REVIEW_GATE_GUIDE.md) and [AI_LOGGING_GUIDE.md](docs/ai/AI_LOGGING_GUIDE.md). This does not replace formal course AI citation/disclosure.
 5. Cite permitted AI usage and third-party datasets, code, methods, references, visual assets, and reused personal work following assignment instructions (APA recommended in supplied policy). Check each citation against real sources. Never invent references.
 6. Do not upload classmates' assignments or peer work to an AI system without explicit consent. Ask instructor if assignment-specific GAI permissions are unclear.
 
@@ -40,12 +40,12 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Apply the Repository/Adapter pattern for data access, dependency injection for the Google Sheets reader, Strategy for alternate scoring methods, and a clear sequence for data validation/features/model/evaluation. Keep the architecture proportional to a DATA120 mini capstone.
 - Use `src/cleaning.py` to normalize approved, *already pseudonymized* check and sighting DataFrames before features/ML. Inspect issue counts and do not treat invalid/missing records as proven absences. Do not send raw plates into the cleaner. Add/update synthetic tests for cleaning behavior; do not claim Python 3.13 tests passed unless actually run.
 - Pure data and feature code must not import Google auth clients or trigger network calls. Keep credentials and operational records outside Git.
-- Read [ENV_SETUP.md](ENV_SETUP.md): store approved local settings and secrets in `python/.env`; commit **only** empty `python/.env.example`. The real `.env`, OAuth token caches, credential files, private keys and passwords must never be committed. Use `python-dotenv` from a centralized configuration module and inject settings rather than spreading `os.getenv` calls across ML classes. Never request or store a Google account password for Sheets API access.
-- See [ARCHITECTURE.md](ARCHITECTURE.md) before creating new modules. Explain any new abstraction to the student in simple terms.
+- Read [ENV_SETUP.md](docs/guides/ENV_SETUP.md): store approved local settings and secrets in `python/.env`; commit **only** empty `python/.env.example`. The real `.env`, OAuth token caches, credential files, private keys and passwords must never be committed. Use `python-dotenv` from a centralized configuration module and inject settings rather than spreading `os.getenv` calls across ML classes. Never request or store a Google account password for Sheets API access.
+- See [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) before creating new modules. Explain any new abstraction to the student in simple terms.
 
 ## Mandatory test-driven development (TDD)
 
-- Follow [TDD_GUIDE.md](TDD_GUIDE.md) for **each new behavior or bug fix** in `python/`: **RED** write/run a test and verify it fails for the intended reason; **GREEN** implement the minimum necessary and rerun; **REFACTOR** improve internal design and rerun tests.
+- Follow [TDD_GUIDE.md](docs/guides/TDD_GUIDE.md) for **each new behavior or bug fix** in `python/`: **RED** write/run a test and verify it fails for the intended reason; **GREEN** implement the minimum necessary and rerun; **REFACTOR** improve internal design and rerun tests.
 - Use `pytest` on Python 3.13 with synthetic inputs and fake readers for Google Sheets. No private credentials or live customer observations in public tests.
 - Cover normal, missing, duplicate, empty, invalid and time-zone edge cases. Use regression tests before fixing discovered defects.
 - Record the actual commands and outcomes for RED, GREEN and REFACTOR in commit evidence. If any phase was not run, explicitly say so; never claim TDD was followed without evidence.
@@ -58,8 +58,8 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Do not modify or deploy `apps-script/` as part of routine DATA120 development.
 - Before committing AI-assisted work, ensure a truthful pending entry exists in the log. Commit the pending entry alongside the proposed change when appropriate, but **do not begin another substantive step** until explicit read and acceptance confirmations are recorded. Revisions and fixes to logging mechanics are allowed. AI involvement is not universally detectable: this rule applies to cooperating assistants. Avoid duplicate entries for the same task.
 - Prefer small, reviewable commits with clear messages; do not overwrite work.
-- For all changes under `python/`, draft commit messages using [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) and the [Git commit guide](GIT_COMMIT_GUIDE.md). Inspect the actual staged diff; report test results truthfully; specify AI assistance accurately; never fabricate test results, user approval, or course compliance. Show the student the proposed message and changes for review before committing. The template is not a substitute for formal course AI citation/disclosure.
-- Keep project documentation and the [DATA_DICTIONARY.md](DATA_DICTIONARY.md) updated when fields or assumptions change.
+- For all changes under `python/`, draft commit messages using [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) and the [Git commit guide](docs/guides/GIT_COMMIT_GUIDE.md). Inspect the actual staged diff; report test results truthfully; specify AI assistance accurately; never fabricate test results, user approval, or course compliance. Show the student the proposed message and changes for review before committing. The template is not a substitute for formal course AI citation/disclosure.
+- Keep project documentation and the [DATA_DICTIONARY.md](docs/planning/DATA_DICTIONARY.md) updated when fields or assumptions change.
 - Add lightweight tests for important data cleaning and feature calculations. Do not claim a test was run unless it was actually run.
 - Prefer `pandas`, `numpy`, `matplotlib`, `scikit-learn` and standard-library modules; pin or document new dependencies.
 - In examples use tiny synthetic datasets, descriptive variable names, type hints where useful, and clear Google-style docstrings.
@@ -78,7 +78,7 @@ The student prefers short, numbered, practical "dummies guide" steps, diagrams, 
 5. Compare justified model experiments to a transparent baseline.
 6. Document methods, limitations, sources, AI use, and student-driven conclusions.
 
-See [README.md](README.md) and [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for current project scope.
+See [README.md](README.md) and [CAPSTONE_PLAN.md](docs/planning/CAPSTONE_PLAN.md) for current project scope.
 
 ## Instruction precedence
 

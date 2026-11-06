@@ -13,7 +13,7 @@ from pathlib import Path
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
-LOG = Path(__file__).resolve().parent / "AI_USE_LOG.md"
+LOG = Path(__file__).resolve().parent / "docs" / "ai" / "AI_USE_LOG.md"
 HISTORY = "## Assistance history"
 NEXT = "## Copy this row for each future use"
 GATE = "## AI material reading and acceptance register"

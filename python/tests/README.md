@@ -16,7 +16,7 @@ Do not use actual identifiable parking records as GitHub test fixtures.
 
 ## Required development workflow (new work)
 
-For future changes, use **test-driven development: RED → GREEN → REFACTOR**. Read [../TDD_GUIDE.md](../TDD_GUIDE.md).
+For future changes, use **test-driven development: RED → GREEN → REFACTOR**. Read [../TDD_GUIDE.md](../docs/guides/TDD_GUIDE.md).
 
 1. Write a small `pytest` test of the intended behavior before implementing it.
 2. Run it and confirm it fails for the intended reason (**RED**).

@@ -1,6 +1,6 @@
 # DATA120 Mini Capstone — Parking Observation Patterns
 
-> **Status:** Planning material generated with AI; **student reading and acceptance pending**. Course-specific AI permission also needs to be confirmed. See [AI_USE_LOG.md](AI_USE_LOG.md).
+> **Status:** Planning material generated with AI; **student reading and acceptance pending**. Course-specific AI permission also needs to be confirmed. See [AI_USE_LOG.md](docs/ai/AI_USE_LOG.md).
 
 ## In one sentence
 
@@ -47,13 +47,16 @@ STAFF walk through parking lot
 ```text
 python/
 ├── README.md                 ← start here
-├── CAPSTONE_PLAN.md          ← question, hypotheses, method, evaluation
-├── DATA_DICTIONARY.md        ← original/proposed data fields and features
+├── docs/                     ← documents grouped by subject
+│   ├── planning/             ← research and data dictionary
+│   ├── architecture/         ← design and interfaces
+│   ├── guides/               ← setup, Git, TDD
+│   ├── policies/             ← academic integrity and privacy
+│   └── ai/                   ← AI disclosures and approval logs
 ├── requirements.txt          ← initial dependencies
 ├── .env.example              ← safe template only (tracked)
 ├── .env                      ← local secrets (ignored, never committed)
 ├── AGENTS.md                 ← AI-agent and academic-integrity instructions
-├── AI_USE_LOG.md             ← AI contribution + review/acceptance record
 ├── notebooks/                ← exploratory and modeling notebooks (future)
 ├── src/                      ← cleaning.py implemented; Sheets/ML modules planned
 ├── tests/                    ← synthetic normalization tests implemented
@@ -75,7 +78,7 @@ py -3.13 -m venv .venv
 
 Use **CPython 3.13** for all local development, notebooks and tests. `py -3.13` requires the Windows Python launcher and an installed Python 3.13; alternatively invoke the installed 3.13 interpreter explicitly. Check `.venv\\Scripts\\python.exe --version` before installing dependencies. The local `.venv` is ignored by Git.
 
-Read [ENV_SETUP.md](ENV_SETUP.md) before adding any Google Sheets credentials. The `.env.example` contains no secrets; `python/.env` and real credential JSON files are excluded from Git. Do not use your Google account password to authenticate the Sheets API.
+Read [ENV_SETUP.md](docs/guides/ENV_SETUP.md) before adding any Google Sheets credentials. The `.env.example` contains no secrets; `python/.env` and real credential JSON files are excluded from Git. Do not use your Google account password to authenticate the Sheets API.
 
 ## Object-oriented architecture
 
@@ -86,11 +89,11 @@ Use **low coupling and high cohesion** (assuming "high collision" meant "high co
 - **Strategy:** Swap a transparent rules baseline and an exploratory anomaly detector behind a narrow model interface.
 - **Pipeline:** Explicit validate → transform → features → model → evaluation steps, with immutable configuration where appropriate.
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for a diagram and design principles. These are design goals; no production integration is implemented yet.
+See [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for a diagram and design principles. These are design goals; no production integration is implemented yet.
 
 ## Test-driven development: required
 
-All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
+All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](docs/guides/TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
 
 ## Planned learning order
 
@@ -103,22 +106,22 @@ All **future** Python feature work and bug fixes should use **RED → GREEN → 
 7. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
 8. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
-See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
+See [CAPSTONE_PLAN.md](docs/planning/CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
 
 ## Privacy and academic integrity
 
 This repository is **public**: do not commit raw plates, time-stamped operational exports, private vehicle-ID mappings, credentials, or confidential evidence. Use synthetic demo records. Any real data must remain in approved private storage, outside Git, with authorized access and appropriate retention.
 
-The University of Calgary allows GAI only as specified for each assessment. AI output supports learning, not a substitute for the student's analysis. All material assistance must be logged and cited as required. See [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AGENTS.md](AGENTS.md), and [AI_REVIEW_GATE_GUIDE.md](AI_REVIEW_GATE_GUIDE.md).
+The University of Calgary allows GAI only as specified for each assessment. AI output supports learning, not a substitute for the student's analysis. All material assistance must be logged and cited as required. See [ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md](docs/policies/ACADEMIC_INTEGRITY_AND_COURSE_POLICIES.md), [AGENTS.md](AGENTS.md), and [AI_REVIEW_GATE_GUIDE.md](docs/ai/AI_REVIEW_GATE_GUIDE.md).
 
 No AI result will authorize a ticket, tow, or allegation of parking misconduct.
 
 ## Reference documents
 
-- [Generative AI use log](AI_USE_LOG.md)
-- [AI logging instructions](AI_LOGGING_GUIDE.md)
-- [AI reading and acceptance checkpoint](AI_REVIEW_GATE_GUIDE.md)
-- [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
-- [Local .env and Google Sheets credential setup](ENV_SETUP.md)
-- [Test-driven development guide](TDD_GUIDE.md)
-- [Git commit message template](COMMIT_TEMPLATE.txt) and [guide](GIT_COMMIT_GUIDE.md)
+- [Generative AI use log](docs/ai/AI_USE_LOG.md)
+- [AI logging instructions](docs/ai/AI_LOGGING_GUIDE.md)
+- [AI reading and acceptance checkpoint](docs/ai/AI_REVIEW_GATE_GUIDE.md)
+- [Citations, copyright and privacy checklist](docs/policies/CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
+- [Local .env and Google Sheets credential setup](docs/guides/ENV_SETUP.md)
+- [Test-driven development guide](docs/guides/TDD_GUIDE.md)
+- [Git commit message template](COMMIT_TEMPLATE.txt) and [guide](docs/guides/GIT_COMMIT_GUIDE.md)
