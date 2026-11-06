@@ -57,12 +57,21 @@ python/src/
   ports.py                  # Python 3.13 typing.Protocol interfaces
   google_sheets_reader.py   # external adapter; read-only Sheets API
   synthetic_reader.py       # no network; synthetic fixtures
-  validation.py             # checks and observation coverage
+  cleaning.py               # implemented: deterministic cleanup + normalized checks/sightings
+  validation.py             # additional validation (planned)
   features.py               # pure pandas feature calculations
   modeling.py               # interchangeable rules/ML strategies
   evaluation.py             # honest comparison without violation claims
   pipeline.py               # orchestration, receives injected components
 ```
+
+## Cleaning and normalization boundary
+
+`src/cleaning.py` is implemented as a **pure pandas** function, `normalize_observations(checks, sightings)`, returning `CleanResult(checks, sightings, issues)`. The Google Sheets adapter and synthetic reader will feed this function *after* removing/replacing real plate identifiers in an authorized private environment.
+
+It uppercases and trims pseudonymous IDs/check/area identifiers, parses timestamps into `America/Edmonton`, normalizes completion values, preserves completed empty checks, deduplicates same-vehicle/check/area rows, and quarantines invalid/conflicting records with issue codes and row positions (no source values). It rejects obviously unsafe raw-plate columns but is **not an anonymization tool** and cannot guarantee detection of all sensitive information. It does not infer arrivals, departures, custody, or violations.
+
+A future pipeline will inject a reader, apply normalization, and separately handle warnings before feature calculation; no direct Google API dependency is imported by the cleaner. Synthetic test cases live in `tests/test_cleaning.py`. Tests have not been run in Python 3.13 yet.
 
 ## Configuration and secret handling
 
