@@ -45,6 +45,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added dated DATA120 capstone milestones and a reproducible Python 3.13 synthetic parking dataset generator, synthetic tests, user guide and Git exclusions | Student reading and acceptance pending: synthetic-milestones-20261105. RED missing module observed, GREEN 6 focused tests passed locally; full repository tests not run | Citation/disclosure pending |
 
+| 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Updated the DATA120 milestone schedule to reserve Sundays for rest, prioritize LOF and Isolation Forest, treat kNN as optional, and begin presentation preparation immediately | Student explicitly accepted the proposed schedule; recorded at 2026-11-06T11:17:38-07:00 America/Edmonton. This confirms schedule approval, not independent verification of model results | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -65,6 +67,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | suspect-patterns-20261105 | Accepted | 2026-11-05T22:13:15-07:00 | 2026-11-05T22:23:15-07:00 | 2026-11-05T22:23:15-07:00 | Revised suspicious-pattern flow adds independent human verification, confirmed-violation blacklisting, and separately recorded authorized on-site ticket/tag actions; revision 2026-11-05T22:22:07-07:00 | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt. Verification module tests not yet executed. |
 
 | synthetic-milestones-20261105 | Accepted | 2026-11-05T22:40:08-07:00 | 2026-11-06T10:06:21-07:00 | 2026-11-06T10:06:21-07:00 | Accepted timeline incorporated: Dec 8 presentation, Dec 11 submission, Dec 4 analysis freeze. New synthetic 38-space, 1–2 checks/day generator and guide added with TDD tests | Student explicitly confirmed reading and acceptance together; both confirmation timestamps use the same message receipt time converted to America/Edmonton (MST). No claim of real dataset augmentation. |
+
+| schedule-two-models-20261106 | Accepted | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | Approved schedule: no Sunday work; LOF and Isolation Forest primary; kNN stretch with November 21 fallback; presentation December 8 and final submission December 11 | Student explicitly accepted the proposed schedule in the conversation. Read and acceptance are recorded together on receipt; no tests run for documentation changes. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
