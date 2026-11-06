@@ -13,7 +13,8 @@ Module inventory (items marked planned are not implemented):
 - `validation.py`: additional schema/quality validation (planned)
 - `features.py`: rolling features calculated without using future observations
 - `pipeline.py`: orchestration using dependency injection, no hardwired Google service
-- `modeling.py`: transparent baseline and optional introductory ML
+- `pattern_detection.py`: **implemented** same-day repeat-check review rule, observation features, and exploratory IsolationForest anomaly scoring
+- `modeling.py`: other scoring strategies (planned)
 
 All functions should have clear names and Google-style docstrings. Keep production Apps Script unchanged.
 
