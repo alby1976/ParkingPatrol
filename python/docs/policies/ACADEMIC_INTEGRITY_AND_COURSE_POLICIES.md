@@ -35,7 +35,7 @@ Course-provided requirements:
 
 Course-provided GAI citation guidance: https://conted.ucalgary.ca/info/writing.jsp
 
-**DATA120 action:** Before asking GAI to write code, interpret results, draft assignment content, or evaluate a model, verify that use is permitted for that particular assignment. Record assistance in [AI_USE_LOG.md](AI_USE_LOG.md). A log helps transparency but **does not replace the required formal citation**.
+**DATA120 action:** Before asking GAI to write code, interpret results, draft assignment content, or evaluate a model, verify that use is permitted for that particular assignment. Record assistance in [AI_USE_LOG.md](../ai/AI_USE_LOG.md). A log helps transparency but **does not replace the required formal citation**.
 
 The course text also states that the instructor will not upload student work to GAI without the student's explicit consent.
 

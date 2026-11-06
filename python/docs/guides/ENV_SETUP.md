@@ -1,6 +1,6 @@
 # DATA120 — local .env setup (Python 3.13)
 
-The `python/.env` file holds **local configuration and secrets**. It must **never be committed or uploaded to GitHub**. Only [`.env.example`](.env.example), containing empty values and instructions, is tracked.
+The `python/.env` file holds **local configuration and secrets**. It must **never be committed or uploaded to GitHub**. Only [`.env.example`](../../.env.example), containing empty values and instructions, is tracked.
 
 > A `.env` file is plaintext, not an encrypted password vault. Protect the workstation, filesystem permissions, backups, and account access. For more sensitive deployment scenarios, use an approved secrets manager. Do not send a real `.env` file to a generative AI assistant.
 
@@ -51,4 +51,4 @@ This is a setup illustration only; a live Google Sheets connector has not been i
 
 ## Public repository policy
 
-Only sanitized `.env.example` and documentation are committed. Do not put credentials, Google Sheet rows, raw plates, private exports, or pseudonymization lookups in public Git. Review each staged diff before commit. Follow [AGENTS.md](AGENTS.md), the course integrity rules, and the student acceptance gate.
+Only sanitized `.env.example` and documentation are committed. Do not put credentials, Google Sheet rows, raw plates, private exports, or pseudonymization lookups in public Git. Review each staged diff before commit. Follow [AGENTS.md](../../AGENTS.md), the course integrity rules, and the student acceptance gate.

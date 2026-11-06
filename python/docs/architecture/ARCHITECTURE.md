@@ -75,15 +75,15 @@ A future pipeline will inject a reader, apply normalization, and separately hand
 
 ## Configuration and secret handling
 
-- Use `python/.env` for local secrets/settings; only commit the blank [`.env.example`](.env.example).
+- Use `python/.env` for local secrets/settings; only commit the blank [`.env.example`](../../.env.example).
 - Centralize environment access in a small `settings.py` configuration module; use `python-dotenv` to load it, then inject settings into the Google Sheets adapter. Keep model and feature modules independent of `.env` and Google credentials.
 - For the Google Sheets API, use OAuth or service-account credential files in approved private storage outside Git. **Never store the actual Google account password.**
 - Do not log/print secrets, embed them in Jupyter notebooks, or commit token caches and credential JSON.
-- Follow [ENV_SETUP.md](ENV_SETUP.md) and review Git exclusions before commits.
+- Follow [ENV_SETUP.md](../guides/ENV_SETUP.md) and review Git exclusions before commits.
 
 ## Development process: TDD
 
-**Required for future changes:** define a testable behavior, write and run a deliberately failing synthetic test (**RED**), implement only the necessary behavior (**GREEN**), then improve structure with all tests still passing (**REFACTOR**). See [TDD_GUIDE.md](TDD_GUIDE.md).
+**Required for future changes:** define a testable behavior, write and run a deliberately failing synthetic test (**RED**), implement only the necessary behavior (**GREEN**), then improve structure with all tests still passing (**REFACTOR**). See [TDD_GUIDE.md](../guides/TDD_GUIDE.md).
 
 Use protocol-based fake readers to test the pipeline without a Google connection, and test failure paths for missing credentials/schema changes without exposing secrets. Unit tests should dominate; a real Sheets API integration test is a separate, permission-controlled step. Keep TDD evidence and student acceptance separate.
 

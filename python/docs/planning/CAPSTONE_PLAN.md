@@ -38,7 +38,7 @@ No claim about true offender-prediction accuracy can be made without separately 
 
 - **Source**: Existing Google Sheet populated by Google Forms and Apps Script, including check/round metadata where available.
 - **Authentication**: Approved Google OAuth credentials or dedicated service account with read-only sharing, stored securely outside Git; use the least-privilege `spreadsheets.readonly` scope. Do not use a Google account password.
-- **Local secrets**: Store non-public configuration/secret values in ignored `python/.env`, created from committed placeholder-only `python/.env.example`. Reference Google credential JSON by a path to secure storage **outside the repo**. Follow [ENV_SETUP.md](ENV_SETUP.md).
+- **Local secrets**: Store non-public configuration/secret values in ignored `python/.env`, created from committed placeholder-only `python/.env.example`. Reference Google credential JSON by a path to secure storage **outside the repo**. Follow [ENV_SETUP.md](../guides/ENV_SETUP.md).
 - **Import**: Future `src/google_sheets_reader.py` loads approved worksheets into pandas DataFrames. Never commit raw downloaded rows or cache them in public repository files.
 - **Processing**: Validate timestamps, check completeness, duplicates and source schemas; pseudonymize plate/jurisdiction values within an approved restricted environment before model analysis.
 - **Operation**: Initially run the Python pipeline manually for coursework. Any recurring connection or write-back would require a separate design and explicit approval. No auto-ticketing, towing, or operational feedback loop.
@@ -73,11 +73,11 @@ Google Form → Google Sheets / Apps Script [production]
 - Keep `.env` loading in one configuration module and inject typed settings into the Google Sheets adapter; do not couple feature/model classes to environment variables.
 - Start simple: prefer plain functions or dataclasses over classes when an abstraction would add complexity without testability.
 
-See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with a synthetic reader and verify that feature logic never contacts Google directly.
+See [ARCHITECTURE.md](../architecture/ARCHITECTURE.md). Tests should replace Google access with a synthetic reader and verify that feature logic never contacts Google directly.
 
 ## 6. Implementation discipline — test-driven development
 
-Apply [TDD_GUIDE.md](TDD_GUIDE.md) to all new Python functionality and bug fixes:
+Apply [TDD_GUIDE.md](../guides/TDD_GUIDE.md) to all new Python functionality and bug fixes:
 
 1. Define a student-approved behavior/acceptance criterion with synthetic data.
 2. **RED:** write and run a `pytest` test that demonstrably fails for the correct reason.
@@ -124,7 +124,7 @@ Do **not** report "85% accuracy detecting illegal parkers" without verified exte
 ## 10. Proposed deliverables
 
 - `notebooks/01_exploration.ipynb` — pandas exploratory work
-- `ARCHITECTURE.md` — low-coupling/high-cohesion design and dependencies
+- `../architecture/ARCHITECTURE.md` — low-coupling/high-cohesion design and dependencies
 - `src/google_sheets_reader.py` — authorized read-only Google Sheets import into pandas
 - `src/cleaning.py` — implemented normalization of approved pseudonymous checks/sightings; not a plate anonymizer
 - `tests/test_cleaning.py` — synthetic cleaning edge cases (execution pending)
@@ -139,7 +139,7 @@ Cleaning and its synthetic test module are now implemented. Other listed analysi
 ## 11. Approval and integrity checkpoints
 
 - [ ] Confirm assessment-specific rules for GAI assistance with the instructor.
-- [ ] Student reviews and accepts this AI-generated **planning proposal**, and read/accept times are recorded in `AI_USE_LOG.md`.
+- [ ] Student reviews and accepts this AI-generated **planning proposal**, and read/accept times are recorded in `../ai/AI_USE_LOG.md`.
 - [ ] Obtain approval for direct Google Sheets API access and privacy requirements before connection.
 - [ ] Confirm least-privilege API permissions and secure credentials stored outside Git.
 - [ ] Keep all identifiable records and secrets out of public Git and GAI services.
