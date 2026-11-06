@@ -39,6 +39,7 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Design for **low coupling and high cohesion**: single-purpose modules, explicit data contracts, and replaceable dependencies.
 - Apply the Repository/Adapter pattern for data access, dependency injection for the Google Sheets reader, Strategy for alternate scoring methods, and a clear sequence for data validation/features/model/evaluation. Keep the architecture proportional to a DATA120 mini capstone.
 - Pure data and feature code must not import Google auth clients or trigger network calls. Keep credentials and operational records outside Git.
+- Read [ENV_SETUP.md](ENV_SETUP.md): store approved local settings and secrets in `python/.env`; commit **only** empty `python/.env.example`. The real `.env`, OAuth token caches, credential files, private keys and passwords must never be committed. Use `python-dotenv` from a centralized configuration module and inject settings rather than spreading `os.getenv` calls across ML classes. Never request or store a Google account password for Sheets API access.
 - See [ARCHITECTURE.md](ARCHITECTURE.md) before creating new modules. Explain any new abstraction to the student in simple terms.
 
 ## Repository workflow
