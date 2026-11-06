@@ -44,7 +44,7 @@ AI-generated material must receive two **explicit student confirmations** before
 | --- | --- | --- | --- | --- | --- | --- |
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
-| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | DATA120 revised plan: read-only Google Sheets connection, CPython 3.13 baseline, low-coupling/high-cohesion design and architecture patterns; latest revision 2026-11-05T07:45:58-07:00 | Initial version read 2026-11-05T07:02:58-07:00; latest revised material awaits renewed reading and acceptance. |
+| capstone-regeneration-20261105 | Revision requested | 2026-11-05T06:59:31-07:00 | 2026-11-05T19:53:29-07:00 | 2026-11-05T19:53:29-07:00 | DATA120 revised plan: read-only Google Sheets connection, CPython 3.13 baseline, low-coupling/high-cohesion design and architecture patterns; latest revision 2026-11-05T07:45:58-07:00 | Student explicitly confirmed reading and requested further changes. Details of requested revisions not yet provided; acceptance not granted. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
