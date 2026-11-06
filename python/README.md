@@ -109,6 +109,22 @@ See [Human Verification Workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md) 
 
 All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](docs/guides/TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
 
+## Deadlines and synthetic data
+
+- **Presentation:** Tuesday, December 8, 2026.
+- **Submission:** Friday, December 11, 2026.
+- **Internal analysis freeze:** December 4, 2026.
+- [Milestone schedule](docs/planning/CAPSTONE_PLAN.md) and [synthetic data generator guide](docs/planning/SYNTHETIC_DATA_GUIDE.md).
+
+Generate fictional observations without accessing Google Sheets:
+
+```powershell
+.\\.venv\\Scripts\\python.exe python/src/synthetic_data.py --days 10 --seed 120
+.\\.venv\\Scripts\\python.exe -m pytest python/tests/test_synthetic_data.py -q
+```
+
+Synthetic 45/90-day examples support software testing and exploratory demonstrations, not claims about actual parking violations. Output stays in the Git-ignored `python/generated/` folder.
+
 ## Planned learning order
 
 1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
