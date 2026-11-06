@@ -39,6 +39,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Reorganized documentation files, updated links and logging script path, and added a documentation index | Student review pending: docs-refactor-20261105 | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Implemented exploratory Python 3.13 same-day two-distinct-check suspicious rule, vehicle-day features, IsolationForest anomaly signal and synthetic TDD tests; revised capstone documents | Student reading/acceptance pending for suspect-patterns-20261105; local focused synthetic tests 8 passed; full repository tests and live Google integration not run | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -55,6 +57,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | capstone-regeneration-20261105 | Accepted | 2026-11-05T06:59:31-07:00 | 2026-11-05T21:48:39-07:00 | 2026-11-05T21:48:39-07:00 | DATA120 Python 3.13 plan with read-only Google Sheets, ignored .env, cleaning module, and mandatory test-driven development (RED-GREEN-REFACTOR); latest revision 2026-11-05T21:45:25-07:00 | Student explicitly confirmed reading and acceptance of revised TDD plan in one message; both confirmations recorded upon receipt. No test execution claimed. |
 
 | docs-refactor-20261105 | Accepted | 2026-11-05T21:55:06-07:00 | 2026-11-05T21:58:59-07:00 | 2026-11-05T21:58:59-07:00 | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student explicitly confirmed reading and acceptance in the same message; both receipt-time timestamps recorded. Python tests not run. |
+
+| suspect-patterns-20261105 | Pending reading | 2026-11-05T22:13:15-07:00 | — | — | Two distinct same-day check IDs produce a suspicious review signal; unsupervised IsolationForest may flag additional patterns; standalone Python implementation and tests documented | Student must confirm reading and acceptance. No live Sheets connection and no enforcement integration. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
