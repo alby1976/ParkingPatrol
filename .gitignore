@@ -16,6 +16,8 @@
 *.pdf
 .env
 .env.*
+# Only this documentation template may be tracked; never real environment files.
+!python/.env.example
 credentials*.json
 token*.json
 __pycache__/
