@@ -72,7 +72,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | schedule-two-models-20261106 | Accepted | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | Approved schedule: no Sunday work; LOF and Isolation Forest primary; kNN stretch with November 21 fallback; presentation December 8 and final submission December 11 | Student explicitly accepted the proposed schedule in the conversation. Read and acceptance are recorded together on receipt; no tests run for documentation changes. |
 
-| guided-sprints-20261106 | Pending reading | 2026-11-06T11:23:06-07:00 | — | — | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student reading and acceptance pending; no session has been marked completed. |
+| guided-sprints-20261106 | Accepted | 2026-11-06T11:23:06-07:00 | 2026-11-06T12:57:27-07:00 | 2026-11-06T12:57:27-07:00 | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student explicitly confirmed reading and acceptance in the same message; both timestamps use message receipt time converted to America/Edmonton (MST). No sprint marked complete without evidence. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
