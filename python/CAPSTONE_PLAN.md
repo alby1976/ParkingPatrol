@@ -75,7 +75,19 @@ Google Form → Google Sheets / Apps Script [production]
 
 See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with a synthetic reader and verify that feature logic never contacts Google directly.
 
-## 6. Proposed Python workflow
+## 6. Implementation discipline — test-driven development
+
+Apply [TDD_GUIDE.md](TDD_GUIDE.md) to all new Python functionality and bug fixes:
+
+1. Define a student-approved behavior/acceptance criterion with synthetic data.
+2. **RED:** write and run a `pytest` test that demonstrably fails for the correct reason.
+3. **GREEN:** add the minimum implementation, rerun focused/related tests.
+4. **REFACTOR:** improve low coupling/high cohesion and rerun the full suite.
+5. Record real test commands/results, disclose material AI assistance, and await student reading and acceptance before the next substantive step.
+
+Prioritize cleaning edge cases, field mapping, a fake Sheets reader, feature computation, leakage prevention, baseline and anomaly-model behavior. The existing cleaning module predates this TDD policy and must not be claimed as test-first. No tests were run merely by adding this policy.
+
+## 7. Proposed Python workflow
 
 | Phase | Student learning task | Output |
 | --- | --- | --- |
@@ -90,7 +102,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with 
 
 **Optional supervised alternative:** If an independently verified, appropriately authorized outcome dataset becomes available, compare a simple classifier (e.g. logistic regression or decision tree) to the baseline. Review labeling policy, class imbalance, leakage, and chronological testing before training. Operational AI/manual review flags are **not** automatically reliable truth labels.
 
-## 7. Proposed features (not yet implemented)
+## 8. Proposed features (not yet implemented)
 
 - `sightings_30d`: unique vehicle-check appearances in 30 days
 - `distinct_days_30d`: distinct local dates seen
@@ -103,13 +115,13 @@ See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with 
 
 **Data leakage protection:** Do not use future sightings or future operational statuses when constructing a historical feature row.
 
-## 8. What success will and will not mean
+## 9. What success will and will not mean
 
 A useful capstone should demonstrate **correct reproducible feature calculations**, honest descriptive visualizations, a justified ML technique, and interpretation of why model findings differ from a simple rule. Check changes in review rankings when inspection schedules differ. Validate with chronological holdout periods where possible.
 
 Do **not** report "85% accuracy detecting illegal parkers" without verified external ground truth; anomaly scores, clusters, and rule flags are not legal or factual violation labels. The final judgment about a particular vehicle remains with a properly authorized human using additional evidence.
 
-## 9. Proposed deliverables
+## 10. Proposed deliverables
 
 - `notebooks/01_exploration.ipynb` — pandas exploratory work
 - `ARCHITECTURE.md` — low-coupling/high-cohesion design and dependencies
@@ -124,7 +136,7 @@ Do **not** report "85% accuracy detecting illegal parkers" without verified exte
 
 Cleaning and its synthetic test module are now implemented. Other listed analysis modules and notebooks remain planned; no model or live Sheets connection exists yet.
 
-## 10. Approval and integrity checkpoints
+## 11. Approval and integrity checkpoints
 
 - [ ] Confirm assessment-specific rules for GAI assistance with the instructor.
 - [ ] Student reviews and accepts this AI-generated **planning proposal**, and read/accept times are recorded in `AI_USE_LOG.md`.
@@ -132,6 +144,7 @@ Cleaning and its synthetic test module are now implemented. Other listed analysi
 - [ ] Confirm least-privilege API permissions and secure credentials stored outside Git.
 - [ ] Keep all identifiable records and secrets out of public Git and GAI services.
 - [ ] Map actual form/sheet fields before implementing the ingestion module.
+- [ ] Follow and document RED → GREEN → REFACTOR cycles for new implementations.
 - [ ] Choose the ML approach based on label availability and dataset size.
 - [ ] Test effects of incomplete and irregular staff inspections.
 - [ ] Cite third-party datasets, algorithms, code, and permitted AI assistance.
