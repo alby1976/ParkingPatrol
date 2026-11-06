@@ -54,6 +54,17 @@ Avoid reconstructing an empty check solely from the `sightings` table. Verify ev
 
 **Window definition:** A cutoff must be defined once (e.g. `(cutoff - 30 days, cutoff]`); records after the cutoff must not enter features. For model comparison, consistently represent zero-sighting candidate vehicles and inspection opportunities, or disclose if the analysis is limited to previously sighted vehicles.
 
+## Normalization output (implemented)
+
+The `src/cleaning.py` function accepts two pandas DataFrames with the **normalized proposed column headers** from the tables above; an actual Google Sheets-to-schema mapping remains to be implemented.
+
+`normalize_observations(checks, sightings)` returns:
+- `checks`: normalized `check_id`, `area_id`, `check_at` (Edmonton timezone), `check_complete` (bool).
+- `sightings`: normalized `vehicle_id` (already pseudonymized), `check_id`, `area_id`, `observed_at` (Edmonton timezone), deduplicated per vehicle/check/area.
+- `issues`: source table name, zero-based input row position and non-sensitive reason code. Invalid records are **excluded** from cleaned outputs, not silently corrected.
+
+The normalizer accepts common boolean spellings such as yes/no, trims and capitalizes identifiers, and rejects ambiguous/nonexistent naive local times (for example, DST transition times) unless timestamps contain a reliable UTC offset. Contradictory duplicate check rows are quarantined. Completed checks with no vehicles remain in the checks table. No parking duration or actual absence is inferred. Real plate/jurisdiction identifiers must be pseudonymized *before* calling the normalizer; this module does not itself anonymize data. It does not read `.env` or Google Sheets and is safe to test with synthetic IDs.
+
 ## Required data-quality checks
 
 1. Plate identity: preserve jurisdiction, normalize carefully, and flag unreadable/ambiguous observations for human review.
