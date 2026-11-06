@@ -58,7 +58,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | docs-refactor-20261105 | Accepted | 2026-11-05T21:55:06-07:00 | 2026-11-05T21:58:59-07:00 | 2026-11-05T21:58:59-07:00 | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student explicitly confirmed reading and acceptance in the same message; both receipt-time timestamps recorded. Python tests not run. |
 
-| suspect-patterns-20261105 | Pending reading | 2026-11-05T22:13:15-07:00 | — | — | Two distinct same-day check IDs produce a suspicious review signal; unsupervised IsolationForest may flag additional patterns; standalone Python implementation and tests documented | Student must confirm reading and acceptance. No live Sheets connection and no enforcement integration. |
+| suspect-patterns-20261105 | Revision requested | 2026-11-05T22:13:15-07:00 | 2026-11-05T22:17:58-07:00 | 2026-11-05T22:17:58-07:00 | Two distinct same-day check IDs produce a suspicious review signal; unsupervised IsolationForest may flag additional patterns; standalone Python implementation and tests documented | Student explicitly confirmed reading and requested further revisions. Specific changes not yet supplied; acceptance not granted. No live Sheets connection or enforcement integration. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
