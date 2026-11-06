@@ -29,3 +29,13 @@ For future changes, use **test-driven development: RED → GREEN → REFACTOR**.
 5. Log AI assistance and obtain student reading/acceptance before the next substantive step.
 
 The existing cleaning tests were drafted alongside an implementation, not demonstrably test-first. Do not claim past TDD evidence. This document update has not run tests.
+
+## Synthetic generator tests
+
+`test_synthetic_data.py` validates reproducibility, 38-space maximum, one/two rounds each day, Edmonton timezone, empty surveys and recurring fictional IDs. Run:
+
+```powershell
+.\\.venv\\Scripts\\python.exe -m pytest python/tests/test_synthetic_data.py -q
+```
+
+Focused local tests: **6 passed** under Python 3.13.5. The full project regression suite and GitHub CI were not verified in this change. See [synthetic generation guide](../docs/planning/SYNTHETIC_DATA_GUIDE.md).
