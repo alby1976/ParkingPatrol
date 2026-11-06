@@ -73,6 +73,16 @@ It uppercases and trims pseudonymous IDs/check/area identifiers, parses timestam
 
 A future pipeline will inject a reader, apply normalization, and separately handle warnings before feature calculation; no direct Google API dependency is imported by the cleaner. Synthetic test cases live in `tests/test_cleaning.py`. Tests have not been run in Python 3.13 yet.
 
+## Same-day review rule + unsupervised strategy
+
+Implemented independently of Google access in [../../src/pattern_detection.py](../../src/pattern_detection.py):
+1. `build_vehicle_day_features(checks, sightings)` — calculate local-day features from cleaned, already-pseudonymized observations;
+2. `mark_repeat_check_suspicious(features)` — deterministic threshold (2+ distinct check IDs on one day);
+3. `score_anomalies(features)` — exploratory scikit-learn IsolationForest scoring (disabled on insufficient data);
+4. `combine_review_signals(frame)` — report separate rule/anomaly sources.
+
+The code does not write back to Apps Script or Google Sheets. Use as an experimental Strategy-pattern candidate only after a student-reviewed design and independent model evaluation. See [SUSPICIOUS_PATTERN_MODEL.md](../planning/SUSPICIOUS_PATTERN_MODEL.md).
+
 ## Configuration and secret handling
 
 - Use `python/.env` for local secrets/settings; only commit the blank [`.env.example`](../../.env.example).
