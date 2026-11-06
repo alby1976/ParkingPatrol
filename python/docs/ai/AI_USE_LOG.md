@@ -43,6 +43,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added separate Python human verification/blacklist/manual-action record design and synthetic tests; updated planning, dictionary, README and agent guidance | Student reading and acceptance pending for suspect-patterns-20261105; tests written before implementation but RED/GREEN execution not verified | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added dated DATA120 capstone milestones and a reproducible Python 3.13 synthetic parking dataset generator, synthetic tests, user guide and Git exclusions | Student reading and acceptance pending: synthetic-milestones-20261105. RED missing module observed, GREEN 6 focused tests passed locally; full repository tests not run | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -61,6 +63,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | docs-refactor-20261105 | Accepted | 2026-11-05T21:55:06-07:00 | 2026-11-05T21:58:59-07:00 | 2026-11-05T21:58:59-07:00 | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student explicitly confirmed reading and acceptance in the same message; both receipt-time timestamps recorded. Python tests not run. |
 
 | suspect-patterns-20261105 | Accepted | 2026-11-05T22:13:15-07:00 | 2026-11-05T22:23:15-07:00 | 2026-11-05T22:23:15-07:00 | Revised suspicious-pattern flow adds independent human verification, confirmed-violation blacklisting, and separately recorded authorized on-site ticket/tag actions; revision 2026-11-05T22:22:07-07:00 | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt. Verification module tests not yet executed. |
+
+| synthetic-milestones-20261105 | Pending reading | 2026-11-05T22:40:08-07:00 | — | — | Accepted timeline incorporated: Dec 8 presentation, Dec 11 submission, Dec 4 analysis freeze. New synthetic 38-space, 1–2 checks/day generator and guide added with TDD tests | Student must read and accept new AI-generated implementation before the next substantive step; no claim of real dataset augmentation. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
