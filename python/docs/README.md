@@ -5,6 +5,7 @@ This directory groups coursework documentation by responsibility. The repository
 ## Planning
 - [Capstone plan](planning/CAPSTONE_PLAN.md) — research goals, methods, deliverables
 - [Data dictionary](planning/DATA_DICTIONARY.md) — observation schemas and feature definitions
+- [Suspicious-pattern rule and unsupervised ML](planning/SUSPICIOUS_PATTERN_MODEL.md) — rule threshold, model indicators, limits
 
 ## Architecture
 - [System architecture](architecture/ARCHITECTURE.md) — Python 3.13 design, low coupling and high cohesion
