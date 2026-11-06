@@ -47,6 +47,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Updated the DATA120 milestone schedule to reserve Sundays for rest, prioritize LOF and Isolation Forest, treat kNN as optional, and begin presentation preparation immediately | Student explicitly accepted the proposed schedule; recorded at 2026-11-06T11:17:38-07:00 America/Edmonton. This confirms schedule approval, not independent verification of model results | Citation/disclosure pending |
 
+| 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Created a detailed S01–S31 DATA120 sprint calendar, ChatGPT coaching prompts, progress tracker and navigation; planned Sundays off and milestones through Dec 11 | Student review pending for guided-sprints-20261106; planning documents only, no tests executed | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -69,6 +71,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | synthetic-milestones-20261105 | Accepted | 2026-11-05T22:40:08-07:00 | 2026-11-06T10:06:21-07:00 | 2026-11-06T10:06:21-07:00 | Accepted timeline incorporated: Dec 8 presentation, Dec 11 submission, Dec 4 analysis freeze. New synthetic 38-space, 1–2 checks/day generator and guide added with TDD tests | Student explicitly confirmed reading and acceptance together; both confirmation timestamps use the same message receipt time converted to America/Edmonton (MST). No claim of real dataset augmentation. |
 
 | schedule-two-models-20261106 | Accepted | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | Approved schedule: no Sunday work; LOF and Isolation Forest primary; kNN stretch with November 21 fallback; presentation December 8 and final submission December 11 | Student explicitly accepted the proposed schedule in the conversation. Read and acceptance are recorded together on receipt; no tests run for documentation changes. |
+
+| guided-sprints-20261106 | Pending reading | 2026-11-06T11:23:06-07:00 | — | — | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student reading and acceptance pending; no session has been marked completed. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
