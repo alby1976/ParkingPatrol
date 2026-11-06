@@ -5,6 +5,7 @@
 Each module should have **one cohesive job** and communicate using narrow, typed interfaces. Keep external APIs at the edge so the analysis code is loosely coupled. See [../ARCHITECTURE.md](../ARCHITECTURE.md).
 
 Proposed modules (not yet implemented):
+- `settings.py`: load ignored `python/.env` with `python-dotenv` and validate settings in one place (planned)
 - `ports.py`: small structural Protocols describing approved data-reader and scoring interfaces
 - `google_sheets_reader.py`: approved **read-only Google Sheets API** connection returning pandas DataFrames without writing data back
 - `load_data.py`: private/local synthetic input for offline tests or development
