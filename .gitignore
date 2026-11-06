@@ -23,3 +23,6 @@ token*.json
 __pycache__/
 *.pyc
 .venv/
+
+# Never track generated synthetic or local data exports
+/python/generated/
