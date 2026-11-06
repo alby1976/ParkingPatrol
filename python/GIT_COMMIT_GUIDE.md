@@ -33,6 +33,19 @@ To turn the template off:
 git config --local --unset commit.template
 ```
 
+## Test-driven development evidence
+
+For new Python features and bug fixes, include a truthful TDD section when drafting commit messages (see [TDD_GUIDE.md](TDD_GUIDE.md)):
+
+```text
+TDD evidence:
+- RED: focused test command and observed expected failure (or Not run)
+- GREEN: command and observed pass/failure (or Not run)
+- REFACTOR: regression suite command and result (or Not run)
+```
+
+Do not manufacture any output; completing a commit does not establish a passing test or student approval.
+
 ## Conventional subject
 
 ```text
