@@ -64,6 +64,14 @@ python/src/
   pipeline.py               # orchestration, receives injected components
 ```
 
+## Configuration and secret handling
+
+- Use `python/.env` for local secrets/settings; only commit the blank [`.env.example`](.env.example).
+- Centralize environment access in a small `settings.py` configuration module; use `python-dotenv` to load it, then inject settings into the Google Sheets adapter. Keep model and feature modules independent of `.env` and Google credentials.
+- For the Google Sheets API, use OAuth or service-account credential files in approved private storage outside Git. **Never store the actual Google account password.**
+- Do not log/print secrets, embed them in Jupyter notebooks, or commit token caches and credential JSON.
+- Follow [ENV_SETUP.md](ENV_SETUP.md) and review Git exclusions before commits.
+
 ## Testability and controls
 
 - Python **3.13** runtime for local environment, notebooks, and tests.
