@@ -33,6 +33,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added placeholder-only python/.env.example, local environment setup guide, gitignore exception, python-dotenv dependency and configuration/credential instructions; no credentials created or exposed | Updated proposal pending student review and acceptance: capstone-regeneration-20261105 | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added python/src/cleaning.py to standardize already-pseudonymized sightings/checks and quarantine anomalies; wrote synthetic pytest cases and updated architecture, project, and data dictionary | Pending renewed reading and acceptance for capstone-regeneration-20261105; tests not yet executed | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -46,7 +48,7 @@ AI-generated material must receive two **explicit student confirmations** before
 | --- | --- | --- | --- | --- | --- | --- |
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
-| capstone-regeneration-20261105 | Revision requested | 2026-11-05T06:59:31-07:00 | 2026-11-05T20:28:52-07:00 | 2026-11-05T20:28:52-07:00 | Updated DATA120 plan: Python 3.13, low-coupling/high-cohesion architecture, read-only Google Sheets API, and local ignored python/.env with public placeholder-only .env.example; revision completed 2026-11-05T20:14:22-07:00 | Student explicitly confirmed reading and requested further revisions; details not yet supplied, acceptance not granted. |
+| capstone-regeneration-20261105 | Pending reading | 2026-11-05T06:59:31-07:00 | — | — | DATA120 revised plan now includes Python 3.13, Google Sheets read-only connection, local .env setup, and implemented pure pandas cleaning/normalization module with synthetic tests; latest revision 2026-11-05T20:38:37-07:00 | Previous version read and revision requested at 2026-11-05T20:28:52-07:00. New cleaning-module revision awaits renewed reading and acceptance; no tests claimed as executed. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
