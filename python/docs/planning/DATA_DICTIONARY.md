@@ -65,6 +65,28 @@ The `src/cleaning.py` function accepts two pandas DataFrames with the **normaliz
 
 The normalizer accepts common boolean spellings such as yes/no, trims and capitalizes identifiers, and rejects ambiguous/nonexistent naive local times (for example, DST transition times) unless timestamps contain a reliable UTC offset. Contradictory duplicate check rows are quarantined. Completed checks with no vehicles remain in the checks table. No parking duration or actual absence is inferred. Real plate/jurisdiction identifiers must be pseudonymized *before* calling the normalizer; this module does not itself anonymize data. It does not read `.env` or Google Sheets and is safe to test with synthetic IDs.
 
+## Same-day suspicion and exploratory anomaly fields
+
+See [SUSPICIOUS_PATTERN_MODEL.md](SUSPICIOUS_PATTERN_MODEL.md).
+
+| Field | Meaning |
+| --- | --- |
+| `day` | Calendar date of the **check timestamp**, interpreted in America/Edmonton |
+| `same_day_distinct_checks` | Count unique check IDs recording the vehicle on that date |
+| `rule_suspicious` | True when `same_day_distinct_checks >= 2` |
+| `distinct_days_30d` | Number of days with sightings over the previous 30 local calendar days (inclusive) |
+| `area_completed_checks_day` | Completed same-day check opportunities across areas in which the vehicle was seen |
+| `observed_fraction_day` | Seen-in-completed-checks fraction over those comparable completed checks; null if none |
+| `distinct_areas_day` | Areas containing positive sightings that day |
+| `check_hour_span` | Hours between earliest and latest **check timestamps**, not parking duration |
+| `anomaly_score` | Relative IsolationForest unusualness, not guilt probability |
+| `anomaly_suspicious` | Exploratory ML outlier for staff review |
+| `model_status` | Scored or reason the model did not score |
+| `suspicious` | Rule or anomaly flagged; never a confirmed offender label |
+| `flag_source` | Rule, anomaly, both, or none |
+
+**Event definition:** Distinct area/check ID. A duplicate entry within the same check does not increase the count. A vehicle observed twice may have remained parked throughout. Incomplete checks can record positive sightings but cannot establish absence. Model training/scoring currently use a supplied snapshot and must not be treated as leakage-free prospective validation.
+
 ## Required data-quality checks
 
 1. Plate identity: preserve jurisdiction, normalize carefully, and flag unreadable/ambiguous observations for human review.
