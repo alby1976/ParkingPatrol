@@ -54,7 +54,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | capstone-regeneration-20261105 | Accepted | 2026-11-05T06:59:31-07:00 | 2026-11-05T21:48:39-07:00 | 2026-11-05T21:48:39-07:00 | DATA120 Python 3.13 plan with read-only Google Sheets, ignored .env, cleaning module, and mandatory test-driven development (RED-GREEN-REFACTOR); latest revision 2026-11-05T21:45:25-07:00 | Student explicitly confirmed reading and acceptance of revised TDD plan in one message; both confirmations recorded upon receipt. No test execution claimed. |
 
-| docs-refactor-20261105 | Pending reading | 2026-11-05T21:55:06-07:00 | — | — | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student reading and acceptance pending; Python tests not run. |
+| docs-refactor-20261105 | Accepted | 2026-11-05T21:55:06-07:00 | 2026-11-05T21:58:59-07:00 | 2026-11-05T21:58:59-07:00 | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student explicitly confirmed reading and acceptance in the same message; both receipt-time timestamps recorded. Python tests not run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
