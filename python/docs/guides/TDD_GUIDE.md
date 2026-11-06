@@ -68,7 +68,7 @@ The `src/cleaning.py` and `tests/test_cleaning.py` files already existed before 
 
 ## Student learning / academic integrity
 
-A coding assistant may teach TDD, suggest a test plan, and help explain failures *within the instructor's assignment-specific GAI rules*. The student must independently understand, verify and interpret results. Log AI contributions and obtain explicit reading and acceptance confirmation per [AGENTS.md](AGENTS.md) and [AI_REVIEW_GATE_GUIDE.md](AI_REVIEW_GATE_GUIDE.md).
+A coding assistant may teach TDD, suggest a test plan, and help explain failures *within the instructor's assignment-specific GAI rules*. The student must independently understand, verify and interpret results. Log AI contributions and obtain explicit reading and acceptance confirmation per [AGENTS.md](../../AGENTS.md) and [AI_REVIEW_GATE_GUIDE.md](../ai/AI_REVIEW_GATE_GUIDE.md).
 
 For every meaningful cycle, the commit message should include:
 

@@ -1,6 +1,6 @@
 # DATA120 — Git Commit Messages for AI Coding Assistants
 
-Use [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) when preparing commits for work in `python/`. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
+Use [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) when preparing commits for work in `python/`. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
 
 ## Before generating a commit message
 
@@ -8,7 +8,7 @@ Use [COMMIT_TEMPLATE.txt](COMMIT_TEMPLATE.txt) when preparing commits for work i
 2. Inspect the **actual staged diff** (`git diff --cached`) and `git status`. Do not describe work absent from the diff.
 3. Check for sensitive content before staging or committing: no real licence plates, customer details, raw exports, tokens, secrets, or keys.
 4. Check which tests really ran and what they reported; never claim a pass without evidence.
-5. If AI helped generate code, documentation, analyses, or the message itself, represent that assistance accurately. For material AI help, run `python python/log_ai_use.py add --tool "Tool (model if known)" --activity "Work performed"` or update `AI_USE_LOG.md` directly if you cannot execute code. Follow [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md) and the [mandatory read/accept gate](AI_REVIEW_GATE_GUIDE.md). Do not begin another substantive task before the student explicitly confirms both reading and acceptance. Log entries **do not replace** required formal AI citations/disclosures.
+5. If AI helped generate code, documentation, analyses, or the message itself, represent that assistance accurately. For material AI help, run `python python/log_ai_use.py add --tool "Tool (model if known)" --activity "Work performed"` or update `../ai/AI_USE_LOG.md` directly if you cannot execute code. Follow [AI_LOGGING_GUIDE.md](../ai/AI_LOGGING_GUIDE.md) and the [mandatory read/accept gate](../ai/AI_REVIEW_GATE_GUIDE.md). Do not begin another substantive task before the student explicitly confirms both reading and acceptance. Log entries **do not replace** required formal AI citations/disclosures.
 6. Ask the student to review the message and changes. Do not invent user approvals or assert that assignment-specific AI use is permitted without confirmation.
 
 ## Configure the commit message template (Windows PowerShell)

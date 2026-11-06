@@ -1,6 +1,6 @@
 # DATA120 Generative AI Use Log
 
-Use this file to **record assistance transparently**. AI assistants following [AGENTS.md](AGENTS.md) must append an entry for each material AI-assisted task using [log_ai_use.py](log_ai_use.py) or direct repository editing; see [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not automatically detect AI use by every tool. The [reading/acceptance gate](AI_REVIEW_GATE_GUIDE.md) blocks the next substantive step for cooperating agents until the student has explicitly confirmed reading and acceptance; it does not authenticate the student or control unrelated tools. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
+Use this file to **record assistance transparently**. AI assistants following [AGENTS.md](../../AGENTS.md) must append an entry for each material AI-assisted task using [log_ai_use.py](../../log_ai_use.py) or direct repository editing; see [AI_LOGGING_GUIDE.md](AI_LOGGING_GUIDE.md). This does not automatically detect AI use by every tool. The [reading/acceptance gate](AI_REVIEW_GATE_GUIDE.md) blocks the next substantive step for cooperating agents until the student has explicitly confirmed reading and acceptance; it does not authenticate the student or control unrelated tools. This is not permission to use AI in a restricted assessment, nor does this log substitute for formal citations required by the instructor.
 
 ## Assignment permission gate
 
