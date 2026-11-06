@@ -53,6 +53,13 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - The existing cleaning module predates adoption of TDD. Do not retroactively describe it as developed test-first.
 - Keep the student's **read → accept** gate independent of TDD. Completing tests does not imply student acceptance, permission to use AI in coursework, or authorization to proceed.
 
+## Synthetic data and deadline constraints
+
+- Respect the **December 8, 2026 presentation** and **December 11, 2026 submission**, with a **December 4 internal analysis freeze**; use the [capstone milestone schedule](docs/planning/CAPSTONE_PLAN.md).
+- Follow [SYNTHETIC_DATA_GUIDE.md](docs/planning/SYNTHETIC_DATA_GUIDE.md) and `src/synthetic_data.py` for reproducible synthetic scenarios; generate only invented `SYN_####` identifiers, with no more than 38 spots and usually one/two daily check events.
+- Synthetic data cannot augment the reported real sample size, furnish verified offender labels, or justify measured violation-detection accuracy. Label synthetic figures clearly and keep generated exports out of Git.
+- Preserve TDD RED/GREEN/REFACTOR evidence for new features. Tests under `tests/test_synthetic_data.py` use fabricated observations only.
+
 ## Repository workflow
 
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
