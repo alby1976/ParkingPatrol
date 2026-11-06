@@ -87,6 +87,24 @@ See [SUSPICIOUS_PATTERN_MODEL.md](SUSPICIOUS_PATTERN_MODEL.md).
 
 **Event definition:** Distinct area/check ID. A duplicate entry within the same check does not increase the count. A vehicle observed twice may have remained parked throughout. Incomplete checks can record positive sightings but cannot establish absence. Model training/scoring currently use a supplied snapshot and must not be treated as leakage-free prospective validation.
 
+## Human verification outcomes (separate operational review data)
+
+These fields represent **independently verified human decisions**, not outcomes inferred from the unsupervised model:
+
+| Field | Meaning |
+| --- | --- |
+| `review_status` | `confirmed_violation`, `no_violation` or `inconclusive` |
+| `reviewer_id` | Restricted opaque human-reviewer identifier |
+| `evidence_ref` | Restricted private reference to independently checked supporting evidence |
+| `reviewed_at` | Timezone-aware human review timestamp |
+| `blacklisted` | True only when the human finding is a confirmed violation |
+| `manual_action` | Separately recorded `ticket` or `tag` performed by authorized staff |
+| `action_staff_id` | Restricted opaque ID of staff who actually recorded the action |
+| `action_ref` | Private ticket/tag reference |
+| `action_at` | Timezone-aware timestamp of the recorded action |
+
+The Python research code only provides a representation of these decisions; it cannot verify that an actual staff member checked the evidence or issued a ticket. Do not upload real enforcement details to the public repository. See [HUMAN_VERIFICATION_WORKFLOW.md](HUMAN_VERIFICATION_WORKFLOW.md).
+
 ## Required data-quality checks
 
 1. Plate identity: preserve jurisdiction, normalize carefully, and flag unreadable/ambiguous observations for human review.
