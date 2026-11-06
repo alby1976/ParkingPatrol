@@ -88,6 +88,10 @@ Use **low coupling and high cohesion** (assuming "high collision" meant "high co
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for a diagram and design principles. These are design goals; no production integration is implemented yet.
 
+## Test-driven development: required
+
+All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
+
 ## Planned learning order
 
 1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
@@ -97,7 +101,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for a diagram and design principles. Thes
 5. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
 6. **Build observation-aware features** such as distinct days seen.
 7. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
-7. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
+8. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
 See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
 
@@ -116,4 +120,5 @@ No AI result will authorize a ticket, tow, or allegation of parking misconduct.
 - [AI reading and acceptance checkpoint](AI_REVIEW_GATE_GUIDE.md)
 - [Citations, copyright and privacy checklist](CITATIONS_COPYRIGHT_PRIVACY_CHECKLIST.md)
 - [Local .env and Google Sheets credential setup](ENV_SETUP.md)
+- [Test-driven development guide](TDD_GUIDE.md)
 - [Git commit message template](COMMIT_TEMPLATE.txt) and [guide](GIT_COMMIT_GUIDE.md)
