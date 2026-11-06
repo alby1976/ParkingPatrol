@@ -114,7 +114,8 @@ All **future** Python feature work and bug fixes should use **RED → GREEN → 
 - **Presentation:** Tuesday, December 8, 2026.
 - **Submission:** Friday, December 11, 2026.
 - **Internal analysis freeze:** December 4, 2026.
-- [Milestone schedule](docs/planning/CAPSTONE_PLAN.md) and [synthetic data generator guide](docs/planning/SYNTHETIC_DATA_GUIDE.md).
+- [Approved milestone schedule](docs/planning/CAPSTONE_PLAN.md): **no work on Sundays**, prioritize **LOF + Isolation Forest**, and treat kNN as an optional stretch goal. Decide by **November 21** whether to drop kNN. Start presentation slides during the first week.
+- [Synthetic data generator guide](docs/planning/SYNTHETIC_DATA_GUIDE.md).
 
 Generate fictional observations without accessing Google Sheets:
 
