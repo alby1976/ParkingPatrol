@@ -13,3 +13,15 @@ Additional tests for future development:
 - Daylight saving time and missing timestamps are handled explicitly.
 
 Do not use actual identifiable parking records as GitHub test fixtures.
+
+## Required development workflow (new work)
+
+For future changes, use **test-driven development: RED → GREEN → REFACTOR**. Read [../TDD_GUIDE.md](../TDD_GUIDE.md).
+
+1. Write a small `pytest` test of the intended behavior before implementing it.
+2. Run it and confirm it fails for the intended reason (**RED**).
+3. Implement the smallest working solution and rerun (**GREEN**).
+4. Refactor, run focused and full tests, and record actual results (**REFACTOR**).
+5. Log AI assistance and obtain student reading/acceptance before the next substantive step.
+
+The existing cleaning tests were drafted alongside an implementation, not demonstrably test-first. Do not claim past TDD evidence. This document update has not run tests.
