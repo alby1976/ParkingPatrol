@@ -165,26 +165,36 @@ Cleaning and its synthetic test module are now implemented. Other listed analysi
 
 No live Google Sheets connection, production integration, fitted model, validation outcome, or instructor approval is claimed here.
 
-## 12. Presentation and submission schedule (2026)
+## 12. Approved presentation and submission schedule (2026)
 
-- **December 8, 2026 (Tuesday): DATA120 presentation.**
-- **December 11, 2026 (Friday): final project submission.**
-- **Internal target December 4:** freeze the analysis, figures, and demonstration so the December 8 presentation can be rehearsed. December 9–11 is reserved for final revisions and submission, not first-time implementation.
+**Student accepted this schedule on November 6, 2026.** See the AI use log for the recorded approval. Dates below assume Sunday is a complete day of rest.
 
-| Dates | Deliverable | Required review |
+- **Presentation:** Tuesday, December 8, 2026.
+- **Final submission:** Friday, December 11, 2026.
+- **Internal analysis and figure freeze:** Friday, December 4, 2026.
+- **Rest days:** Sundays November 8, 15, 22, 29 and December 6 — **no course work scheduled**.
+- **Suggested workload:** 60–90 minutes on weekday evenings, and 2–3 focused hours on Saturdays, subject to other responsibilities.
+
+| Dates (Sundays excluded) | Priority | Evidence / deliverable |
 | --- | --- | --- |
-| Nov 6–12 | Read-only Sheets import design; normalize data and test securely with synthetic fixtures | Verify API authorization, no secrets or raw plates in Git |
-| Nov 13–19 | Observation features, two-check rule, independent human review representation and synthetic unit tests | Review complete vs incomplete check handling |
-| Nov 20–26 | Pilot Isolation Forest on available real history only if authorized and suitable; run separate synthetic demonstration | Flag exploratory findings as anomalies, never true offences |
-| Nov 27–Dec 3 | Compare rule versus ML, inspect review usefulness and limitations; produce student-authored charts | Confirm data sources, test evidence, citations, AI-use disclosure |
-| Dec 4–7 | Freeze graphs and model version; rehearse presentation, verify offline demonstration | Record approval before substantial new steps |
-| Dec 8 | Present DATA120 mini capstone | Present results and uncertainty clearly |
-| Dec 9–11 | Incorporate appropriate feedback and submit the final report/code by Dec 11 | Final privacy, integrity, citation and Git review |
+| Nov 6–14 | Finish Google Sheets read-only import design; audit/normalize data and test with synthetic fixtures; draft slide outline immediately | Private data access plan, cleaning test outcomes and early slide skeleton |
+| Nov 16–21 | Build one shared vehicle-level feature table; compare the existing two-check rule with **Local Outlier Factor (LOF)** and **Isolation Forest** using Python 3.13 and TDD | Two working unsupervised experiments, recorded test commands and results |
+| Nov 23–28 | Assess stability, survey-frequency bias and limitations using authorized real observations; use clearly labelled synthetic demonstrations separately | Comparison charts, model methodology and independent interpretation |
+| Nov 30–Dec 4 | Finish slides, citations, disclosures, offline demo and speaking notes; **freeze analysis and figures by Dec 4** | Presentation-ready deck and reproducible evidence |
+| Dec 5 and Dec 7 (not Dec 6) | Rehearse aloud, confirm slide timing, test demo and prepare static screenshot backup | Final Dec 8 presentation readiness |
+| Dec 8 | Give DATA120 presentation | Present findings and uncertainty without claiming misconduct from anomalies |
+| Dec 9–11 | Apply relevant feedback, finish README/report and final checks; submit by Dec 11 | Final deliverables submitted |
 
-**Current evidence constraint (as of November 5):** approximately 10 days of actual parking observations, 38 spaces, typically one or two survey rounds a day. Continue collecting real observations separately; do not pretend that fictional data extends the real observation period.
+### Scope and fallback
+
+- **Required:** one shared, appropriately protected feature table; two-check suspicious review baseline; LOF and Isolation Forest as the **primary comparison**; TDD evidence, visualizations, and a student-authored presentation.
+- **Optional stretch goal:** k-nearest-neighbor anomaly scoring, added only if the main models, tests and slides are on track. kNN should reuse the same features and evaluation, not become a separate application.
+- **Decision point: November 21:** if behind, **drop kNN** and complete the two primary methods well. If both are not ready, prioritize a credible baseline and one exploratory unsupervised method over three unfinished models.
+- **Data limitation:** As of November 6, there are approximately 10 days of real observations from a lot with up to 38 spaces and usually one/two checks daily. Continue collecting real data, but do not mix synthetic examples with real training evidence or present synthetic observations as actual violations.
+- **No automated enforcement:** An anomaly or two-check flag is only a review priority; independently verified findings are required before blacklisting and any authorized manual on-site action.
 
 ### Synthetic data generator (implemented)
 
-Use [SYNTHETIC_DATA_GUIDE.md](SYNTHETIC_DATA_GUIDE.md) and `python/src/synthetic_data.py` to create reproducible fictional 10-, 45- or 90-day scenarios using pseudonymous identifiers. The generator models a maximum of 38 recorded spots at each check, one/two daily inspections, optional incomplete rounds, and repeated vehicles. It **does not** simulate genuine parking violations, prove offender-detection accuracy, or produce real plates. Generated CSV files go under ignored `python/generated/` and must not be mixed with actual records in reported results.
+Use [SYNTHETIC_DATA_GUIDE.md](SYNTHETIC_DATA_GUIDE.md) and `python/src/synthetic_data.py` to create reproducible fictional 10-, 45-, or 90-day scenarios. Only fictional identifiers and made-up checks are generated. The 38-space maximum, one/two checks per day, optional incomplete rounds, and repeated vehicles approximate the *observation process*, not actual violations. Outputs remain in Git-ignored `python/generated/` and must be clearly labelled **SYNTHETIC** in all charts.
 
-Focused local synthetic-generator tests: **6 passed** with Python 3.13.5. The full repository test suite and live Sheets integration have not been verified for this addition.
+Previously reported focused synthetic-generator tests: **6 passed locally with Python 3.13.5**. No new tests were executed for this schedule documentation update; full regression tests and live Sheets integration remain unverified.
