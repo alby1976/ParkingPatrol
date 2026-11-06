@@ -4,6 +4,9 @@ This directory groups coursework documentation by responsibility. The repository
 
 ## Planning
 - [Capstone plan](planning/CAPSTONE_PLAN.md) — research goals, methods, deliverables
+- [Guided sprint calendar](planning/GUIDED_SPRINT_SESSIONS.md) — dated S01–S31 tasks, Sunday rest and completion criteria
+- [ChatGPT sprint coaching](planning/CHATGPT_SPRINT_COACH.md) — one-action-at-a-time guidance
+- [Sprint progress](planning/SPRINT_PROGRESS.md) — evidence-based status tracking
 - [Data dictionary](planning/DATA_DICTIONARY.md) — observation schemas and feature definitions
 - [Synthetic data generation guide](planning/SYNTHETIC_DATA_GUIDE.md) — Python 3.13 commands and fictional 38-space lot scenarios
 - [Suspicious-pattern rule and unsupervised ML](planning/SUSPICIOUS_PATTERN_MODEL.md) — rule threshold, model indicators, limits
