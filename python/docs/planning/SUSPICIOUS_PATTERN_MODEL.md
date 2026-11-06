@@ -1,0 +1,76 @@
+# DATA120 — Suspicious same-day repeat rule and unsupervised discovery
+
+**Status:** Experimental Python 3.13 module available for student review. Not connected to the live Google Sheet or deployed for enforcement.
+
+## Business requirement
+
+A pseudonymous vehicle observed in **at least two distinct parking checks on the same Edmonton-local calendar date** is marked **Suspicious — repeat-check rule**. The two appearances may be in one or multiple parking areas, but the check IDs must be distinct. A duplicate plate entry in one round counts **once**. The word "event" means **independently recorded survey/check**, not a confirmed separate parking visit.
+
+Example:
+- 9:00 AM vehicle SYN_A seen in check C1; 11:00 AM seen in distinct check C2 → **Suspicious (rule)**.
+- 9:00 AM SYN_B appears twice on the same C1 form → **not flagged** by the repeat-check rule.
+- 9:00 AM SYN_C seen in C1 on Tuesday, 9:00 AM in C2 on Wednesday → **not flagged by the same-day rule**.
+- Two observations in distinct checks may reflect continuous parking rather than separate arrivals. Staff must verify circumstances.
+
+## Additional unsupervised ML review signal
+
+Use `IsolationForest` (scikit-learn) to find unusual numerical *observation patterns* even when the two-check rule does not apply. Candidate features for one pseudonymous vehicle/day are:
+- number of distinct checks containing that vehicle that day;
+- number of calendar dates with a sighting in the previous 30 days;
+- count of completed comparable area checks that day;
+- share of those completed checks containing that vehicle (when denominator is positive);
+- number of areas with sightings that day;
+- time span between first and last **check timestamps** that day (not occupancy duration).
+
+The algorithm is **unsupervised**: it has no confirmed offender labels and does **not** learn what unauthorized parking looks like. An anomaly is simply unusual *relative to the observed dataset*. It is not a probability of wrongdoing. Staff survey frequency and data gaps can also create unusual patterns.
+
+The experimental `score_anomalies` function defaults to a 10% target anomaly fraction and a minimum of 20 eligible vehicle-day rows. These are adjustable **research hyperparameters, not calibrated risk thresholds**. For too few records or inadequate coverage, the model reports its limitation and assigns no anomaly flag. Dataset size/variety and threshold choice require testing and student analysis before operational use.
+
+## Review result
+
+| Column | Meaning |
+| --- | --- |
+| `rule_suspicious` | True when 2+ **distinct check IDs** observed on the same local day |
+| `anomaly_suspicious` | True when exploratory IsolationForest identifies an unusual feature combination |
+| `anomaly_score` | Relative numerical unusualness; **not** probability of a violation |
+| `model_status` | scored, insufficient_samples, insufficient_coverage or no_feature_variation |
+| `suspicious` | True if rule OR anomaly is true; **for human review only** |
+| `flag_source` | none, rule, anomaly or rule+anomaly |
+
+Existing production labels such as Potential offender, Most likely offender and Confirmed offender **remain separate**. Neither the rule nor ML establishes driver identity, customer status, an actual violation, or grounds for ticketing/towing. No automatic write-back to Google Sheets.
+
+## Workflow and boundaries
+
+```text
+Approved Google Sheet (planned read-only connection)
+        ↓
+Restricted pseudonymization boundary (planned)
+        ↓
+cleaning.normalize_observations (implemented)
+        ↓
+pattern_detection.build_vehicle_day_features (implemented)
+        ↓
+├─ mark_repeat_check_suspicious (implemented deterministic rule)
+└─ score_anomalies (implemented exploratory IsolationForest)
+        ↓
+combine_review_signals (review-only output)
+        ↓
+Human verifies independently; not a towing/ticket instruction
+```
+
+The ML function currently fits and scores the supplied snapshot; **it is exploratory, not a validated prospective predictor**. Any future real-time model must use strictly historical training data, future-independent evaluation, and human verification. Avoid leakage, self-training on operational labels or presenting flagged data as ground truth.
+
+## Test-driven development evidence
+
+- RED: synthetic test module imported a missing module; confirmed import failure under CPython 3.13.5.
+- GREEN: focused local tests ran, **8 passed** using pandas 2.2.3 and scikit-learn 1.8.0.
+- REFACTOR: full repository regression test suite **not run**. The files committed to GitHub have not been separately executed there.
+- All test input vehicle identifiers are synthetic.
+
+Run locally from repository root:
+```powershell
+.\.venv\Scripts\python.exe -m pytest python/tests/test_pattern_detection.py -q
+.\.venv\Scripts\python.exe -m pytest python/tests -q
+```
+
+Source references: [scikit-learn IsolationForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html), [pandas](https://pandas.pydata.org/docs/), and [project architecture](../architecture/ARCHITECTURE.md).
