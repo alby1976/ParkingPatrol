@@ -14,6 +14,12 @@ Staff manually inspect a customer-only parking lot, recording observed plates an
 
 **Objective:** Learn Python/pandas/ML using real-world observational-data constraints and produce transparent *review priorities*, not enforcement decisions.
 
+## Suspicious review-label requirement
+
+The requested baseline is **two or more distinct completed or recorded area-check events containing the same vehicle on a single Edmonton-local calendar day**, not two repeated entries in one check and not two proven arrivals. This is a *suspicious review indicator*, not a confirmed violation. The new exploratory IsolationForest model can independently flag unusual vehicle-day observation patterns. Store `rule_suspicious`, `anomaly_suspicious`, `suspicious`, and `flag_source` separately so users understand the explanation.
+
+See [SUSPICIOUS_PATTERN_MODEL.md](SUSPICIOUS_PATTERN_MODEL.md). Python module and synthetic tests exist; connection to live Sheets, production validation, prospective model evaluation and write-back are **not** implemented.
+
 ## 2. Testable analysis questions (student to select)
 
 - Which observed vehicles appear on many **distinct local dates** within a rolling 30-day window?
@@ -95,7 +101,7 @@ Prioritize cleaning edge cases, field mapping, a fake Sheets reader, feature com
 | B. Data cleaning and normalization | Standardize check IDs, area labels, pseudonymous IDs, datetimes and completion flags; quarantine invalid records and de-duplicate within checks | Reproducible cleaned data plus an issue report |
 | C. pandas exploration | Summarize sightings/checks over days, hours, and areas | Descriptive tables and charts |
 | D. Features | Count unique check sightings and distinct dates; measure completed-check opportunity | Reproducible feature table |
-| E. Baseline | Example: 3+ **distinct observed dates** in 30 days | Transparent review-priority indicator |
+| E. Baseline | **2+ distinct observed checks on the same day**; retain 30-day distinct-day summary as an additional feature | Transparent suspicious review signal |
 | F. ML | Explore IsolationForest or clustering **only if sample size and variation are adequate** | Unusual-pattern score/group, not violation likelihood |
 | G. Evaluation | Check sensitivity, stability over later periods, false-alarm potential, and comparison with baseline | Honest method comparison |
 | H. Communicate | Explain what the features mean, limitations, privacy, and decisions that require a human | Student-authored report/presentation |
@@ -128,7 +134,9 @@ Do **not** report "85% accuracy detecting illegal parkers" without verified exte
 - `src/google_sheets_reader.py` — authorized read-only Google Sheets import into pandas
 - `src/cleaning.py` — implemented normalization of approved pseudonymous checks/sightings; not a plate anonymizer
 - `tests/test_cleaning.py` — synthetic cleaning edge cases (execution pending)
-- `src/features.py` — modular features with docstrings
+- `src/pattern_detection.py` — implemented same-day repeat-check rule and exploratory anomaly scoring
+- `tests/test_pattern_detection.py` — synthetic behavior tests (focused local run: 8 passed; GitHub version not independently tested)
+- `src/features.py` — modular future features
 - `tests/test_features.py` — synthetic edge-case tests
 - `notebooks/02_model_comparison.ipynb` — baseline/ML comparison
 - `reports/` — public-safe charts and student-authored findings
