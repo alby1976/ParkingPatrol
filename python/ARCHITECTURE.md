@@ -81,6 +81,14 @@ A future pipeline will inject a reader, apply normalization, and separately hand
 - Do not log/print secrets, embed them in Jupyter notebooks, or commit token caches and credential JSON.
 - Follow [ENV_SETUP.md](ENV_SETUP.md) and review Git exclusions before commits.
 
+## Development process: TDD
+
+**Required for future changes:** define a testable behavior, write and run a deliberately failing synthetic test (**RED**), implement only the necessary behavior (**GREEN**), then improve structure with all tests still passing (**REFACTOR**). See [TDD_GUIDE.md](TDD_GUIDE.md).
+
+Use protocol-based fake readers to test the pipeline without a Google connection, and test failure paths for missing credentials/schema changes without exposing secrets. Unit tests should dominate; a real Sheets API integration test is a separate, permission-controlled step. Keep TDD evidence and student acceptance separate.
+
+The already committed `cleaning.py` and `test_cleaning.py` were not originally built using a verified RED → GREEN cycle. Baseline them before future changes; do not make retrospective TDD claims.
+
 ## Testability and controls
 
 - Python **3.13** runtime for local environment, notebooks, and tests.
