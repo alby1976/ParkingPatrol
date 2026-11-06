@@ -91,6 +91,14 @@ Use **low coupling and high cohesion** (assuming "high collision" meant "high co
 
 See [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for a diagram and design principles. These are design goals; no production integration is implemented yet.
 
+## Suspicious checks and unsupervised pattern exploration
+
+- **Deterministic rule:** pseudonymous vehicle recorded in **two or more distinct checks on the same Edmonton-local day** becomes `rule_suspicious` for *review*. Duplicate entries within one check do not count as two events.
+- **Unsupervised experiment:** IsolationForest may mark additional unusual vehicle-day feature combinations as `anomaly_suspicious`. This is not a calibrated probability of misuse.
+- **Combined review view:** `flag_source` identifies `rule`, `anomaly`, or `rule+anomaly`; no model output triggers enforcement.
+- Implemented in [src/pattern_detection.py](src/pattern_detection.py), tested with synthetic cases in [tests/test_pattern_detection.py](tests/test_pattern_detection.py). No live Google Sheets connection or deployment.
+- Read [the pattern-model design](docs/planning/SUSPICIOUS_PATTERN_MODEL.md) and confirm the proposed interpretation of an "event" as one distinct survey/check.
+
 ## Test-driven development: required
 
 All **future** Python feature work and bug fixes should use **RED → GREEN → REFACTOR**: first write and actually run a failing synthetic test, then write minimal implementation, then improve the code while tests still pass. Keep documented evidence of each phase and review results before advancing. See [TDD_GUIDE.md](docs/guides/TDD_GUIDE.md). The already-created cleaning module was not developed with verified TDD, so it is not retroactively described that way.
