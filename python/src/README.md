@@ -8,7 +8,8 @@ Module inventory (items marked planned are not implemented):
 - `settings.py`: load ignored `python/.env` with `python-dotenv` and validate settings in one place (planned)
 - `ports.py`: small structural Protocols describing approved data-reader and scoring interfaces
 - `google_sheets_reader.py`: approved **read-only Google Sheets API** connection returning pandas DataFrames without writing data back
-- `load_data.py`: private/local synthetic input for offline tests or development
+- `synthetic_data.py`: **implemented** deterministic 38-space fictional check/sighting generator, with CLI and pure pandas API
+- `load_data.py`: other private/local input pathways (planned)
 - `cleaning.py`: **implemented** pure pandas normalization of approved pseudonymous observations and check rows; quarantines invalid data into non-sensitive issue codes
 - `validation.py`: additional schema/quality validation (planned)
 - `features.py`: rolling features calculated without using future observations
