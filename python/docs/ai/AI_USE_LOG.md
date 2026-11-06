@@ -37,6 +37,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Added TDD_GUIDE.md and revised AGENTS.md, ARCHITECTURE.md, CAPSTONE_PLAN.md, README.md, tests guide, and commit guide to require test-first red-green-refactor workflow | Student reading and acceptance pending for capstone-regeneration-20261105; no tests were run for this documentation change | Citation/disclosure pending |
 
+| 2026-11-05 | ChatGPT (OpenAI, GPT-6) | Reorganized documentation files, updated links and logging script path, and added a documentation index | Student review pending: docs-refactor-20261105 | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -51,6 +53,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | review-gate-20261104 | Accepted | 2026-11-04 (time unavailable) | 2026-11-05T06:54:41-07:00 | 2026-11-05T06:54:41-07:00 | Implement two-stage reading and acceptance gate in DATA120 agent workflow, logger, and documentation | Student explicitly confirmed reading and acceptance in the same message; both confirmations recorded upon receipt. |
 
 | capstone-regeneration-20261105 | Accepted | 2026-11-05T06:59:31-07:00 | 2026-11-05T21:48:39-07:00 | 2026-11-05T21:48:39-07:00 | DATA120 Python 3.13 plan with read-only Google Sheets, ignored .env, cleaning module, and mandatory test-driven development (RED-GREEN-REFACTOR); latest revision 2026-11-05T21:45:25-07:00 | Student explicitly confirmed reading and acceptance of revised TDD plan in one message; both confirmations recorded upon receipt. No test execution claimed. |
+
+| docs-refactor-20261105 | Pending reading | 2026-11-05T21:55:06-07:00 | — | — | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student reading and acceptance pending; Python tests not run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
