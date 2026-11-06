@@ -5,6 +5,7 @@ This directory groups coursework documentation by responsibility. The repository
 ## Planning
 - [Capstone plan](planning/CAPSTONE_PLAN.md) — research goals, methods, deliverables
 - [Data dictionary](planning/DATA_DICTIONARY.md) — observation schemas and feature definitions
+- [Synthetic data generation guide](planning/SYNTHETIC_DATA_GUIDE.md) — Python 3.13 commands and fictional 38-space lot scenarios
 - [Suspicious-pattern rule and unsupervised ML](planning/SUSPICIOUS_PATTERN_MODEL.md) — rule threshold, model indicators, limits
 - [Human verification and blacklisting workflow](planning/HUMAN_VERIFICATION_WORKFLOW.md) — independent review, confirmation, and separately recorded manual tickets/tags
 
