@@ -60,7 +60,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | docs-refactor-20261105 | Accepted | 2026-11-05T21:55:06-07:00 | 2026-11-05T21:58:59-07:00 | 2026-11-05T21:58:59-07:00 | Reorganized DATA120 documentation into planning, architecture, guides, policies and AI directories; repaired Markdown links and AI logger path | Student explicitly confirmed reading and acceptance in the same message; both receipt-time timestamps recorded. Python tests not run. |
 
-| suspect-patterns-20261105 | Pending reading | 2026-11-05T22:13:15-07:00 | — | — | Revised suspicious-pattern flow adds independent human verification, confirmed-violation blacklisting, and separately recorded authorized on-site ticket/tag actions; revision 2026-11-05T22:22:07-07:00 | Previous version read and revision requested 2026-11-05T22:17:58-07:00. Latest revision awaits renewed reading and explicit acceptance; verification module tests have not been executed. |
+| suspect-patterns-20261105 | Accepted | 2026-11-05T22:13:15-07:00 | 2026-11-05T22:23:15-07:00 | 2026-11-05T22:23:15-07:00 | Revised suspicious-pattern flow adds independent human verification, confirmed-violation blacklisting, and separately recorded authorized on-site ticket/tag actions; revision 2026-11-05T22:22:07-07:00 | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt. Verification module tests not yet executed. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
