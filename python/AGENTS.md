@@ -32,6 +32,7 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Start with an explainable rules baseline; use supervised classification only with independently verified labels, or clearly frame clustering/anomaly detection as exploratory.
 - Evaluate with chronology-aware splits, leakage checks, and honest discussion of false positives and bias. Never invent prediction accuracy.
 - No model, rule, or GAI output may automatically order, justify, or trigger ticketing/towing. Require independent human verification and applicable authorization.
+- Separate statuses **suspicious → human-reviewed confirmed violation / no violation / inconclusive**. Blacklist only after an explicit verified human finding; any on-site ticket/tag is a distinct authorized staff action. The Python `src/verification.py` module records proposed decisions and manual actions but does not perform enforcement. See [human verification workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md).
 
 ## Python 3.13 and design patterns
 
