@@ -20,6 +20,12 @@ The requested baseline is **two or more distinct completed or recorded area-chec
 
 See [SUSPICIOUS_PATTERN_MODEL.md](SUSPICIOUS_PATTERN_MODEL.md). Python module and synthetic tests exist; connection to live Sheets, production validation, prospective model evaluation and write-back are **not** implemented.
 
+## Human verification and blacklisting (separate from ML)
+
+A suspicious vehicle is **not automatically a violator**. An authorized staff member must independently verify whether parking rules were breached. Only an explicitly **confirmed violation** may lead to a blacklisted status. On-site ticketing/tagging must be performed by properly authorized staff and recorded as a separate manual action, not triggered by ML. Findings of `no_violation` or `inconclusive` do not blacklist a vehicle.
+
+See [HUMAN_VERIFICATION_WORKFLOW.md](HUMAN_VERIFICATION_WORKFLOW.md). `src/verification.py` contains proposed pure records for human findings and reported manual actions; it is not connected to production Google Sheets or an enforcement system. Use verified outcomes to evaluate the research model only after appropriate authorization, without treating model predictions as ground truth.
+
 ## 2. Testable analysis questions (student to select)
 
 - Which observed vehicles appear on many **distinct local dates** within a rolling 30-day window?
