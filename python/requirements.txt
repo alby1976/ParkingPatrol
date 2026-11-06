@@ -10,4 +10,6 @@ pytest>=8,<10
 google-api-python-client>=2,<3
 google-auth>=2,<3
 google-auth-oauthlib>=1,<2
+# Local environment variables without committing credentials
+python-dotenv>=1,<2
 tzdata>=2025.1; platform_system == 'Windows'
