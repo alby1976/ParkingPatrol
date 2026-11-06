@@ -49,6 +49,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Created a detailed S01–S31 DATA120 sprint calendar, ChatGPT coaching prompts, progress tracker and navigation; planned Sundays off and milestones through Dec 11 | Student review pending for guided-sprints-20261106; planning documents only, no tests executed | Citation/disclosure pending |
 
+| 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Added repository-wide `AGENTS.md` requiring PEP 257, Google-style Python docstrings, honest design-pattern documentation, documentation-only behavior preservation and verification; linked policy from `python/AGENTS.md` | Student review pending: python-docstrings-20261106; documentation files only, no Python source changed and no tests run | Citation/disclosure if used |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -73,6 +75,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | schedule-two-models-20261106 | Accepted | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | 2026-11-06T11:17:38-07:00 | Approved schedule: no Sunday work; LOF and Isolation Forest primary; kNN stretch with November 21 fallback; presentation December 8 and final submission December 11 | Student explicitly accepted the proposed schedule in the conversation. Read and acceptance are recorded together on receipt; no tests run for documentation changes. |
 
 | guided-sprints-20261106 | Accepted | 2026-11-06T11:23:06-07:00 | 2026-11-06T12:57:27-07:00 | 2026-11-06T12:57:27-07:00 | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student explicitly confirmed reading and acceptance in the same message; both timestamps use message receipt time converted to America/Edmonton (MST). No sprint marked complete without evidence. |
+
+| python-docstrings-20261106 | Pending reading | 2026-11-06T15:35:51-07:00 | — | — | Repository-wide Python documentation standard in root AGENTS.md and cross-reference in python/AGENTS.md | Student requested standard; explicit reading and acceptance of the new committed files are still pending. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
