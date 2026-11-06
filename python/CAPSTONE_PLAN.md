@@ -37,7 +37,8 @@ No claim about true offender-prediction accuracy can be made without separately 
 **The DATA120 Python model will be linked to the existing Google Sheet** using the Google Sheets API, subject to instructor, business privacy, and student review requirements. This is a planned read-only integration, not an installed connector.
 
 - **Source**: Existing Google Sheet populated by Google Forms and Apps Script, including check/round metadata where available.
-- **Authentication**: Approved Google OAuth credentials or dedicated service account with read-only sharing, stored securely outside Git; use the least-privilege `spreadsheets.readonly` scope.
+- **Authentication**: Approved Google OAuth credentials or dedicated service account with read-only sharing, stored securely outside Git; use the least-privilege `spreadsheets.readonly` scope. Do not use a Google account password.
+- **Local secrets**: Store non-public configuration/secret values in ignored `python/.env`, created from committed placeholder-only `python/.env.example`. Reference Google credential JSON by a path to secure storage **outside the repo**. Follow [ENV_SETUP.md](ENV_SETUP.md).
 - **Import**: Future `src/google_sheets_reader.py` loads approved worksheets into pandas DataFrames. Never commit raw downloaded rows or cache them in public repository files.
 - **Processing**: Validate timestamps, check completeness, duplicates and source schemas; pseudonymize plate/jurisdiction values within an approved restricted environment before model analysis.
 - **Operation**: Initially run the Python pipeline manually for coursework. Any recurring connection or write-back would require a separate design and explicit approval. No auto-ticketing, towing, or operational feedback loop.
@@ -69,6 +70,7 @@ Google Form → Google Sheets / Apps Script [production]
 - **Strategy pattern**: compare explainable rule scores and experimental ML without rewriting data loading.
 - **Pipeline separation**: notebooks orchestrate reusable functions and do not contain essential business logic.
 - No global mutable state, implicit network calls at import time, or model training with side effects.
+- Keep `.env` loading in one configuration module and inject typed settings into the Google Sheets adapter; do not couple feature/model classes to environment variables.
 - Start simple: prefer plain functions or dataclasses over classes when an abstraction would add complexity without testability.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md). Tests should replace Google access with a synthetic reader and verify that feature logic never contacts Google directly.
