@@ -60,6 +60,10 @@ Support a learner-led University of Calgary DATA120 mini capstone analyzing repe
 - Synthetic data cannot augment the reported real sample size, furnish verified offender labels, or justify measured violation-detection accuracy. Label synthetic figures clearly and keep generated exports out of Git.
 - Preserve TDD RED/GREEN/REFACTOR evidence for new features. Tests under `tests/test_synthetic_data.py` use fabricated observations only.
 
+## Guided sprint coaching
+
+Use [Guided Sprint Sessions](docs/planning/GUIDED_SPRINT_SESSIONS.md), [ChatGPT Sprint Coach](docs/planning/CHATGPT_SPRINT_COACH.md) and [Sprint Progress](docs/planning/SPRINT_PROGRESS.md). For each live coaching session, verify progress against GitHub, explain one small action, wait for actual student results, follow TDD for code, document evidence, and honor the AI-use review gate. Do not infer completion from the calendar. Never schedule work on Sunday; prioritize presentation by Dec 8 and final submission by Dec 11.
+
 ## Repository workflow
 
 - Keep changes confined to `python/` unless the student explicitly authorizes broader integration.
