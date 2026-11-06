@@ -2,6 +2,8 @@
 
 Scope: All work in `python/`. These instructions **do not** authorize edits to the production `apps-script/` parking application.
 
+**Repository-wide standard:** [../AGENTS.md](../AGENTS.md) applies to every Python file, including tests, fixtures and utilities. For every Python file created or modified, follow PEP 257 and Google-style docstrings; start modules with the specified Module summary / Design Pattern / Pattern Rationale / Typical Usage template, accurately documenting `None` when appropriate. Explain why code exists, do not invent patterns, preserve behavior/type hints during documentation-only work, and verify the docstring checklist and actual test outcomes. The additional course-specific and approval rules below remain in force.
+
 ## Purpose
 
 Support a learner-led University of Calgary DATA120 mini capstone analyzing repeated parking sightings collected through the existing Google Forms → Google Sheets → Apps Script workflow. Focus on Python, pandas, explainable visualizations, cautious ML experiments, and a defensible report.
