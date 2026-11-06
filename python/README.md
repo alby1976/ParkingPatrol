@@ -55,8 +55,8 @@ python/
 ├── AGENTS.md                 ← AI-agent and academic-integrity instructions
 ├── AI_USE_LOG.md             ← AI contribution + review/acceptance record
 ├── notebooks/                ← exploratory and modeling notebooks (future)
-├── src/                      ← Sheets connector + Python ML logic (future)
-├── tests/                    ← synthetic tests for feature calculations (future)
+├── src/                      ← cleaning.py implemented; Sheets/ML modules planned
+├── tests/                    ← synthetic normalization tests implemented
 └── reports/                  ← public-safe figures/report outline (future)
 ```
 
@@ -92,10 +92,11 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for a diagram and design principles. Thes
 
 1. **Identify real Sheet column names without sharing records.** Write a source-to-dictionary mapping.
 2. **Implement a read-only Google Sheets API connector**, after consent, secure credentials, privacy controls, and student approval; load data into pandas in memory. Use restricted scopes and least privilege. Do not store credentials in Git.
-3. **Create synthetic data** with completed and incomplete checks.
-4. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
-5. **Build observation-aware features** such as distinct days seen.
-6. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
+3. **Clean and normalize synthetic checks/sightings** using [src/cleaning.py](src/cleaning.py), then review the issue report before deciding what to exclude. Run `python -m pytest python/tests/test_cleaning.py`.
+4. **Create synthetic data** with completed and incomplete checks.
+5. **Explore with pandas**: counts by date, area, hour, and inspection frequency.
+6. **Build observation-aware features** such as distinct days seen.
+7. **Compare a transparent baseline** against an exploratory unsupervised ML method (if data volume supports it).
 7. **Evaluate stability and practical interpretability**, discuss limitations, and prepare a student-authored report.
 
 See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md) for details. Model type is provisional until data quality and course assessment rules are confirmed.
