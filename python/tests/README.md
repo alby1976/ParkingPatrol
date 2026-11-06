@@ -1,5 +1,7 @@
 # Synthetic-data tests
 
+Implemented: `test_pattern_detection.py` covers same-day distinct-check suspicion, duplicates, incomplete checks, invalid joins, minimum model size, anomaly labels, and model settings. A local focused run under Python 3.13.5 passed 8 tests; a complete repository regression run has not been performed.
+
 Implemented: `test_cleaning.py` uses synthetic identifiers to test normalization, deduplication, incomplete/empty checks, check conflicts, unknown links, and daylight-saving validation.
 
 Run with `python -m pytest python/tests/test_cleaning.py` in the project Python 3.13 environment. Execution has not been verified yet.
