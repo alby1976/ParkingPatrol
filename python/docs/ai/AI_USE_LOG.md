@@ -64,7 +64,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | suspect-patterns-20261105 | Accepted | 2026-11-05T22:13:15-07:00 | 2026-11-05T22:23:15-07:00 | 2026-11-05T22:23:15-07:00 | Revised suspicious-pattern flow adds independent human verification, confirmed-violation blacklisting, and separately recorded authorized on-site ticket/tag actions; revision 2026-11-05T22:22:07-07:00 | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt. Verification module tests not yet executed. |
 
-| synthetic-milestones-20261105 | Pending reading | 2026-11-05T22:40:08-07:00 | — | — | Accepted timeline incorporated: Dec 8 presentation, Dec 11 submission, Dec 4 analysis freeze. New synthetic 38-space, 1–2 checks/day generator and guide added with TDD tests | Student must read and accept new AI-generated implementation before the next substantive step; no claim of real dataset augmentation. |
+| synthetic-milestones-20261105 | Accepted | 2026-11-05T22:40:08-07:00 | 2026-11-06T10:06:21-07:00 | 2026-11-06T10:06:21-07:00 | Accepted timeline incorporated: Dec 8 presentation, Dec 11 submission, Dec 4 analysis freeze. New synthetic 38-space, 1–2 checks/day generator and guide added with TDD tests | Student explicitly confirmed reading and acceptance together; both confirmation timestamps use the same message receipt time converted to America/Edmonton (MST). No claim of real dataset augmentation. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
