@@ -76,7 +76,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | guided-sprints-20261106 | Accepted | 2026-11-06T11:23:06-07:00 | 2026-11-06T12:57:27-07:00 | 2026-11-06T12:57:27-07:00 | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student explicitly confirmed reading and acceptance in the same message; both timestamps use message receipt time converted to America/Edmonton (MST). No sprint marked complete without evidence. |
 
-| python-docstrings-20261106 | Pending reading | 2026-11-06T15:35:51-07:00 | — | — | Repository-wide Python documentation standard in root AGENTS.md and cross-reference in python/AGENTS.md | Student requested standard; explicit reading and acceptance of the new committed files are still pending. |
+| python-docstrings-20261106 | Accepted | 2026-11-06T15:35:51-07:00 | 2026-11-07T07:41:46-07:00 | 2026-11-07T07:41:46-07:00 | Repository-wide Python documentation standard in root AGENTS.md and cross-reference in python/AGENTS.md | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton (MST). Documentation-only changes; no Python source tests run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
