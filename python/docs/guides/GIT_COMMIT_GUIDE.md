@@ -63,8 +63,29 @@ Use a short subject; explain **why**, actual **changes**, genuine **RED/GREEN/RE
 
 ## AI assistant prompt
 
-> Review the actual staged diff, applicable `python/AGENTS.md` rules, and test output. Draft a Git commit message using `python/COMMIT_TEMPLATE.txt`. Explain what changed, why, and what validation actually ran. State any AI contribution accurately and do not claim independent authorship, test results, approval, or course permission that is unverified. Do not include private data. Return the message for student review before committing.
+> Review the actual staged diff, applicable `python/AGENTS.md` rules, and test output. Draft a Git commit message using `.gitmessage.txt`. Explain what changed, why, and what validation actually ran. State any AI contribution accurately and do not claim independent authorship, test results, approval, or course permission that is unverified. Do not include private data. Return the message for student review before committing.
 
 ## Responsibility
 
 The student decides what to stage, verifies the resulting commit, and independently completes the assessed analysis. Assignment-specific instructor rules take precedence over this guide.
+
+
+## Reference an issue in each planned-work commit
+
+1. Find your session in the [GitHub issue/session index](../planning/GITHUB_ISSUE_WORKFLOW.md). Read the issue and inspect existing implementation first. Search open and closed issues before adding more.
+2. Put actual session IDs and planned dates in the message. Record actual work dates separately if delayed; do not mark sessions complete from dates.
+3. For one step, partial work, or pending student review, use a plain reference:
+
+```text
+test(data120): cover read-only adapter schema errors
+
+Related:
+- Sprint: S05 (planned 2026-11-11)
+Refs #3
+```
+
+4. Only when ALL issue criteria, required checks and explicit student reading/acceptance are satisfied, use a closing reference. Example syntax: `Closes #3`. This example is not a completion claim. For grouped issues, completing one session is insufficient.
+5. GitHub applies commit closing keywords when the commit reaches the default branch (`main`). PR-description closing keywords require a PR targeting the default branch and close on merge. `Refs #N` creates a reference without automatic closure; it does not necessarily establish the PR Development relationship. For squash merges, inspect the final squash message and preserve the intended references. See [GitHub's linking documentation](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
+6. Reference each relevant issue separately; do not invent numbers. For work outside the plan, reuse a suitable issue or explain `N/A`. For another repository use `Refs owner/repo#N`.
+
+Record public-safe completion evidence in the issue and link commits/PRs. Review gates are followed by cooperating assistants; GitHub closing keywords do not enforce them. Keep this workflow setup issue open until its student review is accepted. Neither an issue nor a commit establishes instructor permission for AI use.

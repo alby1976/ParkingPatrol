@@ -132,3 +132,7 @@ git config --local commit.template .gitmessage.txt
 ```
 
 Then use `git commit` (without `-m`) to open the editor with the template. GitHub web/API commits do not automatically apply local templates; use the same conventions manually. For DATA120 review gates, follow [python/AGENTS.md](python/AGENTS.md) and the existing AI use log.
+
+## Issue-driven DATA120 workflow
+
+For planned DATA120 work, find the existing issue in the [issue/session index](python/docs/planning/GITHUB_ISSUE_WORKFLOW.md) before starting; search open and closed issues before creating another. Include the actual session ID(s), planned date(s), and `Refs #N` in partial/review-pending commits. Use `Closes #N` only when the whole issue's acceptance criteria, relevant checks and explicit student read/accept gate are satisfied. Closing keywords in commits close issues when the commit reaches the default branch (`main`); they do not enforce student review. Do not close a grouped issue after just one session. Use one reference per affected issue; never invent issue numbers or approval. Unplanned work should reuse a relevant issue or explain `N/A`. Preserve Sundays off and all DATA120 deadlines, privacy, TDD and course-permission requirements.

@@ -97,3 +97,9 @@ See [README.md](README.md) and [CAPSTONE_PLAN.md](docs/planning/CAPSTONE_PLAN.md
 ## Instruction precedence
 
 Applicable University of Calgary course and assignment requirements take precedence over this file. This file is the single canonical agent instruction document for `python/`.
+
+## GitHub issue references
+
+For planned DATA120 work, find the existing issue in the [issue/session index](docs/planning/GITHUB_ISSUE_WORKFLOW.md) before starting; search open and closed issues before creating another. Include the actual session ID(s), planned date(s), and `Refs #N` in partial/review-pending commits. Use `Closes #N` only when the whole issue's acceptance criteria, relevant checks and explicit student read/accept gate are satisfied. Closing keywords in commits close issues when the commit reaches the default branch (`main`); they do not enforce student review. Do not close a grouped issue after just one session. Use one reference per affected issue; never invent issue numbers or approval. Unplanned work should reuse a relevant issue or explain `N/A`. Preserve Sundays off and all DATA120 deadlines, privacy, TDD and course-permission requirements.
+
+Issue creation is planning, not implementation evidence. Keep task-level AI review entries separate from grouped issue completion. Use the workflow issue for workflow-only commits rather than closing future implementation issues.

@@ -33,5 +33,12 @@ AI Assistance:
 - Student review status: Accepted / Pending / N/A.
 
 Related:
-- Sprint: S01–S31, or N/A.
-- Issue/PR: Actual reference, or N/A.
+- Sprint: Actual session ID(s) and planned YYYY-MM-DD date(s), or N/A.
+- Issue/PR: Actual issue/PR URL or number, or explain N/A.
+
+# Keep one appropriate reference per affected issue below; remove placeholders.
+# Refs #N: partial work or student review pending; does not auto-close.
+# Closes #N: only the ENTIRE issue is complete, checked and explicitly accepted.
+# Closing keywords take effect when the commit reaches default branch main.
+# Never close a grouped issue for one completed session. See the issue index.
+Refs #N

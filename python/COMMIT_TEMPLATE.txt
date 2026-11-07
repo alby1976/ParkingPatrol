@@ -27,6 +27,10 @@ AI assistance:
 - Contribution: 
 - Student review: 
 
-# Optional: cite a related issue/PR, but don't invent one.
+# Legacy reference: use ../.gitmessage.txt as the canonical template.
+# Planned DATA120 work: include actual session IDs and planned dates.
+# Refs #N for partial/review-pending work; Closes #N only for a fully
+# completed, checked and student-accepted issue. Closing takes effect on main.
+# Replace N with a real issue number; never close a group for one session.
 # References:
-# - 
+# Refs #N
