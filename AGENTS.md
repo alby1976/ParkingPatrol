@@ -119,3 +119,16 @@ Before finishing a Python documentation task, verify that:
 - The existing relevant tests still pass, except for already-documented expected failures.
 
 Run the tests when the environment is available; **never claim they passed if they were not run**. For documentation-only edits, perform a diff review and test the behavior if possible. This instruction applies prospectively to files created or modified; it is **not** a request to rewrite every existing source file now.
+
+
+## Repository-wide Git Commit Messages
+
+Use the accepted [commit message template](.gitmessage.txt) for Git commits across this repository. Follow `type(scope): imperative summary` and describe the real purpose, changes, test results, applicable PEP 257/Google-style documentation verification, privacy/security review, AI assistance, and related sprint/issue. Include RED/GREEN/REFACTOR evidence for new Python behavior when applicable. State `Not run` or `N/A` rather than inventing outcomes. Do not put actual plate numbers, personal data or credentials into public commit history.
+
+Configure once per local clone from the repository root:
+
+```powershell
+git config --local commit.template .gitmessage.txt
+```
+
+Then use `git commit` (without `-m`) to open the editor with the template. GitHub web/API commits do not automatically apply local templates; use the same conventions manually. For DATA120 review gates, follow [python/AGENTS.md](python/AGENTS.md) and the existing AI use log.
