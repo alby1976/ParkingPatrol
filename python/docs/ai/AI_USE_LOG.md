@@ -51,6 +51,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-06 | ChatGPT (OpenAI, GPT-6) | Added repository-wide `AGENTS.md` requiring PEP 257, Google-style Python docstrings, honest design-pattern documentation, documentation-only behavior preservation and verification; linked policy from `python/AGENTS.md` | Student review pending: python-docstrings-20261106; documentation files only, no Python source changed and no tests run | Citation/disclosure if used |
 
+| 2026-11-07 | ChatGPT (OpenAI, GPT-6) | Implemented previously accepted Git commit message template as repository-wide `.gitmessage.txt`; updated AGENTS.md and DATA120 Git guide to use it | Proposal accepted by student in conversation; implementation files awaiting separate reading and acceptance: git-template-20261107. Documentation only, tests not run | Citation/disclosure if used |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -77,6 +79,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | guided-sprints-20261106 | Accepted | 2026-11-06T11:23:06-07:00 | 2026-11-06T12:57:27-07:00 | 2026-11-06T12:57:27-07:00 | Detailed dated sprint sessions, short hands-on ChatGPT coaching workflow, progress tracker, presentation and submission preparation | Student explicitly confirmed reading and acceptance in the same message; both timestamps use message receipt time converted to America/Edmonton (MST). No sprint marked complete without evidence. |
 
 | python-docstrings-20261106 | Accepted | 2026-11-06T15:35:51-07:00 | 2026-11-07T07:41:46-07:00 | 2026-11-07T07:41:46-07:00 | Repository-wide Python documentation standard in root AGENTS.md and cross-reference in python/AGENTS.md | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton (MST). Documentation-only changes; no Python source tests run. |
+
+| git-template-20261107 | Pending reading | 2026-11-07T07:45:38-07:00 | — | — | Repository-wide accepted commit template .gitmessage.txt and AGENTS/Git guide cross-references | Student accepted template wording in conversation before repo changes; implementation has not yet received post-commit read and acceptance. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
