@@ -80,7 +80,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | python-docstrings-20261106 | Accepted | 2026-11-06T15:35:51-07:00 | 2026-11-07T07:41:46-07:00 | 2026-11-07T07:41:46-07:00 | Repository-wide Python documentation standard in root AGENTS.md and cross-reference in python/AGENTS.md | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton (MST). Documentation-only changes; no Python source tests run. |
 
-| git-template-20261107 | Pending reading | 2026-11-07T07:45:38-07:00 | — | — | Repository-wide accepted commit template .gitmessage.txt and AGENTS/Git guide cross-references | Student accepted template wording in conversation before repo changes; implementation has not yet received post-commit read and acceptance. |
+| git-template-20261107 | Accepted | 2026-11-07T07:45:38-07:00 | 2026-11-07T07:47:20-07:00 | 2026-11-07T07:47:20-07:00 | Repository-wide accepted commit template .gitmessage.txt and AGENTS/Git guide cross-references | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt in America/Edmonton (MST). No Python tests run for documentation/configuration-only changes. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
