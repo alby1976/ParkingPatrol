@@ -1,6 +1,6 @@
 # DATA120 — Git Commit Messages for AI Coding Assistants
 
-Use the repository-wide [`.gitmessage.txt`](../../../../.gitmessage.txt) when preparing commits; the earlier [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) is retained for reference. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
+Use the repository-wide [`.gitmessage.txt`](../../../.gitmessage.txt) when preparing commits; the earlier [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) is retained for reference. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
 
 ## Before generating a commit message
 
