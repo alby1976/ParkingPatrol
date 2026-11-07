@@ -53,7 +53,7 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-07 | ChatGPT (OpenAI, GPT-6) | Implemented previously accepted Git commit message template as repository-wide `.gitmessage.txt`; updated AGENTS.md and DATA120 Git guide to use it | Proposal accepted by student in conversation; implementation files awaiting separate reading and acceptance: git-template-20261107. Documentation only, tests not run | Citation/disclosure if used |
 
-| 2026-11-07 | Codex (OpenAI, GPT-6) | Inspected repository instructions and existing issues; created grouped S01–S31 implementation/milestone issues #1–#10 and issue/session index; updated commit templates, agent instructions and Git guide for issue references | Pending reading and acceptance: issue-workflow-20261107. Documentation/planning only; no Python tests run; no sprint implementation marked complete | Citation/disclosure if used |
+| 2026-11-07 | Codex (OpenAI, GPT-6) | Inspected repository instructions and existing issues; created grouped S01–S31 implementation/milestone issues #1–#10 and issue/session index; updated commit templates, agent instructions and Git guide for issue references | Student explicitly confirmed reading and acceptance; both recorded at 2026-11-07T07:53:44-07:00 America/Edmonton: issue-workflow-20261107. Documentation/planning only; no Python tests run; no sprint implementation marked complete | Citation/disclosure if used |
 
 ## Copy this row for each future use
 
@@ -84,7 +84,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | git-template-20261107 | Accepted | 2026-11-07T07:45:38-07:00 | 2026-11-07T07:47:20-07:00 | 2026-11-07T07:47:20-07:00 | Repository-wide accepted commit template .gitmessage.txt and AGENTS/Git guide cross-references | Student explicitly confirmed reading and acceptance together; both timestamps recorded at receipt in America/Edmonton (MST). No Python tests run for documentation/configuration-only changes. |
 
-| issue-workflow-20261107 | Pending reading | 2026-11-07T07:51:34-07:00 | — | — | GitHub issues #1–#10, S01–S31/date mapping, issue workflow index, root/Python instructions, commit templates and Git guide; preserves Sunday rest, deadlines, privacy, TDD and read/accept gates | Student reading and acceptance not yet confirmed. Prior git-template acceptance applies only to that earlier implementation. |
+| issue-workflow-20261107 | Accepted | 2026-11-07T07:51:34-07:00 | 2026-11-07T07:53:44-07:00 | 2026-11-07T07:53:44-07:00 | GitHub issues #1–#10, S01–S31/date mapping, issue workflow index, root/Python instructions, commit templates and Git guide; preserves Sunday rest, deadlines, privacy, TDD and read/accept gates | Student explicitly confirmed reading and acceptance of the committed issue-driven workflow in the same message; both timestamps use the current recording time in America/Edmonton (MST). No sprint implementation completion or test execution is implied. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
