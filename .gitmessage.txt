@@ -1,0 +1,37 @@
+# ParkingPatrol / DATA120 Git commit message template
+# Subject format: type(scope): imperative summary (ideally <=72 chars).
+# Types: feat, fix, docs, test, refactor, chore, build, ci, perf
+# Scopes: data120, parking, sheets, ml, synthetic, tests, docs
+# Remove unused placeholders. Commit messages become part of PUBLIC Git history.
+
+type(scope): explain the change briefly
+
+Why:
+- Explain the problem this change addresses.
+
+Changes:
+- Describe the actual staged changes.
+- Note genuine design-pattern changes, or N/A.
+
+Testing:
+- RED: Command and observed failure, or Not run / N/A.
+- GREEN: Command and observed result, or Not run / N/A.
+- REFACTOR: Regression command and observed result, or Not run / N/A.
+
+Documentation:
+- PEP 257 / Google-style docstrings: Verified / N/A / Not checked.
+- AGENTS.md requirements: Verified / N/A / Not checked.
+
+Privacy and Security:
+- Confirm whether real plates, personal records, or credentials are absent.
+- State any special privacy/security considerations.
+
+AI Assistance:
+- Tool: Tool and model, or None.
+- Contribution: Specific help received, or None.
+- AI Use Log ID: Existing entry ID, or N/A.
+- Student review status: Accepted / Pending / N/A.
+
+Related:
+- Sprint: S01–S31, or N/A.
+- Issue/PR: Actual reference, or N/A.
