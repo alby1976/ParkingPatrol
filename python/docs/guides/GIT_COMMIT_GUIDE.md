@@ -1,6 +1,6 @@
 # DATA120 — Git Commit Messages for AI Coding Assistants
 
-Use [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) when preparing commits for work in `python/`. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
+Use the repository-wide [`.gitmessage.txt`](../../../../.gitmessage.txt) when preparing commits; the earlier [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) is retained for reference. The template is **suggested structure**, not proof that a change is correct, independently created, tested, or acceptable under course assessment rules.
 
 ## Before generating a commit message
 
@@ -16,7 +16,7 @@ Use [COMMIT_TEMPLATE.txt](../../COMMIT_TEMPLATE.txt) when preparing commits for 
 From the **repository root**, run:
 
 ```powershell
-git config --local commit.template python/COMMIT_TEMPLATE.txt
+git config --local commit.template .gitmessage.txt
 ```
 
 This affects this local clone only. Verify:
@@ -52,14 +52,14 @@ Do not manufacture any output; completing a commit does not establish a passing 
 type(scope): imperative summary
 ```
 
-Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `data`, `experiment`.
+Common types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`, `build`, `ci`, `perf`.
 
 Examples (illustrative, not claims of completed work):
 - `docs(data120): document observation-data limitations`
 - `feat(features): count distinct observed dates per window`
 - `test(features): cover incomplete-check edge cases`
 
-Use a short subject; explain **what**, **why**, **validation**, and **AI assistance** in the body. Do not include confidential data in messages: commit messages are part of public Git history.
+Use a short subject; explain **why**, actual **changes**, genuine **RED/GREEN/REFACTOR evidence**, **documentation**, **privacy/security**, **AI assistance**, and **related sprint/issue** in the body. Mark inapplicable sections as `N/A` and unexecuted tests as `Not run`. Do not include confidential data in messages: commit messages are part of public Git history.
 
 ## AI assistant prompt
 
