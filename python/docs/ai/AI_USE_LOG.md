@@ -92,7 +92,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | auto-issue-links-20261107 | Accepted | 2026-11-07T21:25:58-07:00 | 2026-11-07T21:29:07-07:00 | 2026-11-07T21:29:07-07:00 | Agent-side lookup of real open/closed GitHub issues, automatic Refs/conditional Closes references for CLI/API/PR, issue deduplication, and reporting SHA, tests and AI review | Student explicitly confirmed both reading and acceptance in the same message; both timestamps recorded on receipt in America/Edmonton (MST). Documentation-only change; no Python tests run. |
 
-| s01-environment-20261107 | Pending reading | 2026-11-07T21:36:18-07:00 | — | — | S01 environment verification: Python 3.13.14, active .venv, main tracking branch, .idea and python/.env ignore checks; sprint tracker updated. Related issue #2 stays open | Student provided terminal screenshots; review and acceptance of recorded summary pending; no source changes or tests run. |
+| s01-environment-20261107 | Accepted | 2026-11-07T21:36:18-07:00 | 2026-11-07T21:38:57-07:00 | 2026-11-07T21:38:57-07:00 | S01 environment verification: Python 3.13.14, active .venv, main tracking branch, .idea and python/.env ignore checks; sprint tracker updated. Related issue #2 stays open | Student explicitly confirmed reading and acceptance together in one message; both receipt-time timestamps in America/Edmonton (MST). No Python source changes or tests run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
