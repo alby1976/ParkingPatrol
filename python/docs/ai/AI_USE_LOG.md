@@ -88,7 +88,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | issue-workflow-20261107 | Accepted | 2026-11-07T07:51:34-07:00 | 2026-11-07T07:53:44-07:00 | 2026-11-07T07:53:44-07:00 | GitHub issues #1–#10, S01–S31/date mapping, issue workflow index, root/Python instructions, commit templates and Git guide; preserves Sunday rest, deadlines, privacy, TDD and read/accept gates | Student explicitly confirmed reading and acceptance of the committed issue-driven workflow in the same message; both timestamps use the current recording time in America/Edmonton (MST). No sprint implementation completion or test execution is implied. |
 
-| auto-issue-links-20261107 | Pending reading | 2026-11-07T21:25:58-07:00 | — | — | Agent-side lookup of real open/closed GitHub issues, automatic Refs/conditional Closes references for CLI/API/PR, issue deduplication, and reporting SHA, tests and AI review | Student requested changes; explicit post-implementation reading and acceptance pending. No Python source changes or tests run. |
+| auto-issue-links-20261107 | Accepted | 2026-11-07T21:25:58-07:00 | 2026-11-07T21:29:07-07:00 | 2026-11-07T21:29:07-07:00 | Agent-side lookup of real open/closed GitHub issues, automatic Refs/conditional Closes references for CLI/API/PR, issue deduplication, and reporting SHA, tests and AI review | Student explicitly confirmed both reading and acceptance in the same message; both timestamps recorded on receipt in America/Edmonton (MST). Documentation-only change; no Python tests run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
