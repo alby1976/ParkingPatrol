@@ -1,15 +1,29 @@
-# DATA120 — CPython 3.13 only (see README.md)
-# Suggested compatible minimums; install/test and record the resolved versions.
+# DATA120 — Python 3.13 dependencies
+# Install in the project virtual environment:
+#   python -m pip install -r python/requirements.txt
+# Lower/upper bounds are compatibility ranges, not a fully locked environment.
+# Record actual installed versions for reproducible coursework.
+
+# Core data analysis, statistics, plots, and unsupervised ML
 pandas>=2.2.3,<4
 numpy>=2.1,<3
 matplotlib>=3.9,<4
 scikit-learn>=1.6,<2
-jupyterlab>=4.3,<5
+
+# Testing (pytest is used by python/tests/)
 pytest>=8,<10
-# Google Sheets API planned read-only connection; not deployed yet.
+
+# Notebooks and a kernel bound to this project's virtual environment
+jupyterlab>=4.3,<5
+ipykernel>=6.29.5,<8
+
+# Planned Google Sheets read-only adapter; not a live integration yet
 google-api-python-client>=2,<3
 google-auth>=2,<3
 google-auth-oauthlib>=1,<2
-# Local environment variables without committing credentials
+
+# Load local configuration from ignored .env files
 python-dotenv>=1,<2
+
+# Reliable IANA America/Edmonton time zones on Windows
 tzdata>=2025.1; platform_system == 'Windows'
