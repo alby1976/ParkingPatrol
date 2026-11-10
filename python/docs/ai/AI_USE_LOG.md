@@ -100,7 +100,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | requirements-s02-20261109 | Accepted | 2026-11-09T19:53:33-07:00 | 2026-11-09T21:08:59-06:00 | 2026-11-09T21:08:59-06:00 | Updated python/requirements.txt to explicitly include ipykernel and organize core, test, notebook, Google Sheets and time-zone dependencies; linked issue #2 | Student explicitly confirmed reading and acceptance in the same message; both timestamps taken at receipt in America/Edmonton (MST). Dependency installation and actual S02 tests remain unverified. |
 
-| pyproject-s02-20261109 | Pending reading | 2026-11-09T21:11:06-06:00 | — | — | python/pyproject.toml for Python 3.13, setuptools packaging of four src modules, dependency source requirements.txt, pytest defaults and README guide; GitHub issue #2 | Student must review and explicitly accept implementation; no new Python source changed, package build and tests not run. |
+| pyproject-s02-20261109 | Accepted | 2026-11-09T21:11:06-06:00 | 2026-11-09T21:19:25-06:00 | 2026-11-09T21:19:25-06:00 | python/pyproject.toml for Python 3.13, setuptools packaging of four src modules, dependency source requirements.txt, pytest defaults and README guide; GitHub issue #2 | Student explicitly confirmed reading and acceptance together in one message; both timestamps recorded at message receipt in America/Edmonton (MST). No Python source changed; package installation and tests not yet run. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
