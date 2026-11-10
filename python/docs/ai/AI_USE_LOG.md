@@ -59,6 +59,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-07 | ChatGPT (OpenAI, GPT-6) | Coached Sprint S01 Python, Git and ignore-rule checks; recorded verified, screenshot-supported results in SPRINT_PROGRESS.md, without changing application code | Student to read and accept S01 summary; S01 status Awaiting approval; tests not run (not applicable), `py` launcher unavailable | Citation/disclosure pending |
 
+| 2026-11-09 | ChatGPT (OpenAI, GPT-6) | Audited current DATA120 Python imports and declared dependencies, added explicit ipykernel notebook dependency and reorganized requirements.txt comments by usage | Awaiting student reading and acceptance: requirements-s02-20261109. No package installation, environment validation or pytest execution was performed | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -93,6 +95,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | auto-issue-links-20261107 | Accepted | 2026-11-07T21:25:58-07:00 | 2026-11-07T21:29:07-07:00 | 2026-11-07T21:29:07-07:00 | Agent-side lookup of real open/closed GitHub issues, automatic Refs/conditional Closes references for CLI/API/PR, issue deduplication, and reporting SHA, tests and AI review | Student explicitly confirmed both reading and acceptance in the same message; both timestamps recorded on receipt in America/Edmonton (MST). Documentation-only change; no Python tests run. |
 
 | s01-environment-20261107 | Accepted | 2026-11-07T21:36:18-07:00 | 2026-11-07T21:38:57-07:00 | 2026-11-07T21:38:57-07:00 | S01 environment verification: Python 3.13.14, active .venv, main tracking branch, .idea and python/.env ignore checks; sprint tracker updated. Related issue #2 stays open | Student explicitly confirmed reading and acceptance together in one message; both receipt-time timestamps in America/Edmonton (MST). No Python source changes or tests run. |
+
+| requirements-s02-20261109 | Pending reading | 2026-11-09T19:53:33-07:00 | — | — | Updated python/requirements.txt to explicitly include ipykernel and organize core, test, notebook, Google Sheets and time-zone dependencies; linked issue #2 | Student review pending; install and local tests must be run separately in PyCharm. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
