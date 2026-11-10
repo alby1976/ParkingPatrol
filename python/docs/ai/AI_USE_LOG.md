@@ -96,7 +96,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | s01-environment-20261107 | Accepted | 2026-11-07T21:36:18-07:00 | 2026-11-07T21:38:57-07:00 | 2026-11-07T21:38:57-07:00 | S01 environment verification: Python 3.13.14, active .venv, main tracking branch, .idea and python/.env ignore checks; sprint tracker updated. Related issue #2 stays open | Student explicitly confirmed reading and acceptance together in one message; both receipt-time timestamps in America/Edmonton (MST). No Python source changes or tests run. |
 
-| requirements-s02-20261109 | Pending reading | 2026-11-09T19:53:33-07:00 | — | — | Updated python/requirements.txt to explicitly include ipykernel and organize core, test, notebook, Google Sheets and time-zone dependencies; linked issue #2 | Student review pending; install and local tests must be run separately in PyCharm. |
+| requirements-s02-20261109 | Accepted | 2026-11-09T19:53:33-07:00 | 2026-11-09T21:08:59-06:00 | 2026-11-09T21:08:59-06:00 | Updated python/requirements.txt to explicitly include ipykernel and organize core, test, notebook, Google Sheets and time-zone dependencies; linked issue #2 | Student explicitly confirmed reading and acceptance in the same message; both timestamps taken at receipt in America/Edmonton (MST). Dependency installation and actual S02 tests remain unverified. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
