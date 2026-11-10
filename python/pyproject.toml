@@ -1,0 +1,29 @@
+# DATA120 Python 3.13 project metadata and pytest settings.
+# Dependencies are read from requirements.txt to avoid maintaining two lists.
+# This file configures the coursework Python modules; it does not deploy Apps Script.
+
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parkingpatrol-data120"
+version = "0.1.0"
+description = "DATA120 exploratory analysis of manually observed parking patterns"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dynamic = ["dependencies"]
+
+[tool.setuptools]
+py-modules = ["cleaning", "pattern_detection", "synthetic_data", "verification"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
