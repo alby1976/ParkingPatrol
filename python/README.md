@@ -53,7 +53,8 @@ python/
 │   ├── guides/               ← setup, Git, TDD
 │   ├── policies/             ← academic integrity and privacy
 │   └── ai/                   ← AI disclosures and approval logs
-├── requirements.txt          ← initial dependencies
+├── requirements.txt          ← authoritative dependency list
+├── pyproject.toml            ← Python 3.13 metadata, editable install, pytest config
 ├── .env.example              ← safe template only (tracked)
 ├── .env                      ← local secrets (ignored, never committed)
 ├── AGENTS.md                 ← AI-agent and academic-integrity instructions
@@ -79,6 +80,24 @@ py -3.13 -m venv .venv
 Use **CPython 3.13** for all local development, notebooks and tests. `py -3.13` requires the Windows Python launcher and an installed Python 3.13; alternatively invoke the installed 3.13 interpreter explicitly. Check `.venv\\Scripts\\python.exe --version` before installing dependencies. The local `.venv` is ignored by Git.
 
 Read [ENV_SETUP.md](docs/guides/ENV_SETUP.md) before adding any Google Sheets credentials. The `.env.example` contains no secrets; `python/.env` and real credential JSON files are excluded from Git. Do not use your Google account password to authenticate the Sheets API.
+
+## Project metadata and test configuration
+
+[pyproject.toml](pyproject.toml) declares the Python 3.13 project, local source modules, and shared `pytest` settings. It reads its dependencies **directly from [requirements.txt](requirements.txt)**, so package versions have only one source of truth.
+
+Use the existing installation command from the repository root:
+
+```powershell
+python -m pip install -r python/requirements.txt
+```
+
+Optional, if editable installation of the DATA120 modules is desired (use the same active virtual environment):
+
+```powershell
+python -m pip install -e ./python
+```
+
+This is an optional project packaging workflow, not a replacement for the scheduled S02 dependency installation or tests. Packaging and imports have **not yet been independently verified** in the student's PyCharm environment. From the repository root, the existing test command remains `python -m pytest python/tests -q`. Avoid packaging or installing operational Google Apps Script files.
 
 ## Object-oriented architecture
 
