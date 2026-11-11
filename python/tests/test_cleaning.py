@@ -61,7 +61,7 @@ def test_conflicting_duplicate_check_quarantines_corresponding_sightings():
 
 def test_ambiguous_local_dst_time_rejected():
     checks = sample_checks()
-    checks.loc[0, "check_at"] = "2026-11-01 01:30"
+    checks.loc[0, "check_at"] = "2025-11-02 01:30"
     result = normalize_observations(checks, sample_sightings())
     assert "ROUND 1" not in result.checks["check_id"].tolist()
     assert "missing_or_invalid_required_field" in result.issues["issue"].tolist()
