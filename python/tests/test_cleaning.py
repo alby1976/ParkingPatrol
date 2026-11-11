@@ -44,10 +44,11 @@ def test_normalizes_deduplicates_and_preserves_incomplete_and_empty_checks():
 
 def test_unknown_checks_are_quarantined_without_exposing_values():
     sightings = sample_sightings()
-    sightings.loc[0, "check_id"] = "unknown"
+    sightings.loc[0, "check_id"] = "PRIVATE_TEST_CHECK_987654"
     result = normalize_observations(sample_checks(), sightings)
     assert "unknown_or_invalid_check" in result.issues["issue"].tolist()
-    assert "unknown" not in result.issues.to_string().lower()
+    assert set(result.issues.columns) == {"table", "row_index", "issue"}
+    assert "PRIVATE_TEST_CHECK_987654" not in result.issues.to_string()
 
 
 def test_conflicting_duplicate_check_quarantines_corresponding_sightings():
