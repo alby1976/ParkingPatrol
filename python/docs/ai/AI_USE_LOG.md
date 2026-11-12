@@ -108,7 +108,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | s02-privacy-20261110 | Accepted | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | Student-authored test-only privacy assertion improvement in python/tests/test_cleaning.py; commit d29b1238efea0e445edd3fedfcab811c5f90ea87, Refs #4 | Student explicitly said they read and accepted the committed S02 privacy test correction. Both timestamps recorded at receipt in America/Edmonton; full regression 29 passed from student output. S02 itself remains in progress. |
 
-| s02-outline-20261112 | Pending reading | 2026-11-12T08:22:08-06:00 | — | — | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student review of the completed outline milestone pending, S02 still incomplete; no new Python tests run for this documentation work. |
+| s02-outline-20261112 | Accepted | 2026-11-12T08:22:08-06:00 | 2026-11-12T08:25:52-06:00 | 2026-11-12T08:25:52-06:00 | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton. S02 and issue #2 remain open pending remaining presentation outline. No new Python tests for Markdown work. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
