@@ -39,6 +39,22 @@ The connector should read both vehicle sightings and completed/empty area checks
 
 Avoid reconstructing an empty check solely from the `sightings` table. Verify every `check_id` has a matching check record and that area and time agree.
 
+## Staff-reported plate status — separate Form (new; NOT human verification)
+
+A companion Google Form (see [administrator setup guide](../../../docs/Per_Vehicle_Status_Setup.md)) collects **one plate per response** with three required questions: `Plate`, `Province`, and `Staff-reported status` (choose **Unknown**, **Suspicious**, **Violator**). It is separate from the existing multi-plate inspection-round Form. The status response sheet holds raw private plate information and **must not** be copied into the public Python repository.
+
+Before Python import, a future authorized adapter must pseudonymize `Plate + Province` within a restricted environment, map the Form response timestamp with an explicit timezone offset, and retain only the following columns:
+
+| Python field | Meaning | Rule |
+| --- | --- | --- |
+| `vehicle_id` | Already-pseudonymized plate+province identity | Only approved opaque IDs; never raw plate |
+| `staff_status` | Staff category: `unknown`, `suspicious`, `violator` | Required; no implicit verified status |
+| `reported_at` | Offset-aware time of the staff category submission | The submission time, not the actual observation or violation time |
+
+Implemented offline validation: `src/staff_status.py` → `normalize_staff_reports(reports)`. Synthetic tests in `tests/test_staff_status.py` cover missing statuses, unsupported categories, plate-like IDs, raw plate columns and timezone offsets. The actual Google Sheets read-only adapter and data join **remain unimplemented**.
+
+**Do not treat `staff_status == "violator"` as `confirmed_violation`.** A staff assertion is not independently verified evidence, must not trigger blacklisting or enforcement, and must not be used as an unsupervised-model ground-truth label. Explicit independently verified outcomes remain separate in the human verification workflow. Avoid time leakage: never join future staff reports into historical feature rows.
+
 ## Engineered columns — one vehicle × area × cutoff
 
 | Feature | Definition | Missing-value rule |
