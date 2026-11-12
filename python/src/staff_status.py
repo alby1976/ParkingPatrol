@@ -20,10 +20,13 @@ Typical Usage:
 
 from __future__ import annotations
 
+import re
+
 import pandas as pd
 
 STAFF_STATUSES = frozenset({"unknown", "suspicious", "violator"})
 COLUMNS = ("vehicle_id", "staff_status", "reported_at")
+OPAQUE_ID = re.compile(r"^(?:V[0-9A-F]{24}|SYN_[A-Z0-9_]+|DEMO_[A-Z0-9_]+)$")
 FORBIDDEN = frozenset({
     "plate", "license_plate", "licence_plate", "plate_number", "raw_plate",
     "driver_name", "customer_name", "api_key", "password"
@@ -66,8 +69,8 @@ def normalize_staff_reports(reports: pd.DataFrame) -> pd.DataFrame:
     ids = out["vehicle_id"].map(
         lambda x: x.strip().upper() if isinstance(x, str) else ""
     )
-    if ids.eq("").any():
-        raise ValueError("Missing pseudonymous vehicle ID")
+    if ids.eq("").any() or not ids.map(lambda x: bool(OPAQUE_ID.fullmatch(x))).all():
+        raise ValueError("Missing or non-pseudonymous vehicle ID")
     out["vehicle_id"] = ids
 
     labels = out["staff_status"].map(
