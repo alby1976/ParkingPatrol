@@ -15,6 +15,7 @@ Module inventory (items marked planned are not implemented):
 - `features.py`: rolling features calculated without using future observations
 - `pipeline.py`: orchestration using dependency injection, no hardwired Google service
 - `pattern_detection.py`: **implemented** same-day repeat-check review rule, observation features, and exploratory IsolationForest anomaly scoring
+- `staff_status.py`: **implemented** pure validation of pseudonymous Unknown/Suspicious/Violator staff reports; does not verify violations or connect to the live Form
 - `verification.py`: **proposed** pure records for independent human verification, confirmed-blacklist status, and separately reported on-site manual ticket/tag actions; no actual enforcement integration
 - `modeling.py`: other scoring strategies (planned)
 
