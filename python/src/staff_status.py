@@ -1,7 +1,9 @@
-"""Normalize staff-reported parking categories for offline DATA120 research.
+"""Normalize parking categories, including a historically confirmed ticket status.
 
 Accept only pseudonymous vehicle identifiers from a restricted import
-boundary. Never verify violations, modify operational statuses, contact
+boundary. Historical Violator means a prior ticket exists according to authorized staff;
+this function cannot check the underlying ticket record. Never modify
+operational statuses, contact
 AI services, or initiate enforcement.
 
 Design Pattern:
@@ -34,7 +36,7 @@ FORBIDDEN = frozenset({
 
 
 def normalize_staff_reports(reports: pd.DataFrame) -> pd.DataFrame:
-    """Validate staff impressions without treating them as verified findings.
+    """Normalize labels without verifying private historical ticket evidence.
 
     Args:
         reports: A table with already-pseudonymized vehicle IDs, an explicitly
@@ -50,8 +52,12 @@ def normalize_staff_reports(reports: pd.DataFrame) -> pd.DataFrame:
             appear, staff statuses are invalid, or timestamps lack an offset.
 
     Note:
-        A staff-reported "violator" is NOT independently verified evidence,
-        a blacklist decision, an enforcement authorization, or training truth.
+        A "violator" selection represents an authorized staff attestation
+        that this vehicle received a ticket in the past, rather than a
+        suspicion. The underlying ticket record must be confirmed through
+        restricted operational records; this pure validator cannot check
+        it. It does not establish a new violation, issue a ticket or tow,
+        or serve as automatic model ground truth.
         Never join future status reports into historical ML feature rows.
     """
     if not isinstance(reports, pd.DataFrame):
