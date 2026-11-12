@@ -67,6 +67,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-12 | ChatGPT (OpenAI, GPT-6) | Guided and reviewed the student-created presentation outline (Slides 1–3), inspected Git staging/commits, identified and corrected accidental PyCharm settings inclusion, verified push and clean local Git status, and updated the sprint tracker | Student read/acceptance pending: s02-outline-20261112; existing 29 passed Python tests were reported earlier, no new tests performed for Markdown work | Citation/disclosure pending |
 
+| 2026-11-12 | ChatGPT (OpenAI, GPT-6) | Added separate required per-vehicle staff status Google Form installer (Unknown/Suspicious/Violator), local mock tests, Python 3.13 pseudonymous status validation and tests, schema/setup/retention documentation, and GitHub Issue #11 | Pending student reading and acceptance: per-plate-status-20261112; isolated 2 Node and 4 Python 3.13.5 focused tests passed. Full repository and live Google Form tests not run | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -109,6 +111,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | s02-privacy-20261110 | Accepted | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | Student-authored test-only privacy assertion improvement in python/tests/test_cleaning.py; commit d29b1238efea0e445edd3fedfcab811c5f90ea87, Refs #4 | Student explicitly said they read and accepted the committed S02 privacy test correction. Both timestamps recorded at receipt in America/Edmonton; full regression 29 passed from student output. S02 itself remains in progress. |
 
 | s02-outline-20261112 | Accepted | 2026-11-12T08:22:08-06:00 | 2026-11-12T08:25:52-06:00 | 2026-11-12T08:25:52-06:00 | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton. S02 and issue #2 remain open pending remaining presentation outline. No new Python tests for Markdown work. |
+
+| per-plate-status-20261112 | Pending reading | 2026-11-12T08:39:54-06:00 | — | — | Per-vehicle staff status reporting Form in Apps Script, required three choices, Python validation/schema, synthetic tests, setup guide and issue #11. Original multi-plate round form untouched; no automatic enforcement or model training. | Student review pending. Not deployed; live permissions and 3-month status response retention require administrator verification. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
