@@ -13,7 +13,7 @@ The existing parking-round Form asks for a **multiline list of plates** for one 
 
 The **Staff-reported status** dropdown allows **Unknown**, **Suspicious**, or **Violator**. It is required, and staff must explicitly select one. *Unknown* is the appropriate selection when evidence is insufficient. Google Forms does not automatically preselect it.
 
-**The word “Violator” on this Form is a staff assertion, NOT a confirmed violation.** Nothing in this new Form changes the existing verified-blacklist logic, issues a ticket, notifies patrol, or trains the AI model. Separate independent verification is mandatory before any operational finding.
+**Violator is the confirmed historical status for a vehicle previously issued a parking ticket.** Authorized staff must check the private prior-ticket record before selecting it; a Suspicious vehicle without a confirmed prior ticket is not a Violator. This status identifies a **past confirmed incident**, not a new violation today. The Form does not automatically issue a ticket, notify patrol, change the blacklist or train the AI model; a fresh enforcement action still requires independent review and authorization.
 
 ## What the installer changes
 
@@ -43,7 +43,7 @@ The Form response tab contains sensitive raw values. Those **must stay private**
 - Pass **only** `vehicle_id`, `staff_status`, and `reported_at` to `python/src/staff_status.py`.
 - Do not join future staff-reported categories into past ML features or use them as independently verified outcomes.
 
-The validated categorical values in Python are `unknown`, `suspicious`, `violator`. Actual human verification remains in `python/src/verification.py` and needs reviewer identity and independent private evidence.
+The validated categorical values in Python are `unknown`, `suspicious`, `violator`. Here `violator` means **historically ticketed and confirmed**, subject to checking the restricted ticket record. The Python normalizer cannot authenticate that record. A current incident remains independently assessed using `python/src/verification.py`; do not equate a prior ticket to proof of current misconduct.
 
 ## Test and deployment status
 
