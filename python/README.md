@@ -124,7 +124,7 @@ The existing Google Form records **multiple plates per inspection round**. The o
 
 The Python module [src/staff_status.py](src/staff_status.py) validates **already-pseudonymized** staff reports only. The [data dictionary](docs/planning/DATA_DICTIONARY.md) documents `vehicle_id`, `staff_status`, and `reported_at`. A secure Google Sheets adapter for importing these Form responses is **planned, not implemented**.
 
-A staff-reported `violator` category is **not a verified violation**, blacklisting decision, ML training label or ticket/tow authorization. Preserve [the independent human-verification workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md). See [Form setup and retention notes](../docs/Per_Vehicle_Status_Setup.md).
+The `violator` category means the vehicle has **a confirmed prior parking ticket**. Staff must check the restricted ticket record before selecting it. This records historical status, not proof of a new offence; no automatic new ticket, tow, blacklist update or ML label is generated. Preserve [the independent human-verification workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md). See [Form setup and retention notes](../docs/Per_Vehicle_Status_Setup.md).
 
 ## Human verification and on-site actions
 
