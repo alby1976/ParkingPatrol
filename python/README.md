@@ -118,6 +118,14 @@ See [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for a diagram and desig
 - Implemented in [src/pattern_detection.py](src/pattern_detection.py), tested with synthetic cases in [tests/test_pattern_detection.py](tests/test_pattern_detection.py). No live Google Sheets connection or deployment.
 - Read [the pattern-model design](docs/planning/SUSPICIOUS_PATTERN_MODEL.md) and confirm the proposed interpretation of an "event" as one distinct survey/check.
 
+## Staff-reported status (new, separate from confirmed violations)
+
+The existing Google Form records **multiple plates per inspection round**. The optional companion per-plate status Form instead requires Plate, Province and **Staff-reported status** (Unknown, Suspicious, Violator) for a **single vehicle**. Installing it requires a separately authorized run of the Apps Script installer; GitHub does not automatically change live Google Forms.
+
+The Python module [src/staff_status.py](src/staff_status.py) validates **already-pseudonymized** staff reports only. The [data dictionary](docs/planning/DATA_DICTIONARY.md) documents `vehicle_id`, `staff_status`, and `reported_at`. A secure Google Sheets adapter for importing these Form responses is **planned, not implemented**.
+
+A staff-reported `violator` category is **not a verified violation**, blacklisting decision, ML training label or ticket/tow authorization. Preserve [the independent human-verification workflow](docs/planning/HUMAN_VERIFICATION_WORKFLOW.md). See [Form setup and retention notes](../docs/Per_Vehicle_Status_Setup.md).
+
 ## Human verification and on-site actions
 
 A vehicle that triggers the rule or anomaly review indicator is **suspicious only**. An authorized human verifies whether a parking violation actually occurred. If verified, the vehicle may be recorded as **blacklisted**; any ticket or tag issued on site is a separate staff action with its own timestamp and reference. No Python module or ML model issues tickets or tags automatically.
