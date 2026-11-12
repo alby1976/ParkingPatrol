@@ -1,6 +1,6 @@
 /**
  * Create a private one-vehicle staff-status form without altering parking-round collection.
- * Staff categories are reports, NOT independently verified violations.
+ * The Violator option means a confirmed prior ticket; current conduct is not inferred.
  * This module never blacklists, tickets, tows, or trains a model.
  */
 function setupPlateStatusForm_(spreadsheet, properties) {
@@ -13,7 +13,7 @@ function setupPlateStatusForm_(spreadsheet, properties) {
     else form.setAcceptingResponses(false);
     form.setDestination(FormApp.DestinationType.SPREADSHEET, spreadsheet.getId());
   }
-  form.setDescription('Internal staff reporting ONLY. Submit one plate per response. Choose Unknown, Suspicious, or Violator. A staff-reported Violator selection is NOT a confirmed violation; independently review evidence before any blacklist or enforcement action.');
+  form.setDescription('Internal staff reporting: one plate per response. Unknown = unclassified; Suspicious = requires review; Violator = confirmed historical violator with an issued prior ticket. Staff must check the prior ticket record before choosing Violator. Prior ticket status alone does not establish a new violation.');
   form.setAllowResponseEdits(false);
   form.setPublishingSummary(false);
   var items = form.getItems();
@@ -34,8 +34,8 @@ function setupPlateStatusForm_(spreadsheet, properties) {
   var oldStatus = find('Staff-reported status');
   var status = oldStatus ? oldStatus.asListItem() : form.addListItem().setTitle('Staff-reported status');
   status.setChoiceValues(['Unknown', 'Suspicious', 'Violator'])
-    .setHelpText('Required for EVERY plate. Unknown when evidence is insufficient. Violator is staff-reported and does not automatically blacklist or authorize enforcement.')
+    .setHelpText('Required for every plate. Unknown when evidence is insufficient. Select Violator ONLY when an earlier ticket is confirmed in the private ticket record. This documents historical confirmation, not a new incident or permission to tow.')
     .setRequired(true);
-  form.setConfirmationMessage('Staff status report saved privately. A Violator selection requires separate independent verification before any blacklist or action.');
+  form.setConfirmationMessage('Status saved privately. Violator means a previously ticketed vehicle; confirm its historical ticket record. A new enforcement action requires fresh authorization and evidence.');
   return form;
 }
