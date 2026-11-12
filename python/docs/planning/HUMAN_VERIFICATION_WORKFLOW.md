@@ -4,9 +4,9 @@
 
 ## Important distinction: required staff Form selection
 
-The new optional per-vehicle staff Form records a required **Unknown / Suspicious / Violator** category. These are *staff-reported categories*, even when someone selects “Violator”. They do not override this document's independent verification requirements, do not create a confirmed blacklist entry, and do not trigger ticketing or towing.
+The new optional per-vehicle staff Form records a required **Unknown / Suspicious / Violator** category. **Violator is a confirmed historical category: a parking ticket has already been issued to that vehicle.** Authorized staff must verify that prior ticket in restricted operational records before selecting the category. Unlike Suspicious, this is not an unverified prior allegation. It does **not**, by itself, prove a new violation today or automatically issue another ticket or tow.
 
-Python keeps these form reports in the separate `src/staff_status.py` research module, **not** the `ReviewOutcome` record. Never treat status selections as ground-truth labels for evaluation without independently checking the underlying evidence and necessary permissions. See [status setup](../../../docs/Per_Vehicle_Status_Setup.md).
+Python keeps these form reports in the separate `src/staff_status.py` research module, **not** the `ReviewOutcome` record. A documented prior ticket may support historical outcome analysis when independently authenticated and permitted, but is not ground truth for a new incident or a substitute for time-safe evaluation. Never train an unsupervised model to imitate a staff status label. See [status setup](../../../docs/Per_Vehicle_Status_Setup.md).
 
 ## Business rule
 
