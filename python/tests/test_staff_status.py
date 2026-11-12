@@ -45,6 +45,7 @@ def test_missing_or_invalid_fields_fail_closed():
     for name, value in (
         ("staff_status", None), ("staff_status", ""),
         ("staff_status", "Confirmed"), ("vehicle_id", ""),
+        ("vehicle_id", "ABC123"),
         ("reported_at", "bad")
     ):
         frame = base.copy()
