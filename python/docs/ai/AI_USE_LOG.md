@@ -65,6 +65,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-10 | ChatGPT (OpenAI, GPT-6) | Guided correction of a contradictory synthetic unknown-check privacy assertion, inspection of staged diff, focused tests, full regression and Git commit `d29b1238`; confirmed GitHub Issue #4 reference | Student supplied actual results (focused 1 passed in 0.69s and full 29 passed in 2.00s), explicitly confirmed reading and acceptance; review ID s02-privacy-20261110 | Citation/disclosure pending |
 
+| 2026-11-12 | ChatGPT (OpenAI, GPT-6) | Guided and reviewed the student-created presentation outline (Slides 1–3), inspected Git staging/commits, identified and corrected accidental PyCharm settings inclusion, verified push and clean local Git status, and updated the sprint tracker | Student read/acceptance pending: s02-outline-20261112; existing 29 passed Python tests were reported earlier, no new tests performed for Markdown work | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -105,6 +107,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | pyproject-s02-20261109 | Accepted | 2026-11-09T21:11:06-06:00 | 2026-11-09T21:19:25-06:00 | 2026-11-09T21:19:25-06:00 | python/pyproject.toml for Python 3.13, setuptools packaging of four src modules, dependency source requirements.txt, pytest defaults and README guide; GitHub issue #2 | Student explicitly confirmed reading and acceptance together in one message; both timestamps recorded at message receipt in America/Edmonton (MST). No Python source changed; package installation and tests not yet run. |
 
 | s02-privacy-20261110 | Accepted | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | 2026-11-10T21:47:38-06:00 | Student-authored test-only privacy assertion improvement in python/tests/test_cleaning.py; commit d29b1238efea0e445edd3fedfcab811c5f90ea87, Refs #4 | Student explicitly said they read and accepted the committed S02 privacy test correction. Both timestamps recorded at receipt in America/Edmonton; full regression 29 passed from student output. S02 itself remains in progress. |
+
+| s02-outline-20261112 | Pending reading | 2026-11-12T08:22:08-06:00 | — | — | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student review of the completed outline milestone pending, S02 still incomplete; no new Python tests run for this documentation work. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
