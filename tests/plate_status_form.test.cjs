@@ -60,6 +60,9 @@ test('per-plate form requires an explicit status from three supported choices', 
   assert.deepEqual(form.items.map(x => x.title), ['Plate', 'Province', 'Staff-reported status']);
   assert.equal(form.items.every(x => x.required), true);
   assert.deepEqual(Array.from(form.items[2].options), ['Unknown', 'Suspicious', 'Violator']);
+  assert.match(form.items[2].help, /earlier ticket is confirmed/);
+  assert.match(form.description, /confirmed historical violator/);
+  assert.match(form.confirmation, /previously ticketed vehicle/);
   assert.equal(properties.getProperty('PLATE_STATUS_FORM_ID'), 'FORM-FICTION');
 });
 
