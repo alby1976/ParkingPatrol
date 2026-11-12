@@ -112,7 +112,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | s02-outline-20261112 | Accepted | 2026-11-12T08:22:08-06:00 | 2026-11-12T08:25:52-06:00 | 2026-11-12T08:25:52-06:00 | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton. S02 and issue #2 remain open pending remaining presentation outline. No new Python tests for Markdown work. |
 
-| per-plate-status-20261112 | Pending reading | 2026-11-12T08:39:54-06:00 | — | — | Per-vehicle staff status reporting Form in Apps Script, required three choices, Python validation/schema, synthetic tests, setup guide and issue #11. Original multi-plate round form untouched; no automatic enforcement or model training. | Student review pending. Not deployed; live permissions and 3-month status response retention require administrator verification. |
+| per-plate-status-20261112 | Pending reading | 2026-11-12T08:39:54-06:00 | — | — | Revised 2026-11-12T08:44:04-06:00: Violator means confirmed historical vehicle with an earlier issued ticket; Unknown and Suspicious remain distinct. Updated Google Form wording, Python docstrings, guides, tests and Issue #11. No new incident automatically verified. | Student requested correction before accepting initial proposal; awaiting fresh explicit reading and acceptance of revised implementation. Historical ticket evidence must be checked privately. Live Google Form not deployed; no new test execution verified for this revision. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
