@@ -71,6 +71,8 @@ function setupParkingPatrol() {
     }
     setupRetentionSettings_();
     setupManualTags_();
+    // Separate per-vehicle status entry: the inspection form collects many plates per round.
+    var statusForm = setupPlateStatusForm_(ss, p);
     if (!book_().getSheetByName('Offenders')) write_('Offenders', ['Status'], [['Run Analyze now to populate all flagged vehicles.']]);
     if (!book_().getSheetByName('AIPatternHistory')) write_('AIPatternHistory', ['VehicleID','PatternCode','ObservationDay','CheckID'], []);
     var expected = ['Area', 'Observation time (optional)', 'Plates present', 'Every vehicle in this area recorded?'];
@@ -84,6 +86,9 @@ function setupParkingPatrol() {
     write_('Setup', ['Item', 'Value'], [
       ['Form link — restrict responder access before use', f.getPublishedUrl()],
       ['Form edit link', f.getEditUrl()], ['Spreadsheet', ss.getUrl()],
+      ['Per-vehicle staff status form — restrict access before publishing', statusForm.getPublishedUrl()],
+      ['Per-vehicle staff status form edit link', statusForm.getEditUrl()],
+      ['Staff status policy', 'Required per-plate Unknown/Suspicious/Violator choice. Staff report only; no automatic blacklist or enforcement.'],
       ['Policy', 'Customers only; no tenant or employee parking.'],
       ['AI configuration', 'Apps Script > Project Settings > Script properties. See GitHub setup guide.'],
       ['Schedule', 'Processes after a completed Form submission; 15-minute retry checks remain.'],
