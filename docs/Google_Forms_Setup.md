@@ -1,3 +1,7 @@
+# Per-plate staff status enhancement
+
+The multi-plate round Form remains the original collection workflow. A **separate**, optional staff-status Form with **required Plate, Province and Unknown/Suspicious/Violator dropdown** is now included in the installer, but is not deployed merely by updating GitHub. See [Per-vehicle Status Setup](Per_Vehicle_Status_Setup.md). Administrators must restrict responders, validate a test deployment and approve retention before live use. A staff-reported “Violator” is not a confirmed violation.
+
 > **Implemented connection:** Follow [the installation guide](INSTALL_AI_CONNECTION.md). It uses one round per submission and replaces the earlier two-form/manual design below. The earlier forms are not read by the automated worker. Installation, Google authorization and a live API test in your account are still required.
 
 # Google Forms setup — step by step
