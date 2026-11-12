@@ -2,6 +2,12 @@
 
 **Status:** Proposed extension of the suspicious-pattern project; student reading and acceptance pending. Not connected to live Google Sheets or Apps Script and not an enforcement application.
 
+## Important distinction: required staff Form selection
+
+The new optional per-vehicle staff Form records a required **Unknown / Suspicious / Violator** category. These are *staff-reported categories*, even when someone selects “Violator”. They do not override this document's independent verification requirements, do not create a confirmed blacklist entry, and do not trigger ticketing or towing.
+
+Python keeps these form reports in the separate `src/staff_status.py` research module, **not** the `ReviewOutcome` record. Never treat status selections as ground-truth labels for evaluation without independently checking the underlying evidence and necessary permissions. See [status setup](../../../docs/Per_Vehicle_Status_Setup.md).
+
 ## Business rule
 
 A vehicle may first be marked **Suspicious** because it appeared in at least two separate same-day check events, or because an unsupervised algorithm identified an unusual observation pattern. This triggers a **human verification**, not a violation finding.
