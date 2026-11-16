@@ -71,6 +71,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-15 | ChatGPT (OpenAI, GPT-6) | Guided drafting and review of slides 4–8 of the DATA120 presentation outline; reviewed student commit f8857eb036d98f31cb02a37561e1145fdb29be0a and verified GitHub publication | Student explicitly confirmed reading and acceptance of the complete 8-slide outline on 2026-11-15T21:15:51-06:00; no new tests executed for documentation; prior reported Python regression 29 passed | Citation/disclosure pending |
 
+| 2026-11-16 | ChatGPT (OpenAI, GPT-6) | Rebaselined DATA120 S01–S31 sprint calendar and revised implementation plan after documented S03–S08 verification gaps; retained Sundays off and fixed Dec 4/8/11 deadlines; reprioritized tested shared features and LOF/Isolation Forest using fictional data with a baseline-plus-one-model fallback | Student requested planning revisions; material outputs await separate explicit reading and acceptance. No Python source, tests, real data or live Google Sheets access changed | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -117,6 +119,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | per-plate-status-20261112 | Accepted | 2026-11-12T08:39:54-06:00 | 2026-11-12T08:46:10-06:00 | 2026-11-12T08:46:10-06:00 | Revised 2026-11-12T08:44:04-06:00: Violator means confirmed historical vehicle with an earlier issued ticket; Unknown and Suspicious remain distinct. Updated Google Form wording, Python docstrings, guides, tests and Issue #11. No new incident automatically verified. | Student explicitly confirmed reading and acceptance of the revised implementation in the same message; both timestamps recorded at receipt in America/Edmonton (MST). Issue #11 remains open pending tests, deployment, and retention verification. Live Google Form not deployed; no new test execution verified for the revision. |
 
 | s02-eight-slide-outline-20261115 | Accepted | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | Complete 8-slide PRESENTATION_OUTLINE.md including slides 4–8, committed as f8857eb036d98f31cb02a37561e1145fdb29be0a (Refs #2), verified on GitHub | Student expressly said "read and accept" immediately following the complete-outline review; both confirmation times recorded at receipt in America/Edmonton. Presentation is an outline, not a completed slide deck; actual model findings remain pending. |
+
+| sprint-recovery-20261116 | Pending reading and acceptance | — | — | — | Revised GUIDED_SPRINT_SESSIONS.md, CAPSTONE_PLAN.md, and SPRINT_PROGRESS.md; proposals drafted November 16, 2026 and committed to GitHub | Student requested update but has not yet confirmed reading or accepting the revised documents. Do not record invented timestamps or mark S03–S08 complete. No tests executed for this documentation-only work. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
