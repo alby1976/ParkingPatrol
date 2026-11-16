@@ -165,36 +165,85 @@ Cleaning and its synthetic test module are now implemented. Other listed analysi
 
 No live Google Sheets connection, production integration, fitted model, validation outcome, or instructor approval is claimed here.
 
-## 12. Approved presentation and submission schedule (2026)
+## 12. November 16 recovery implementation plan and unchanged deadlines
 
-**Student accepted this schedule on November 6, 2026.** See the AI use log for the recorded approval. Dates below assume Sunday is a complete day of rest.
+**Recovery proposal status:** This revision was prepared November 16, 2026 and awaits student reading and acceptance. It changes the work order, not the assessment deadlines or the prior schedule-approval record. See the revised [S01–S31 calendar](GUIDED_SPRINT_SESSIONS.md) for session dates.
 
-- **Presentation:** Tuesday, December 8, 2026.
-- **Final submission:** Friday, December 11, 2026.
-- **Internal analysis and figure freeze:** Friday, December 4, 2026.
-- **Rest days:** Sundays November 8, 15, 22, 29 and December 6 — **no course work scheduled**.
-- **Suggested workload:** 60–90 minutes on weekday evenings, and 2–3 focused hours on Saturdays, subject to other responsibilities.
+### Actual progress versus unverified tasks
 
-| Dates (Sundays excluded) | Priority | Evidence / deliverable |
-| --- | --- | --- |
-| Nov 6–14 | Finish Google Sheets read-only import design; audit/normalize data and test with synthetic fixtures; draft slide outline immediately | Private data access plan, cleaning test outcomes and early slide skeleton |
-| Nov 16–21 | Build one shared vehicle-level feature table; compare the existing two-check rule with **Local Outlier Factor (LOF)** and **Isolation Forest** using Python 3.13 and TDD | Two working unsupervised experiments, recorded test commands and results |
-| Nov 23–28 | Assess stability, survey-frequency bias and limitations using authorized real observations; use clearly labelled synthetic demonstrations separately | Comparison charts, model methodology and independent interpretation |
-| Nov 30–Dec 4 | Finish slides, citations, disclosures, offline demo and speaking notes; **freeze analysis and figures by Dec 4** | Presentation-ready deck and reproducible evidence |
-| Dec 5 and Dec 7 (not Dec 6) | Rehearse aloud, confirm slide timing, test demo and prepare static screenshot backup | Final Dec 8 presentation readiness |
-| Dec 8 | Give DATA120 presentation | Present findings and uncertainty without claiming misconduct from anomalies |
-| Dec 9–11 | Apply relevant feedback, finish README/report and final checks; submit by Dec 11 | Final deliverables submitted |
+- **Verified:** Python 3.13.14; student-reported full regression 29 passed; generator `--days 10 --seed 120` produced 18 inspections and 448 fictional sightings; complete eight-section presentation outline committed as `f8857eb` and accepted November 15.
+- **Exists but requires fit-for-purpose audit:** `src/cleaning.py`, `src/pattern_detection.py`, synthetic-generator code, same-day check rule, exploratory Isolation Forest and their tests. Existence is **not** evidence of a completed cross-method comparison.
+- **Not verified:** live authorized Sheets reader, completed S03–S08 sessions, unified feature matrix, LOF experiment, evaluated results, readable figures or final slide deck.
+- **Carry-forward rather than start-over:** inspect existing code and tests before adding an adapter or replacing cleaning logic. Existing issue #3–#5 acceptance criteria remain in place, but dependent work can use the synthetic-only path.
 
-### Scope and fallback
+### Dependency-first minimum viable research experiment
 
-- **Required:** one shared, appropriately protected feature table; two-check suspicious review baseline; LOF and Isolation Forest as the **primary comparison**; TDD evidence, visualizations, and a student-authored presentation.
-- **Optional stretch goal:** k-nearest-neighbor anomaly scoring, added only if the main models, tests and slides are on track. kNN should reuse the same features and evaluation, not become a separate application.
-- **Decision point: November 21:** if behind, **drop kNN** and complete the two primary methods well. If both are not ready, prioritize a credible baseline and one exploratory unsupervised method over three unfinished models.
-- **Data limitation:** As of November 6, there are approximately 10 days of real observations from a lot with up to 38 spaces and usually one/two checks daily. Continue collecting real data, but do not mix synthetic examples with real training evidence or present synthetic observations as actual violations.
-- **No automated enforcement:** An anomaly or two-check flag is only a review priority; independently verified findings are required before blacklisting and any authorized manual on-site action.
+```text
+Reproducible fictional observations + inspection/check metadata
+     ↓ validate timestamps, area, completeness, duplicates
+Comparable vehicle × analysis-window feature table
+     ↓ shared inputs, explicit cutoff, no leakage
+Transparent 2-distinct-check same-day review rule
+     ↓
+LOF (if small-sample safeguards work)  +  Isolation Forest (existing, re-evaluate)
+     ↓ same input rows / transparent parameters and rankings
+Synthetic-only comparison + authorized aggregate coverage assessment
+     ↓ sensitivity, caveats, no pseudo-accuracy
+2–3 public-safe figures + student interpretation + rehearsed slide deck
+```
 
-### Synthetic data generator (implemented)
+**Core minimum columns:** pseudonymous vehicle/area/window cutoff, unique completed/comparable checks with an observed sighting, distinct local dates, number of completed comparable area inspections, observed check fraction (nullable if denominator zero), optional observation-hour diversity when reliable. Same-check duplicates count once; checks not observed or not performed do not imply a vehicle was absent or continuously parked.
 
-Use [SYNTHETIC_DATA_GUIDE.md](SYNTHETIC_DATA_GUIDE.md) and `python/src/synthetic_data.py` to create reproducible fictional 10-, 45-, or 90-day scenarios. Only fictional identifiers and made-up checks are generated. The 38-space maximum, one/two checks per day, optional incomplete rounds, and repeated vehicles approximate the *observation process*, not actual violations. Outputs remain in Git-ignored `python/generated/` and must be clearly labelled **SYNTHETIC** in all charts.
+**Comparison contract:** baseline and all retained ML models consume the same pseudonymous observation window and appropriately normalized numeric features. The rule uses distinct same-local-day inspection IDs. LOF must bound `n_neighbors` below the eligible sample count; tiny/constant feature matrices require a clear skip/fallback rather than a deceptive anomaly flag. Isolation Forest should be rerun on the identical feature table. Explain model rankings instead of claiming probability of violations.
 
-Previously reported focused synthetic-generator tests: **6 passed locally with Python 3.13.5**. No new tests were executed for this schedule documentation update; full regression tests and live Sheets integration remain unverified.
+**Evaluation contract:** use time-bounded features with no future inspection/status leakage. Assess changes in rankings under plausible LOF-neighbor/Isolation-Forest settings and inspection frequencies. If only limited real data are available, report that; keep synthetic demonstration and real-data evidence separate. Historical `Violator` status means previously verified ticket and must never be inferred from a new anomaly. No accuracy/precision/recall claims without independent authorized labels.
+
+### Recovery gates and implementation sequence
+
+| Gate | Target | Work | Acceptance evidence / fallback |
+| --- | --- | --- | --- |
+| **G0: Audit and unblock** | **Mon Nov 16** | Review existing source/tests, S02–S08 evidence, check column dictionary/header-only mapping. Run actual baseline tests before edits. | Gap checklist and test log. Live Google Sheets remains optional; use fiction-only reader if not approved. |
+| **G1: Features and baseline** | **Nov 17–18** | TDD shared vehicle/check feature calculations and verify the existing 2-distinct-check rule. | Synthetic edge cases, zero/one completed check, duplicate check entries, DST/local-day tests and RED/GREEN/REFACTOR. |
+| **G2: Model comparison** | **Nov 18–20** | Add/test LOF with safeguards; reuse/test Isolation Forest on identical features; obtain comparison table and first chart. | Reproducible parameters and rankings; labels only mean review priority. |
+| **G3: Scope decision** | **Sat Nov 21** | Drop optional kNN from critical path now; if capacity constrained, retain baseline plus one tested model. | Student accepts an explicit scope decision; no made-up second model. |
+| **G4: Evaluation and slides** | **Nov 23–28** | Evaluate coverage, sample limitations, temporal leakage and sensitivity; create 2–3 public-safe charts; write conclusions and first visual deck. | Student-authored interpretation and rehearsed first draft. |
+| **G5: Reproducible freeze** | **Nov 30–Dec 4** | Verify AI/APA rules, tests, chart reproducibility, slides, presenter notes, offline demo; freeze analysis **Fri Dec 4**. | Documented version/commit, actual tests, rehearsed artifact. |
+| **G6: Delivery** | **Dec 5–11** | Rehearse Dec 5 and 7, present **Tue Dec 8**, apply feedback, audit and submit **Fri Dec 11**. | Delivery/submission evidence. No work on Sun Dec 6. |
+
+### Explicit scope cuts
+
+- **Drop now:** kNN and other stretch ML methods, unneeded redesigns, auto-ticket/tow/write-back, additional Apps Script operational enhancements and general dashboards.
+- **Defer unless available and authorized:** live read-only Google Sheets integration and its credential/error-path work; formal validation against confidential historical ticket data. A secure headers-only schema check may proceed without providing private rows.
+- **Never cut:** privacy and data-access checks, TDD evidence for new Python behavior, a transparent baseline, at least one functioning appropriate ML comparison, honest interpretation, citations/disclosure requirements, and student review gates.
+- **Escalate at Nov 21:** If two-model comparison is infeasible, prioritize baseline + one rigorously tested unsupervised experiment. Reduce algorithm breadth, not evidence quality.
+
+### Implementation order by existing module
+
+| Work area | Current basis | Next focused change | Issue |
+| --- | --- | --- | --- |
+| `src/cleaning.py` + tests | Existing implementation, regression previously passed | Audit feature input contract and gaps, not wholesale rewrite | [#4](https://github.com/alby1976/ParkingPatrol/issues/4) |
+| `src/features.py` + `tests/test_features.py` | Proposed modules; verify whether added before creating | Implement deterministic comparable check denominators, local day, and cutoff; TDD | [#4](https://github.com/alby1976/ParkingPatrol/issues/4) |
+| `src/pattern_detection.py` + tests | Existing same-day rule and exploratory Isolation Forest | Reuse, test on unified features and add LOF scoring if feasible | [#5](https://github.com/alby1976/ParkingPatrol/issues/5) |
+| `src/google_sheets_reader.py` + fake tests | Planned; live authorization not verified | Defer live connection; maintain synthetic adapter boundary and headers-only dictionary | [#3](https://github.com/alby1976/ParkingPatrol/issues/3) |
+| `reports/` + presentation | Eight-slide outline verified; findings pending | Comparison tables, figures, visual deck, reproducible results and rehearsal | [#7](https://github.com/alby1976/ParkingPatrol/issues/7), [#8](https://github.com/alby1976/ParkingPatrol/issues/8) |
+
+### Fixed boundaries
+
+- **Sundays OFF:** November 8, 15, 22, 29 and December 6. No catch-up assignments on Sunday.
+- **Analysis freeze:** Friday December 4. **Presentation:** Tuesday December 8. **Submission:** Friday December 11 (check the instructor's actual hour).
+- **Privacy:** real plates, raw records, credentials and identifying ticket history must remain outside the public repo and assistant context.
+- **Academic integrity:** course-specific authorization for generative AI remains unverified; student must review each substantial change and personally own conclusions. Update AI_USE_LOG.md with actual activity and timestamps. Keep issues open until all criteria and review gates are evidenced.
+
+## 13. Original approved schedule retained as historical baseline (November 6, 2026)
+
+The student accepted the *original* schedule on November 6, 2026. The revised November 16 recovery plan above supersedes its **work ordering only**. The original fixed dates, target time allocation, and Sundays off remain valid.
+
+- Presentation: Tuesday December 8, 2026.
+- Final submission: Friday December 11, 2026.
+- Internal analysis and figure freeze: Friday December 4, 2026.
+- Sunday rest: November 8, 15, 22, 29 and December 6.
+- Suggested time budget: weekdays 60–90 minutes; Saturdays 2–3 hours.
+
+The historical S01–S31 session allocation appears in prior Git history and grouped GitHub issues; current session tasks are in [GUIDED_SPRINT_SESSIONS.md](GUIDED_SPRINT_SESSIONS.md).
+
+**No new Python code, live data access, fitted ML comparison or tests are claimed by this documentation update.**
