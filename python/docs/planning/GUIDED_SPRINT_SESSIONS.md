@@ -1,80 +1,93 @@
-# DATA120 Guided Sprint Calendar
+# DATA120 Guided Sprint Calendar — Recovery Revision (November 16, 2026)
 
-**Presentation:** Tuesday Dec 8, 2026. **Submission:** Friday Dec 11. **Internal analysis freeze:** Friday Dec 4.
+**Presentation:** Tuesday December 8, 2026. **Final submission:** Friday December 11, 2026. **Internal analysis and figure freeze:** Friday December 4, 2026.
 
-**Working rhythm:** weekdays 60–90 minutes, Saturdays 2–3 hours, Sundays OFF (Nov 8, 15, 22, 29 and Dec 6). This is a proposal for student review, not a record of completed work.
+**Status:** Revised implementation proposal awaiting student reading and acceptance; dates are targets, not claims of completion. Retain the original session IDs S01–S31 for issue traceability.
 
-## Session format
+**Working rhythm:** weekdays 60–90 minutes, Saturdays 2–3 hours, Sundays OFF (November 8, 15, 22, 29 and December 6).
 
-Begin each session by saying to ChatGPT: **"Guide me through DATA120 session SXX, one step at a time, using the GitHub sprint calendar."** Follow [CHATGPT_SPRINT_COACH.md](CHATGPT_SPRINT_COACH.md) for the reusable prompt and approval rules.
+## How to use this plan
 
-Each session: 5 minutes recall → 10 minutes define done → up to 55 minutes hands-on TDD/research → 10 minutes review/commit → stop for human reading and acceptance. Saturday: two focus blocks with a break, followed by slide work.
+Start each session: **"Guide me through DATA120 session SXX, one step at a time, using the recovery sprint calendar."** Follow [CHATGPT_SPRINT_COACH.md](CHATGPT_SPRINT_COACH.md). Use one small action per message and ask the student to paste real terminal results.
 
-## Sprint A: Foundation + slides (Nov 6–14)
+Session rhythm: recall → define proof of done → one test-first coding task or analysis step → review/commit → explicit student reading and acceptance. Do not assign a second substantive task until the approval gate is satisfied.
 
-| ID | Date | Task | Proof of done |
-|---|---|---|---|
-| S01 | Fri Nov 6 | Verify Python 3.13, local Git checkout and secrets exclusion | Version commands and safe Git status recorded |
-| S02 | Sat Nov 7 | Run baseline tests and synthetic 10-day generator; draft 8-slide skeleton | Test outputs and slide outline |
-| — | Sun Nov 8 | **REST** | No project work |
-| S03 | Mon Nov 9 | Map private Google Sheet column **headers only** to data dictionary | Header mapping, no private rows |
-| S04 | Tue Nov 10 | RED–GREEN–REFACTOR for fake read-only Sheets adapter | Synthetic test evidence |
-| S05 | Wed Nov 11 | Test invalid credentials, changed headers, API errors | Focused regression outcomes |
-| S06 | Thu Nov 12 | Authorized read-only connection, or synthetic fallback if not approved | Non-identifying schema/count summary |
-| S07 | Fri Nov 13 | Clean/normalize tests and slides 1–2 | Results and first slides |
-| S08 | Sat Nov 14 | Synthetic data through cleaning and features; slide 3 | Reproducible walkthrough |
+## Verified starting point (November 15)
 
-## Sprint B: Baseline + two ML models (Nov 16–21)
+- **S01 completed and accepted:** Python 3.13.14 environment and safe Git checks.
+- **S02 core artifacts verified and outline accepted:** 29 previously reported passing Python tests; synthetic 10-day run created 18 checks and 448 fictional sightings; eight-slide Markdown outline committed as `f8857eb` and accepted November 15. Check issue #2's remaining criteria before closing.
+- **S03–S08:** no complete session evidence in the tracker. This is a verification gap, not proof that all code is absent. Audit existing cleaning, detection and tests before writing anything new.
+- **Existing code:** cleaning, synthetic generation, same-day rule and exploratory Isolation Forest code exist; they must be tested on the shared comparison features before claiming a finished model.
+- **No verified:** authorized live Google Sheets import, LOF comparison, evaluated model findings, charts, final slide deck, or prospective accuracy. The extra per-plate-status work is not on the capstone critical path.
 
-| ID | Date | Task | Proof of done |
-|---|---|---|---|
-| — | Sun Nov 15 | **REST** | No project work |
-| S09 | Mon Nov 16 | Test-first one-vehicle/analysis-window features, accounting for completed inspections | Feature schema + tests |
-| S10 | Tue Nov 17 | Test 2-distinct-check same-day suspicious baseline | Synthetic examples and chart |
-| S11 | Wed Nov 18 | Implement/test LOF with small-sample safeguards | LOF test results |
-| S12 | Thu Nov 19 | Compare Isolation Forest using exactly the same features | Comparable outputs |
-| S13 | Fri Nov 20 | Combine rule, LOF, Isolation Forest comparisons; slides 4–6 | Comparison chart and slides |
-| S14 | Sat Nov 21 | **Scope gate:** drop optional kNN if behind; if needed prioritize baseline + one reliable model. Rehearse slides | Recorded scope decision |
+## Sprint A — Historical baseline and recovered prerequisites (November 6–14)
 
-## Sprint C: Evaluation + charts (Nov 23–28)
+| ID | Original date | Original task | Recovery disposition |
+| --- | --- | --- | --- |
+| S01 | Fri Nov 6 | Python, Git, secrets exclusion | **Completed/accepted** |
+| S02 | Sat Nov 7 | Tests, fictional generator, eight-slide outline | **Core outputs verified; outline accepted.** Review #2 closure criteria separately |
+| S03 | Mon Nov 9 | Headers-only Google Sheets data dictionary | **Carry forward as a bounded schema check**; no private rows |
+| S04 | Tue Nov 10 | Fake read-only adapter TDD | **Defer unless needed**; do not block synthetic ML |
+| S05 | Wed Nov 11 | Bad credentials/schema/API errors | **Defer with adapter**; remains unverified |
+| S06 | Thu Nov 12 | Authorized live read-only import or synthetic fallback | **Use synthetic fallback by default** until authorization is verified |
+| S07 | Fri Nov 13 | Cleaning tests and early slides | **Audit existing cleaning/tests**; early slide outline done |
+| S08 | Sat Nov 14 | Fictional cleaning/features walkthrough | **Carry forward to S09** if no evidence |
+| — | Sundays Nov 8, 15 | **REST** | No make-up work |
 
-| ID | Date | Task | Proof of done |
-|---|---|---|---|
-| — | Sun Nov 22 | **REST** | No project work |
-| S15 | Mon Nov 23 | Privately audit actual observation days and completed checks | Aggregate data-quality counts |
-| S16 | Tue Nov 24 | Evaluate on later observations if possible; check temporal leakage | Evaluation limitations documented |
-| S17 | Wed Nov 25 | Test LOF neighbor choice and Isolation Forest parameter sensitivity | Stability plot |
-| S18 | Thu Nov 26 | Compare to independently verified human outcomes only if authorized | Qualified review analysis or honest limitation |
-| S19 | Fri Nov 27 | Create 2–3 clearly labeled, public-safe figures; slide 7 | Checked charts |
-| S20 | Sat Nov 28 | Write your interpretation, slide 8 and first full slide walkthrough | Complete first presentation draft |
-| — | Sun Nov 29 | **REST** | No project work |
+## Sprint B — Recovery plus baseline and models (November 16–21)
 
-## Sprint D: Finish presentation (Nov 30–Dec 7)
+| ID | Date | Revised task | Proof of done |
+| --- | --- | --- | --- |
+| S09 | **Mon Nov 16** | **Recovery gate:** inspect current src/tests, issue #2–#5 evidence; confirm or mark S03–S08 gaps. Audit cleaning and shared vehicle/check feature schema using synthetic records only | Short gap checklist; real `pytest` baseline output if run; specific next coding target; no private records |
+| S10 | **Tue Nov 17** | Test-first shared vehicle-by-analysis-window features (unique check sightings, distinct observed dates, completed comparable checks, observed fraction); ensure time zone and missing-check logic | RED/GREEN/REFACTOR evidence, deterministic synthetic feature table |
+| S11 | **Wed Nov 18** | Verify 2-distinct-check same-local-day rule and deduplication on those data, then implement/test LOF with valid small-sample neighbor bounds | Focused tests; rule and LOF scoring evidence |
+| S12 | **Thu Nov 19** | Run/test existing Isolation Forest using the same feature rows as LOF; handle degenerate and small datasets | Reproducible side-by-side scores/flags; test evidence |
+| S13 | **Fri Nov 20** | Produce initial rule-vs-LOF-vs-Isolation Forest table and one labeled comparison chart; replace presentation Slides 4–6 placeholders only with verified methods | Public-safe synthetic demonstration and documented limitations |
+| S14 | **Sat Nov 21** | **Hard scope gate:** assess actual evidence, remove optional kNN now, decide whether to keep two ML methods or baseline + one reliable model; rehearse an early walkthrough | Recorded scope decision, unblocked work plan, student approval |
 
-| ID | Date | Task | Proof of done |
-|---|---|---|---|
-| S21 | Mon Nov 30 | Check rubric, citations, permitted AI use and attribution | Submission checklist |
-| S22 | Tue Dec 1 | Simplify slides to one concept per visual | Legible slide deck |
-| S23 | Wed Dec 2 | Run appropriate regression tests; verify reproducibility | Actual command outputs |
-| S24 | Thu Dec 3 | Timed verbal rehearsal; create static demo screenshots | Rehearsal notes and backups |
-| S25 | Fri Dec 4 | **FREEZE** model, results, charts, presentation version | Recorded presentation version |
-| S26 | Sat Dec 5 | Full timed presentation + Q&A practice | Dry-run completion |
-| — | Sun Dec 6 | **REST** | No project work |
-| S27 | Mon Dec 7 | Final rehearsal and backup check; no new models | Presentation go/no-go checklist |
+**Nov 16–21 fallback:** If the shared feature table is delayed, prioritize a correctly tested two-check baseline and **one** reproducible unsupervised experiment. Do not invent LOF results or force a second model into the presentation. Do not use live Sheet access as a prerequisite for synthetic model research.
 
-## Presentation and submission
+## Sprint C — Evidence, evaluation, figures and first deck (November 23–28)
 
-| ID | Date | Task |
-|---|---|---|
-| S28 | Tue Dec 8 | Deliver presentation; capture questions and feedback |
-| S29 | Wed Dec 9 | Incorporate appropriate feedback with regression tests |
-| S30 | Thu Dec 10 | Final report, documentation, privacy, APA and AI disclosure audit |
-| S31 | Fri Dec 11 | Submit by the instructor's required time; retain confirmation |
+| ID | Date | Revised task | Proof of done |
+| --- | --- | --- | --- |
+| S15 | Mon Nov 23 | Audit observation/check coverage, publicly using aggregates only; if live access remains unapproved, evaluate fictional records and explicitly label them | Coverage/inspection-frequency table, clear data provenance |
+| S16 | Tue Nov 24 | Evaluate temporal leakage, incomplete checks and later-period stability when observations suffice | Date-bounded analysis and limitations; no fabricated accuracy |
+| S17 | Wed Nov 25 | Model sensitivity: LOF neighbors if LOF retained; Isolation Forest settings if retained; assess ranking stability | Small public-safe sensitivity figure or documented insufficiency |
+| S18 | Thu Nov 26 | Check whether independently verified historical tickets are available and authorized for evaluation; otherwise write the absence-of-ground-truth limitation | Approval decision or clear limitation; historical status ≠ new violation |
+| S19 | Fri Nov 27 | Complete 2–3 privacy-safe figures, with synthetic versus real sources clearly separated; replace Slide 7 placeholder | Verified charts with captions and axes |
+| S20 | Sat Nov 28 | Student writes findings, limitations and Slide 8 conclusions; assemble first full visual slide deck and rehearse walkthrough | Complete draft deck, cited actual outcomes and student interpretation |
+| — | Sun Nov 22, Nov 29 | **REST** | No project work |
 
-## Hard limits and fallback
+## Sprint D — Reproducibility and presentation readiness (November 30–December 7)
 
-The real dataset is approximately 10 days from a 38-space lot, normally inspected once or twice per day. Synthetic 45/90-day data is for testing and demonstrations and **must never be represented as actual collected observations**. Prioritize two-check rule, LOF and Isolation Forest; kNN is optional. If behind on Nov 21, drop kNN. If still behind, prioritize one well-evaluated unsupervised model plus baseline rather than three incomplete methods.
+| ID | Date | Revised task | Proof of done |
+| --- | --- | --- | --- |
+| S21 | Mon Nov 30 | Verify assignment rubric, APA/AI requirements and authorized data use; resolve outstanding privacy/permission decisions | Checklist; unconfirmed rules explicitly marked |
+| S22 | Tue Dec 1 | Make slides accessible and visual; one concept per slide and presenter notes | Legible presentation draft |
+| S23 | Wed Dec 2 | Full regression, deterministic data demo, requirements and instructions verification | Actual command/output evidence, no implied test passes |
+| S24 | Thu Dec 3 | Timed rehearsal, screenshots and offline fallback | Timed run and backup |
+| S25 | **Fri Dec 4** | **FREEZE:** models, figures, conclusions, slides and reproducible revision | Saved version/commit and approved freeze checklist |
+| S26 | Sat Dec 5 | Full presentation and Q&A rehearsal | Dry-run notes |
+| — | Sun Dec 6 | **REST** | No course work |
+| S27 | Mon Dec 7 | Final backup and rehearsal only; no new experiments | Go/no-go checklist |
 
-A suspicious flag is only a human review signal, not an actual violation. No model triggers blacklisting, ticketing or towing. Keep real plates, credentials and raw observations out of public Git.
+## Delivery (December 8–11)
 
-See the [Capstone Plan](CAPSTONE_PLAN.md) and [Sprint Progress Tracker](SPRINT_PROGRESS.md).
+| ID | Date | Work |
+| --- | --- | --- |
+| S28 | Tue Dec 8 | Present verified outcomes and limitations |
+| S29 | Wed Dec 9 | Record feedback, make only justified changes with regressions |
+| S30 | Thu Dec 10 | Report, README, privacy, citations and AI use disclosure audit |
+| S31 | Fri Dec 11 | Submit by actual course deadline and retain submission confirmation |
+
+## Nonnegotiable safeguards and prioritization
+
+1. **Critical path:** synthetic data → cleaned comparable inspections → shared vehicle-level features → same-day rule → at least one genuinely evaluated ML model → charts → student conclusions → rehearsed presentation.
+2. **Optional/off critical path:** new Apps Script deployment, automated write-back/towing, full live Sheets production integration, kNN, large dashboards and generalized infrastructure. Defer these until after presentation unless explicitly required by the course.
+3. Real observations (~10 days, 38 stalls, usually 1–2 check rounds daily) cannot validate offender-detection accuracy. Synthetic observations are fictional demonstrations, never treated as real or as ground-truth violations.
+4. No raw plates, credentials or private rows in GitHub, assistant prompts, charts or logs; require approved access before touching the live Sheet. Use `America/Edmonton` for local-day rules.
+5. All new Python behavior follows TDD RED → GREEN → REFACTOR. Record actual test commands, AI use, issue refs, and student read/accept before closing grouped issues.
+6. **Remaining schedule is compressed, not extended:** never shift the December 4 freeze, December 8 presentation, December 11 submission or Sunday rest dates.
+
+See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md), [SPRINT_PROGRESS.md](SPRINT_PROGRESS.md) and [GITHUB_ISSUE_WORKFLOW.md](GITHUB_ISSUE_WORKFLOW.md).
