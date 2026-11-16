@@ -44,3 +44,15 @@ For each session, record ID, date, objective, actual minutes, tests observed, ch
 - **AI review:** `s02-eight-slide-outline-20261115` **Accepted**; reading and acceptance confirmed together at `2026-11-15T21:15:51-06:00`.
 - **Tests:** No new tests for the Markdown change; previous student full regression was 29 passed. The existing 10-day synthetic generation reported 18 checks and 448 fictional sightings.
 - **Remaining:** Confirm all grouped Issue #2 acceptance criteria before changing its status. The outline is not a final presentation with evaluated model results. No new development scheduled on Sunday.
+
+## Recovery rebaseline proposed — November 16, 2026 (awaiting student review)
+
+- **Reason:** As of November 15, only S01 and S02's main deliverables have recorded verification; sessions S03–S08 do not have complete closeout evidence. That is an evidence gap of six scheduled sessions, not proof that no code was written.
+- **Revised calendar:** [GUIDED_SPRINT_SESSIONS.md](GUIDED_SPRINT_SESSIONS.md), recovery commit `6745a90`.
+- **Revised implementation plan:** [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md), recovery commit `7a4a6f1`.
+- **Immediate Monday Nov 16 gate:** inspect existing cleaning/pattern-detection/test modules and S02–S08 issues; run baseline tests and identify the smallest missing feature/test. No source changes or tests were executed while preparing this revision.
+- **Revised priorities:** use fictional data without waiting for live Sheets credentials; build comparable completed-check features; verify two-check rule; test LOF/Isolation Forest against identical features; prepare evidence and public-safe charts.
+- **Scope cut:** optional kNN is removed from the capstone critical path. New Apps Script deployment, write-back and enforcement automation stay out of scope. If by Nov 21 two ML models are unready, explicitly select baseline plus one reliable unsupervised model.
+- **Hard dates unchanged:** Dec 4 analysis freeze, Dec 8 presentation, Dec 11 submission; Sundays Nov 22, 29 and Dec 6 remain off.
+- **Approval:** This revised proposal has **not yet been explicitly read and accepted** by the student. Review ID `sprint-recovery-20261116`; do not mark the revised plan accepted or advance session status until the student confirms.
+- **Git/issue caution:** GitHub-file edits may place remote `main` ahead of local PyCharm `main`; fetch/pull only after checking local status and avoiding overwriting uncommitted work.
