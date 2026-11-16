@@ -69,6 +69,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-12 | ChatGPT (OpenAI, GPT-6) | Added separate required per-vehicle staff status Google Form installer (Unknown/Suspicious/Violator), local mock tests, Python 3.13 pseudonymous status validation and tests, schema/setup/retention documentation, and GitHub Issue #11 | Pending student reading and acceptance: per-plate-status-20261112; isolated 2 Node and 4 Python 3.13.5 focused tests passed. Full repository and live Google Form tests not run | Citation/disclosure pending |
 
+| 2026-11-15 | ChatGPT (OpenAI, GPT-6) | Guided drafting and review of slides 4–8 of the DATA120 presentation outline; reviewed student commit f8857eb036d98f31cb02a37561e1145fdb29be0a and verified GitHub publication | Student explicitly confirmed reading and acceptance of the complete 8-slide outline on 2026-11-15T21:15:51-06:00; no new tests executed for documentation; prior reported Python regression 29 passed | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -113,6 +115,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | s02-outline-20261112 | Accepted | 2026-11-12T08:22:08-06:00 | 2026-11-12T08:25:52-06:00 | 2026-11-12T08:25:52-06:00 | Presentation outline Slides 1–3 committed as 9b13643 and pushed to GitHub; 18 synthetic checks/448 sightings verified; local Git status clean; issue #2 remains open | Student explicitly confirmed reading and acceptance together; both receipt-time timestamps recorded in America/Edmonton. S02 and issue #2 remain open pending remaining presentation outline. No new Python tests for Markdown work. |
 
 | per-plate-status-20261112 | Accepted | 2026-11-12T08:39:54-06:00 | 2026-11-12T08:46:10-06:00 | 2026-11-12T08:46:10-06:00 | Revised 2026-11-12T08:44:04-06:00: Violator means confirmed historical vehicle with an earlier issued ticket; Unknown and Suspicious remain distinct. Updated Google Form wording, Python docstrings, guides, tests and Issue #11. No new incident automatically verified. | Student explicitly confirmed reading and acceptance of the revised implementation in the same message; both timestamps recorded at receipt in America/Edmonton (MST). Issue #11 remains open pending tests, deployment, and retention verification. Live Google Form not deployed; no new test execution verified for the revision. |
+
+| s02-eight-slide-outline-20261115 | Accepted | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | Complete 8-slide PRESENTATION_OUTLINE.md including slides 4–8, committed as f8857eb036d98f31cb02a37561e1145fdb29be0a (Refs #2), verified on GitHub | Student expressly said "read and accept" immediately following the complete-outline review; both confirmation times recorded at receipt in America/Edmonton. Presentation is an outline, not a completed slide deck; actual model findings remain pending. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
