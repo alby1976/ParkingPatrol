@@ -73,6 +73,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-16 | ChatGPT (OpenAI, GPT-6) | Rebaselined DATA120 S01–S31 sprint calendar and revised implementation plan after documented S03–S08 verification gaps; retained Sundays off and fixed Dec 4/8/11 deadlines; reprioritized tested shared features and LOF/Isolation Forest using fictional data with a baseline-plus-one-model fallback | Student requested planning revisions; material outputs await separate explicit reading and acceptance. No Python source, tests, real data or live Google Sheets access changed | Citation/disclosure pending |
 
+| 2026-11-16 | ChatGPT (OpenAI, GPT-6) | Drafted DATA120 one-page ParkingPatrol project summary with research question, observational-data methodology, rule-based comparison, LOF, Isolation Forest, optional kNN distance scoring, related peer-reviewed publications and limitations | Draft committed as 435ebdb; awaiting student reading and acceptance; no Python tests were run; references verified against publisher/index listings | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -121,6 +123,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | s02-eight-slide-outline-20261115 | Accepted | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | 2026-11-15T21:15:51-06:00 | Complete 8-slide PRESENTATION_OUTLINE.md including slides 4–8, committed as f8857eb036d98f31cb02a37561e1145fdb29be0a (Refs #2), verified on GitHub | Student expressly said "read and accept" immediately following the complete-outline review; both confirmation times recorded at receipt in America/Edmonton. Presentation is an outline, not a completed slide deck; actual model findings remain pending. |
 
 | sprint-recovery-20261116 | Pending reading and acceptance | — | — | — | Revised GUIDED_SPRINT_SESSIONS.md, CAPSTONE_PLAN.md, and SPRINT_PROGRESS.md; proposals drafted November 16, 2026 and committed to GitHub | Student requested update but has not yet confirmed reading or accepting the revised documents. Do not record invented timestamps or mark S03–S08 complete. No tests executed for this documentation-only work. |
+
+| project-summary-20261116 | Pending reading and acceptance | — | — | — | One-page proposal draft in python/reports/PROJECT_SUMMARY.md, commit 435ebdb, optional kNN only if time permits | Student requested updated summary; no student acceptance yet. Content is a proposal, not verified experimental results. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
