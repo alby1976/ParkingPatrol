@@ -43,7 +43,7 @@ Session rhythm: recall → define proof of done → one test-first coding task o
 | S11 | **Wed Nov 18** | Verify 2-distinct-check same-local-day rule and deduplication on those data, then implement/test LOF with valid small-sample neighbor bounds | Focused tests; rule and LOF scoring evidence |
 | S12 | **Thu Nov 19** | Run/test existing Isolation Forest using the same feature rows as LOF; handle degenerate and small datasets | Reproducible side-by-side scores/flags; test evidence |
 | S13 | **Fri Nov 20** | Produce initial rule-vs-LOF-vs-Isolation Forest table and one labeled comparison chart; replace presentation Slides 4–6 placeholders only with verified methods | Public-safe synthetic demonstration and documented limitations |
-| S14 | **Sat Nov 21** | **Hard scope gate:** assess actual evidence, remove optional kNN now, decide whether to keep two ML methods or baseline + one reliable model; rehearse an early walkthrough | Recorded scope decision, unblocked work plan, student approval |
+| S14 | **Sat Nov 21** | **Hard scope gate:** assess actual evidence, keep kNN strictly optional and only start it after the baseline, LOF, Isolation Forest, tests and core presentation evidence are complete; decide whether to retain two ML methods or baseline + one reliable model; rehearse an early walkthrough | Recorded scope decision, unblocked work plan, student approval |
 
 **Nov 16–21 fallback:** If the shared feature table is delayed, prioritize a correctly tested two-check baseline and **one** reproducible unsupervised experiment. Do not invent LOF results or force a second model into the presentation. Do not use live Sheet access as a prerequisite for synthetic model research.
 
@@ -84,7 +84,7 @@ Session rhythm: recall → define proof of done → one test-first coding task o
 ## Nonnegotiable safeguards and prioritization
 
 1. **Critical path:** synthetic data → cleaned comparable inspections → shared vehicle-level features → same-day rule → at least one genuinely evaluated ML model → charts → student conclusions → rehearsed presentation.
-2. **Optional/off critical path:** new Apps Script deployment, automated write-back/towing, full live Sheets production integration, kNN, large dashboards and generalized infrastructure. Defer these until after presentation unless explicitly required by the course.
+2. **Optional/off critical path:** kNN **distance-based anomaly scoring** is an accepted stretch goal only if time remains after the baseline, LOF, Isolation Forest, evaluation and presentation deliverables. Also defer new Apps Script deployment, automated write-back/towing, full live Sheets production integration, large dashboards and generalized infrastructure.
 3. Real observations (~10 days, 38 stalls, usually 1–2 check rounds daily) cannot validate offender-detection accuracy. Synthetic observations are fictional demonstrations, never treated as real or as ground-truth violations.
 4. No raw plates, credentials or private rows in GitHub, assistant prompts, charts or logs; require approved access before touching the live Sheet. Use `America/Edmonton` for local-day rules.
 5. All new Python behavior follows TDD RED → GREEN → REFACTOR. Record actual test commands, AI use, issue refs, and student read/accept before closing grouped issues.
