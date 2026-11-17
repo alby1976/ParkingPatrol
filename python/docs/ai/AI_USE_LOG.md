@@ -124,7 +124,7 @@ AI-generated material must receive two **explicit student confirmations** before
 
 | sprint-recovery-20261116 | Pending reading and acceptance | — | — | — | Revised GUIDED_SPRINT_SESSIONS.md, CAPSTONE_PLAN.md, and SPRINT_PROGRESS.md; proposals drafted November 16, 2026 and committed to GitHub | Student requested update but has not yet confirmed reading or accepting the revised documents. Do not record invented timestamps or mark S03–S08 complete. No tests executed for this documentation-only work. |
 
-| project-summary-20261116 | Pending reading and acceptance | — | — | — | One-page proposal draft in python/reports/PROJECT_SUMMARY.md, commit 435ebdb, optional kNN only if time permits | Student requested updated summary; no student acceptance yet. Content is a proposal, not verified experimental results. |
+| project-summary-20261116 | Accepted | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | One-page proposal draft in python/reports/PROJECT_SUMMARY.md, commit 435ebdb, optional distance-based kNN only if time permits | Student explicitly stated "read and accepted"; both receipt-time reading and acceptance confirmations recorded in America/Edmonton. This approval covers the one-page project summary, not the separately pending revised sprint calendar or ML experimental findings. No Python tests executed for documentation-only work. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
