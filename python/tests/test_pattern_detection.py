@@ -89,6 +89,96 @@ def test_small_samples_do_not_get_anomaly_labels():
     assert scored["model_status"].eq("insufficient_samples").all()
 
 
+
+def test_lof_small_samples_do_not_get_anomaly_labels():
+    """Skip LOF scoring when too few observations are available."""
+    from pattern_detection import score_lof_anomalies
+
+    checks, sightings = records()
+    features = build_vehicle_day_features(checks, sightings)
+
+    scored = score_lof_anomalies(features, min_samples=20)
+
+    assert scored["lof_suspicious"].eq(False).all()
+    assert scored["lof_score"].isna().all()
+    assert scored["lof_status"].eq("insufficient_samples").all()
+
+
+
+def test_lof_skips_heavily_duplicated_features():
+    """Avoid unreliable LOF scores for identical feature vectors."""
+    from pattern_detection import score_lof_anomalies
+
+    rows = [{
+        "vehicle_id": f"SYN_{i}",
+        "day": "2026-10-15",
+        "same_day_distinct_checks": 1,
+        "distinct_days_30d": 1,
+        "area_completed_checks_day": 2,
+        "observed_fraction_day": 0.5,
+        "distinct_areas_day": 1,
+        "check_hour_span": 0.0,
+    } for i in range(40)]
+
+    features = pd.DataFrame(rows)
+    scored = score_lof_anomalies(features, min_samples=20)
+
+    assert scored["lof_status"].eq("no_feature_variation").all()
+    assert scored["lof_score"].isna().all()
+    assert not scored["lof_suspicious"].any()
+
+
+
+def test_lof_rejects_mixed_duplicate_neighborhoods():
+    """Skip LOF when duplicate groups overwhelm the neighborhood."""
+    from pattern_detection import score_lof_anomalies
+
+    rows = [{
+        "vehicle_id": f"SYN_{i}",
+        "day": "2026-10-15",
+        "same_day_distinct_checks": 1,
+        "distinct_days_30d": 1,
+        "area_completed_checks_day": 2,
+        "observed_fraction_day": 0.5,
+        "distinct_areas_day": 1,
+        "check_hour_span": 0.0,
+    } for i in range(40)]
+
+    for i in range(30, 40):
+        rows[i]["distinct_days_30d"] = i - 28
+
+    scored = score_lof_anomalies(
+        pd.DataFrame(rows), min_samples=20
+    )
+
+    assert scored["lof_status"].eq("duplicate_neighborhood").all()
+    assert scored["lof_score"].isna().all()
+    assert not scored["lof_suspicious"].any()
+
+
+def test_lof_scores_eligible_synthetic_features():
+    """Score suitable synthetic observations using LOF."""
+    from pattern_detection import score_lof_anomalies
+
+    rows = [{
+        "vehicle_id": f"SYN_{i}",
+        "day": "2026-10-15",
+        "same_day_distinct_checks": 1 + (i % 3),
+        "distinct_days_30d": 1 + (i % 7),
+        "area_completed_checks_day": 3,
+        "observed_fraction_day": (1 + (i % 3)) / 3,
+        "distinct_areas_day": 1,
+        "check_hour_span": float(i % 5),
+    } for i in range(40)]
+
+    features = pd.DataFrame(rows)
+    scored = score_lof_anomalies(features, min_samples=20)
+
+    assert scored["lof_status"].eq("scored").all()
+    assert scored["lof_score"].notna().all()
+    assert scored["lof_suspicious"].dtype == bool
+
+
 def test_unsupervised_model_yields_separate_nonprobabilistic_signal():
     rows = [{
         "vehicle_id": f"SYN_{i}", "day": "2026-10-15",

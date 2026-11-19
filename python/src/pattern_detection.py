@@ -7,6 +7,7 @@ from datetime import timedelta
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
+from sklearn.neighbors import LocalOutlierFactor
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -87,6 +88,82 @@ def mark_repeat_check_suspicious(features: pd.DataFrame) -> pd.DataFrame:
     _check(features, ("same_day_distinct_checks",))
     out = features.copy()
     out["rule_suspicious"] = out["same_day_distinct_checks"] >= 2
+    return out
+
+
+
+def score_lof_anomalies(
+    features: pd.DataFrame, *, min_samples: int = 20
+) -> pd.DataFrame:
+
+    """Score unusual feature patterns using exploratory Local Outlier Factor.
+
+    LOF scores indicate unusual observation patterns, not parking
+    violations or probabilities of misconduct. Scoring is skipped when
+    the sample is too small, coverage is insufficient, feature values
+    do not vary, or identical feature groups overwhelm the neighborhood.
+
+    Args:
+        features: Cleaned, pseudonymous vehicle-day feature records.
+        min_samples: Minimum eligible sample size for LOF scoring.
+
+    Returns:
+        A copy containing lof_score, lof_suspicious, and lof_status.
+        Unavailable scores remain NaN and review flags remain False.
+
+    Design:
+        Uses standardized numerical features shared with Isolation
+        Forest, while keeping LOF scores and flags separate.
+    """
+    _check(features, FEATURES)
+    out = features.copy()
+    out["lof_score"] = np.nan
+    out["lof_suspicious"] = False
+    out["lof_status"] = "insufficient_samples"
+
+    if len(out) < min_samples:
+        return out
+
+
+    matrix = out[list(FEATURES)].astype(float)
+    eligible = matrix.notna().all(axis=1) & np.isfinite(matrix).all(axis=1)
+
+    if eligible.sum() < min_samples:
+        out["lof_status"] = "insufficient_coverage"
+        return out
+
+    valid = matrix.loc[eligible]
+
+    if valid.nunique().max() <= 1:
+        out["lof_status"] = "no_feature_variation"
+        return out
+
+
+    # Skip scoring when identical feature vectors overwhelm the
+    # default 20-neighbour LOF configuration.
+    largest_duplicate_group = int(
+        valid.groupby(list(FEATURES), dropna=False).size().max()
+    )
+    neighbor_count = min(20, len(valid) - 1)
+
+    if largest_duplicate_group > neighbor_count:
+        out["lof_status"] = "duplicate_neighborhood"
+        return out
+
+    scaled = StandardScaler().fit_transform(valid)
+
+    model = LocalOutlierFactor(
+        n_neighbors=neighbor_count,
+        contamination=0.10,
+    )
+
+    labels = model.fit_predict(scaled)
+
+    out.loc[eligible, "lof_score"] = -model.negative_outlier_factor_
+    out.loc[eligible, "lof_suspicious"] = labels == -1
+    out.loc[eligible, "lof_status"] = "scored"
+    out.loc[~eligible, "lof_status"] = "insufficient_coverage"
+
     return out
 
 
