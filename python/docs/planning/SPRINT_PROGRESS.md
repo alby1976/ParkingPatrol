@@ -67,3 +67,12 @@ For each session, record ID, date, objective, actual minutes, tests observed, ch
 - **Remaining:** Add RED-first synthetic collision/quarantine test, then audit/extend shared comparable-inspection feature schema for LOF and Isolation Forest; keep future exploratory/prospective enhancements (#12/#13), optional kNN, bootstrapping and external datasets off critical path.
 - **Evidence boundaries:** These findings are from student-shared local code excerpts and pytest output; no code files were changed as part of S09 audit, and no live source data or secrets were shared.
 - **Next step:** Begin one small TDD regression test for cross-area inspection-ID collision in S10 / Issue #4; ask student to approve the actual code change before implementation proceeds.
+
+## S10 — Cross-area check-ID regression test accepted (November 18, 2026)
+
+- **Scope:** First S10 test-only task, **accepted**, but S10 feature engineering and Issue #4 are **not completed**.
+- **Test added:** `test_check_id_reused_across_areas_is_quarantined` in `python/tests/test_cleaning.py`; fictional EAST/WEST duplicated check ID is excluded, collision diagnostic recorded, linked sightings omitted. Existing cleaning implementation unchanged; this previously untested behavior passed on first run (not a RED→GREEN implementation cycle).
+- **Student-observed results:** `python -m pytest python/tests/test_cleaning.py::test_check_id_reused_across_areas_is_quarantined -v`: **1 passed in 0.65s**. `python -m pytest python/tests -q`: **34 passed in 2.05s**. `git diff --cached --check` produced no output.
+- **Git:** student committed and pushed [42ead3c](https://github.com/alby1976/ParkingPatrol/commit/42ead3c2117d3fa547daec0b0411aac99fd5e53b), `Refs #4`; GitHub remote commit verified. No private identifiers or operational data in the test.
+- **AI review:** `s10-cross-area-20261118` **Accepted**, student explicitly confirmed reading and acceptance at `2026-11-18T22:58:16-06:00` (America/Edmonton).
+- **Next:** safely synchronize local PyCharm main with updated remote documentation, then test-first review of shared comparable-completed-check features for LOF/Isolation Forest. Optional kNN, bootstrapping, external backup datasets, and future Issues #12/#13 stay deferred.
