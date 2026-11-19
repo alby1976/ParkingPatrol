@@ -56,3 +56,14 @@ For each session, record ID, date, objective, actual minutes, tests observed, ch
 - **Hard dates unchanged:** Dec 4 analysis freeze, Dec 8 presentation, Dec 11 submission; Sundays Nov 22, 29 and Dec 6 remain off.
 - **Approval:** The student explicitly **read and accepted** this revised plan on 2026-11-17T08:36:42-06:00 (America/Edmonton). Review ID `sprint-recovery-20261116`. This approves the schedule, not outstanding S03–S08 implementation or tests.
 - **Git/issue caution:** GitHub-file edits may place remote `main` ahead of local PyCharm `main`; fetch/pull only after checking local status and avoiding overwriting uncommitted work.
+
+## S09 — Recovery code audit accepted (November 18, 2026)
+
+- **Status:** Audit completed and **explicitly accepted** by the student at `2026-11-18T22:01:13-06:00` (America/Edmonton); AI review ID `s09-audit-20261118`. This does not complete S03–S08 or close grouped Issue #4.
+- **Actual baseline test command:** `python -m pytest python/tests -v`. Student supplied Windows 11 / Python 3.13.14 / pytest 9.2.0 terminal output: **33 passed in 18.36 seconds**, 0 failed.
+- **Source inventory:** `cleaning.py`, `pattern_detection.py`, `staff_status.py`, `synthetic_data.py`, `verification.py`; five corresponding test modules. `features.py` and `test_features.py` not present in observed local inventory.
+- **Reused functions:** `build_vehicle_day_features` (6 defined vehicle-day features), `mark_repeat_check_suspicious` (2 distinct observed checks/day), and `score_anomalies` (exploratory in-sample Isolation Forest with minimum eligible sample and data-quality checks).
+- **ID audit:** The fictional generator creates unique `check_id` values in its single area; its tests assert uniqueness. Cleaning explicitly excludes a `check_id` reused in multiple areas and records `check_id_used_for_multiple_areas`. Student confirmed **no exact assertion** for that diagnostic in `python/tests/test_cleaning.py` using `Select-String`. This is a targeted regression-test gap, not a verified production fault.
+- **Remaining:** Add RED-first synthetic collision/quarantine test, then audit/extend shared comparable-inspection feature schema for LOF and Isolation Forest; keep future exploratory/prospective enhancements (#12/#13), optional kNN, bootstrapping and external datasets off critical path.
+- **Evidence boundaries:** These findings are from student-shared local code excerpts and pytest output; no code files were changed as part of S09 audit, and no live source data or secrets were shared.
+- **Next step:** Begin one small TDD regression test for cross-area inspection-ID collision in S10 / Issue #4; ask student to approve the actual code change before implementation proceeds.
