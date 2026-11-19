@@ -75,6 +75,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-16 | ChatGPT (OpenAI, GPT-6) | Drafted DATA120 one-page ParkingPatrol project summary with research question, observational-data methodology, rule-based comparison, LOF, Isolation Forest, optional kNN distance scoring, related peer-reviewed publications and limitations | Draft committed as 435ebdb; awaiting student reading and acceptance; no Python tests were run; references verified against publisher/index listings | Citation/disclosure pending |
 
+| 2026-11-18 | ChatGPT (OpenAI, GPT-6) | Guided S09 student inspection of cleaning.py, pattern_detection.py, synthetic_data.py and tests, reviewed 33/33 pytest results and found a missing explicit cross-area check-ID collision regression test | Student explicitly read and accepted S09 audit; no code changes or additional test runs were carried out by the assistant. S03–S08 remain without completed session evidence | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -125,6 +127,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | sprint-recovery-20261116 | Accepted | 2026-11-16 (proposal) | 2026-11-17T08:36:42-06:00 | 2026-11-17T08:36:42-06:00 | Revised GUIDED_SPRINT_SESSIONS.md, CAPSTONE_PLAN.md, and SPRINT_PROGRESS.md; proposals drafted November 16, 2026 and committed to GitHub | Student explicitly confirmed both reading and acceptance of the revised calendar and implementation plan in one message; both confirmation timestamps are receipt time in America/Edmonton. This does not mark S03–S08 complete or imply tests were run. No tests executed for this documentation-only work. |
 
 | project-summary-20261116 | Accepted | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | One-page proposal draft in python/reports/PROJECT_SUMMARY.md, commit 435ebdb, optional distance-based kNN only if time permits | Student explicitly stated "read and accepted"; both receipt-time reading and acceptance confirmations recorded in America/Edmonton. This approval covers the one-page project summary, not the separately pending revised sprint calendar or ML experimental findings. No Python tests executed for documentation-only work. |
+
+| s09-audit-20261118 | Accepted | 2026-11-18T22:01:13-06:00 | 2026-11-18T22:01:13-06:00 | 2026-11-18T22:01:13-06:00 | S09 source/test audit: student reported Python 3.13.14 and pytest 9.2.0; 33 passed in 18.36 seconds; verified existing feature builder, two-check rule, exploratory Isolation Forest, and cleaning's cross-area check ID quarantine; identified missing explicit regression assertion | Student explicitly stated "I have read and accept the S09 audit." Both read and accept confirmed together at receipt, America/Edmonton. This does not mark new feature engineering, LOF, or full S03–S08 issue scopes complete. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
