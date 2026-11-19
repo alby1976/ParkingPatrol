@@ -27,6 +27,19 @@ def records():
     return checks, sightings
 
 
+def test_no_completed_checks_keeps_coverage_unknown():
+    """Do not infer coverage from an incomplete inspection."""
+    checks, sightings = records()
+    checks["check_complete"] = False
+
+    features = build_vehicle_day_features(checks, sightings)
+    vehicle = features.query("vehicle_id == 'SYN_B'").iloc[0]
+
+    assert vehicle["same_day_distinct_checks"] == 1
+    assert vehicle["area_completed_checks_day"] == 0
+    assert pd.isna(vehicle["observed_fraction_day"])
+
+
 def test_two_distinct_checks_flag_suspicious():
     c, s = records()
     out = mark_repeat_check_suspicious(build_vehicle_day_features(c, s))
