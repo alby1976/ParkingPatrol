@@ -60,6 +60,20 @@ def test_conflicting_duplicate_check_quarantines_corresponding_sightings():
     assert "unknown_or_invalid_check" in result.issues["issue"].tolist()
 
 
+def test_check_id_reused_across_areas_is_quarantined():
+    """Quarantine checks sharing an ID across different areas."""
+    checks = sample_checks()
+    duplicate_area = checks.iloc[[0]].copy()
+    duplicate_area.loc[:, "area_id"] = "west"
+    checks = pd.concat([checks, duplicate_area], ignore_index=True)
+
+    result = normalize_observations(checks, sample_sightings())
+
+    assert "ROUND 1" not in result.checks["check_id"].tolist()
+    assert "check_id_used_for_multiple_areas" in result.issues["issue"].tolist()
+    assert "DEMO_001" not in result.sightings["vehicle_id"].tolist()
+
+
 def test_ambiguous_local_dst_time_rejected():
     checks = sample_checks()
     checks.loc[0, "check_at"] = "2025-11-02 01:30"
