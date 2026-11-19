@@ -76,3 +76,11 @@ For each session, record ID, date, objective, actual minutes, tests observed, ch
 - **Git:** student committed and pushed [42ead3c](https://github.com/alby1976/ParkingPatrol/commit/42ead3c2117d3fa547daec0b0411aac99fd5e53b), `Refs #4`; GitHub remote commit verified. No private identifiers or operational data in the test.
 - **AI review:** `s10-cross-area-20261118` **Accepted**, student explicitly confirmed reading and acceptance at `2026-11-18T22:58:16-06:00` (America/Edmonton).
 - **Next:** safely synchronize local PyCharm main with updated remote documentation, then test-first review of shared comparable-completed-check features for LOF/Isolation Forest. Optional kNN, bootstrapping, external backup datasets, and future Issues #12/#13 stay deferred.
+
+### S10 zero-completed-check regression accepted — November 18, 2026
+
+- **Test:** `test_no_completed_checks_keeps_coverage_unknown` in `python/tests/test_pattern_detection.py`; all checks in the synthetic fixture marked incomplete, `SYN_B` retains one positive sighting, zero completed comparable checks and `NaN` observation fraction.
+- **TDD evidence:** Initial student run failed `assert 2 == 0` because fixture retained two completed checks; corrected fixture passed focused **1 test in 1.17s** without production edits. Full suite **35 passed in 1.46s**, student reported; existing logic was confirmed, not newly implemented.
+- **Git:** [4b8ccb8](https://github.com/alby1976/ParkingPatrol/commit/4b8ccb8a98473d2121cc803b5b1642f67bedb32c), `Refs #4`, uploaded and independently verified.
+- **AI review:** `s10-zero-coverage-20261118` **Accepted** by explicit student reading/acceptance at `2026-11-18T23:41:40-06:00` America/Edmonton.
+- **Remaining:** S10 feature-table design/comparison not done; grouped #4 remains open. Continue with a small audit/test for numeric feature eligibility for both LOF and Isolation Forest. Synchronize local Git first because AI log and tracker were updated remotely.
