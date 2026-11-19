@@ -77,6 +77,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | 2026-11-18 | ChatGPT (OpenAI, GPT-6) | Guided S09 student inspection of cleaning.py, pattern_detection.py, synthetic_data.py and tests, reviewed 33/33 pytest results and found a missing explicit cross-area check-ID collision regression test | Student explicitly read and accepted S09 audit; no code changes or additional test runs were carried out by the assistant. S03–S08 remain without completed session evidence | Citation/disclosure pending |
 
+| 2026-11-18 | ChatGPT (OpenAI, GPT-6) | Guided student to add a synthetic regression test for a cross-area check-ID collision, verified the student-reported focused 1 pass in 0.65s and entire pytest suite 34 passed in 2.05s, reviewed diff and staged whitespace check, and verified GitHub commit 42ead3c (Refs #4) | Student explicitly confirmed reading and acceptance of committed test; no production module changes; test passed without a new RED failure | Citation/disclosure pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -129,6 +131,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | project-summary-20261116 | Accepted | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | 2026-11-16T23:03:07-06:00 | One-page proposal draft in python/reports/PROJECT_SUMMARY.md, commit 435ebdb, optional distance-based kNN only if time permits | Student explicitly stated "read and accepted"; both receipt-time reading and acceptance confirmations recorded in America/Edmonton. This approval covers the one-page project summary, not the separately pending revised sprint calendar or ML experimental findings. No Python tests executed for documentation-only work. |
 
 | s09-audit-20261118 | Accepted | 2026-11-18T22:01:13-06:00 | 2026-11-18T22:01:13-06:00 | 2026-11-18T22:01:13-06:00 | S09 source/test audit: student reported Python 3.13.14 and pytest 9.2.0; 33 passed in 18.36 seconds; verified existing feature builder, two-check rule, exploratory Isolation Forest, and cleaning's cross-area check ID quarantine; identified missing explicit regression assertion | Student explicitly stated "I have read and accept the S09 audit." Both read and accept confirmed together at receipt, America/Edmonton. This does not mark new feature engineering, LOF, or full S03–S08 issue scopes complete. |
+
+| s10-cross-area-20261118 | Accepted | 2026-11-18T22:58:16-06:00 | 2026-11-18T22:58:16-06:00 | 2026-11-18T22:58:16-06:00 | Regression test in python/tests/test_cleaning.py, commit 42ead3c2117d3fa547daec0b0411aac99fd5e53b, Refs #4; focused 1 passed (0.65s); full 34 passed (2.05s) | Student explicitly stated "I have read and accept the S10 cross-area inspection-ID regression test" and accepted the verified results. Reading and acceptance recorded together at receipt (America/Edmonton); no new production code; remaining S10 feature work and Issue #4 stay open. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
