@@ -199,6 +199,27 @@ def test_unsupervised_model_yields_separate_nonprobabilistic_signal():
         {"none", "rule", "anomaly", "rule+anomaly"})
 
 
+def test_compare_three_methods_preserves_unscored_status():
+    """Keep three review methods separate when data is insufficient."""
+    from pattern_detection import compare_review_methods
+
+    checks, sightings = records()
+    features = build_vehicle_day_features(checks, sightings)
+
+    result = compare_review_methods(features)
+
+    assert "rule_suspicious" in result.columns
+    assert "anomaly_suspicious" in result.columns
+    assert "lof_suspicious" in result.columns
+
+    assert result["model_status"].eq("insufficient_samples").all()
+    assert result["lof_status"].eq("insufficient_samples").all()
+    assert result["lof_score"].isna().all()
+
+    assert result["rule_suspicious"].any()
+    assert not result["lof_suspicious"].any()
+
+
 def test_invalid_model_configuration_rejected():
     c, s = records()
     frame = build_vehicle_day_features(c, s)

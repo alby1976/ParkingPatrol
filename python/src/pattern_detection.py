@@ -212,3 +212,23 @@ def combine_review_signals(frame: pd.DataFrame) -> pd.DataFrame:
     out["flag_source"] = np.select(
         [rule & ml, rule, ml], ["rule+anomaly", "rule", "anomaly"], default="none")
     return out
+
+
+def compare_review_methods(features: pd.DataFrame) -> pd.DataFrame:
+    """Compare three review methods on the same feature records.
+
+    Args:
+        features: Cleaned, pseudonymous vehicle-day features.
+
+    Returns:
+        A copy containing separate rule, Isolation Forest,
+        and LOF flags, scores, and model statuses.
+
+    Notes:
+        An unscored model must not be interpreted as finding
+        no anomalies. No flag proves a parking violation.
+    """
+    result = mark_repeat_check_suspicious(features)
+    result = score_anomalies(result)
+    result = score_lof_anomalies(result)
+    return result
