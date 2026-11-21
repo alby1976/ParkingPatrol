@@ -83,7 +83,7 @@ Read [ENV_SETUP.md](docs/guides/ENV_SETUP.md) before adding any Google Sheets cr
 
 ## Project metadata and test configuration
 
-[pyproject.toml](pyproject.toml) declares the Python 3.13 project, local source modules, and shared `pytest` settings. It reads its dependencies **directly from [requirements.txt](requirements.txt)**, so package versions have only one source of truth.
+[pyproject.toml](pyproject.toml) declares the Python 3.13 project, local source modules, and shared `pytest` settings. It reads its dependencies **directly from [requirements.txt](requirements.txt)**, so package versions have only one source of truth. Presentation generation uses `python-pptx>=1.0.2,<2` from that same list (the student verified version 1.0.2 locally); no separate dependency declaration is needed in `pyproject.toml`.
 
 Use the existing installation command from the repository root:
 
@@ -96,6 +96,8 @@ Optional, if editable installation of the DATA120 modules is desired (use the sa
 ```powershell
 python -m pip install -e ./python
 ```
+
+The PowerPoint generator is planned but has not yet been implemented; see [reports/README.md](reports/README.md) for the existing synthetic chart and planned presentation workflow.
 
 This is an optional project packaging workflow, not a replacement for the scheduled S02 dependency installation or tests. Packaging and imports have **not yet been independently verified** in the student's PyCharm environment. From the repository root, the existing test command remains `python -m pytest python/tests -q`. Avoid packaging or installing operational Google Apps Script files.
 
