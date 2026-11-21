@@ -46,17 +46,26 @@ Can unsupervised machine learning identify unusual repeat-parking observations c
 - Synthetic records are used for testing and demonstrations only.
 - Repeated observations do not prove unauthorized parking.
 
- ## Slide 4 — Data Cleaning and Feature Engineering
+## Slide 4 — Data Cleaning and Feature Engineering
 
 ### Data Cleaning
 - Normalize vehicle identifiers and timestamps.
 - Remove duplicate vehicle observations within the same inspection.
 - Preserve incomplete inspections and identify missing information.
 
-### Feature Engineering (Planned)
-- Number of distinct days a vehicle was observed.
-- Number of inspections recording the same vehicle.
-- Observation frequency relative to completed inspections.
+
+### Feature Engineering (Implemented)
+
+Six numerical features are calculated for each vehicle-day:
+
+1. `same_day_distinct_checks` — Distinct inspections observing the vehicle that day.
+2. `distinct_days_30d` — Distinct observation days within the 30-day window.
+3. `area_completed_checks_day` — Completed inspection opportunities for that area and day.
+4. `observed_fraction_day` — Fraction of completed inspections observing the vehicle.
+5. `distinct_areas_day` — Number of distinct areas observing the vehicle that day.
+6. `check_hour_span` — Time span between recorded observations, not parking duration.
+
+These features provide consistent inputs for the rule-based and machine-learning comparison.
 
 ### Why It Matters
 - Models need consistent numerical inputs.
@@ -80,53 +89,93 @@ Can unsupervised machine learning identify unusual repeat-parking observations c
 
 ## Slide 6 — Unsupervised Machine Learning
 
-### Local Outlier Factor (LOF) — Planned
-- Compares a vehicle's observation features with nearby examples.
-- Identifies patterns that are unusual relative to their neighbours.
-- Requires sensitivity checks because the dataset is small.
 
-### Isolation Forest — Exploratory Implementation
-- Uses random partitions to identify unusual feature combinations.
-- Existing Python implementation requires testing and evaluation on suitable feature data.
+### Local Outlier Factor (LOF) — Implemented, but Not Scored
+
+- LOF compares the density around each observation with the density around its neighbours.
+- The implementation includes a safeguard for heavily duplicated feature patterns.
+- In the synthetic dataset, all 315 vehicle-day rows returned `duplicate_neighborhood`.
+- Therefore, LOF produced no usable scores for this experiment.
+- "Not scored" does not mean zero anomalies.
+
+### Isolation Forest — Implemented
+
+- Isolation Forest uses random partitions to identify unusual combinations of features.
+- It flagged 32 of 315 synthetic vehicle-day observations.
+- These are exploratory, in-sample review signals, not verified parking violations.
 
 ### Model Comparison
-- Use the same features and observation window for both methods.
-- Compare anomaly rankings with the two-check baseline.
-- An anomaly is a review priority, not proof of a violation.
+
+- Both ML methods use the same six-feature vehicle-day representation.
+- The two-check rule flagged 133 of 315 synthetic observations.
+- Isolation Forest flagged 32; LOF was not scored.
+- Neither method establishes offender-detection accuracy.
+- All review signals require human interpretation and verification.
 
 ## Slide 7 — Model Comparison and Findings
 
-### Planned Comparison
-- Compare the existing two-check rule, LOF, and Isolation Forest.
-- Use the same cleaned feature table and observation window.
-- Examine which vehicles each method flags for review.
-- Evaluate the stability of anomaly rankings when model settings change.
+### Synthetic Dataset Results
 
-### Visualizations to Add
-- Vehicle observation frequency chart.
-- Comparison of rule-based flags versus ML anomaly flags.
-- Model sensitivity or stability chart.
+| Method | Flagged Vehicle-Day Rows | Interpretation |
+|---|---:|---|
+| Two-check rule | 133 | Repeated sightings during distinct same-day inspections |
+| Isolation Forest | 32 | Unusual feature combinations |
+| LOF | Not scored | Duplicate-neighbourhood safeguard activated |
 
-### Findings — To Be Completed
-- Insert actual results after running and evaluating the models.
-- Label synthetic demonstrations separately from real-data results.
-- Do not report offender-detection accuracy without independently verified ground-truth labels.
+- Total: 315 fictional vehicle-day observations.
+- These counts come from reproducible synthetic data.
+- The methods identify review signals, not confirmed offenders.
+
+### Visualization
+
+![Synthetic model comparison](model_comparison.png)
+
+Generated using `model_comparison_chart.py`.
+
+### Key Findings
+
+- The two-check rule flagged more observations than Isolation Forest.
+- The synthetic dataset contained only 23 distinct numerical feature patterns.
+- Heavy duplication prevented conservative LOF scoring.
+- Different flag counts do not establish which method is more accurate.
+- No independently verified offender labels were used to calculate accuracy.
+
+### Interpretation
+
+Isolation Forest can help prioritize unusual observation patterns for human review.
+
+However, synthetic-data results cannot establish real-world effectiveness or justify automatic ticketing or towing.
+
 
 ## Slide 8 — Conclusions, Limitations and Future Work
 
-### Conclusions — To Be Finalized
-- Evaluate whether the rule-based method and unsupervised models identify useful repeat-observation patterns.
-- Use anomaly detection to prioritize human investigation, not automatic enforcement.
-- Report conclusions only after reviewing actual model results.
+### Conclusions
+
+- ParkingPatrol successfully compares rule-based detection with exploratory unsupervised machine learning.
+- The two-check rule flagged 133 of 315 synthetic vehicle-day observations.
+- Isolation Forest flagged 32 observations.
+- LOF could not produce usable scores because of heavily duplicated feature patterns.
+- These results demonstrate different review approaches, not offender-detection accuracy.
+- Human verification is required before any enforcement decision.
 
 ### Limitations
-- Small and evolving real-world dataset.
-- Usually one or two manual inspections per day.
-- No recorded arrival or departure times.
-- Synthetic data cannot establish real-world model accuracy.
+
+- Only 23 distinct numerical feature patterns appeared among 315 synthetic vehicle-day observations.
+- The synthetic dataset does not establish real-world accuracy or effectiveness.
+- The initial real-world observation period is approximately 10 days.
+- Staff inspect the lot only once or twice daily.
+- Actual vehicle arrival, departure, and parking duration are unknown.
+- Repeated observations cannot prove continuous parking or unauthorized use.
 
 ### Future Work
-- Collect more observations and assess model stability.
-- Evaluate against independently verified historical records where permitted.
-- Improve the secure Google Sheets-to-Python workflow.
-- Maintain human verification before any new enforcement action.
+
+- Collect more real observations with appropriate privacy safeguards.
+- Evaluate detection methods against independently verified historical outcomes.
+- Investigate DBSCAN and HDBSCAN clustering for duplicated feature patterns (GitHub Issue #16).
+- Evaluate model stability and sensitivity to inspection frequency.
+- Improve secure Google Sheets integration.
+- Keep human verification separate from automated review signals.
+
+### Final Takeaway
+
+ParkingPatrol can help prioritize parking observations for human review, but it cannot independently determine whether a vehicle violated parking rules.
