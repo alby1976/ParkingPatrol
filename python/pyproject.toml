@@ -1,5 +1,6 @@
 # DATA120 Python 3.13 project metadata and pytest settings.
-# Dependencies are read from requirements.txt to avoid maintaining two lists.
+# Dependencies (including python-pptx for presentation generation) are read
+# from requirements.txt to avoid maintaining two lists.
 # This file configures the coursework Python modules; it does not deploy Apps Script.
 
 [build-system]
