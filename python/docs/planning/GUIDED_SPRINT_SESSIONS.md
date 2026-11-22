@@ -91,3 +91,31 @@ Session rhythm: recall → define proof of done → one test-first coding task o
 6. **Remaining schedule is compressed, not extended:** never shift the December 4 freeze, December 8 presentation, December 11 submission or Sunday rest dates.
 
 See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md), [SPRINT_PROGRESS.md](SPRINT_PROGRESS.md) and [GITHUB_ISSUE_WORKFLOW.md](GITHUB_ISSUE_WORKFLOW.md).
+
+## November 22 rubric-aligned sprint update (current priority; supersedes conflicting task emphasis above)
+
+**Source:** D2L “6. DAT 120 Mini Capstone Project” (two pages), student supplied November 22. Rubric: **ML model analysis/evaluation 40 points; code quality 30; presentation 20; one-page summary 10**. Assignment explicitly accepts a **Python script or notebook** (a notebook is encouraged for visibility, **not mandatory**), requires an exploration/visualization and model-training/validation narrative, a **presentation under 10 minutes**, and upload of the completed paper and presentation to the **D2L Mini capstone project dropbox**. Course outline says final presentations in **Week 6, December 9**; the historical December 8 target is provisional until instructor/D2L confirms the actual presentation appointment. Final submission remains **December 11**. Keep the internal **December 4 analysis freeze** and Sundays off.
+
+| Session / date | Rubric-aligned priority and evidence of done |
+| --- | --- |
+| **S15 Mon Nov 23** | **40-point ML audit:** review synthetic feature-table coverage, 10d/30d sample sizes, duplicated patterns, inspection limitations; record tables/visuals and no ground-truth labels. |
+| **S16 Tue Nov 24** | Explain model fit/score workflow, the **in-sample** nature of Isolation Forest, leakage limits, and comparison with the transparent two-check rule; no unsupported accuracy metrics. |
+| **S17 Wed Nov 25** | **Sensitivity/interpretation:** compare two-check 133/315 vs 409/965 and IF 32/315 vs 97/965; explicitly explain preset 10% IF contamination and why LOF scores are withheld for duplicate neighborhoods. Test additional configurations only if academically justified. |
+| **S18 Thu Nov 26** | Independently verified outcomes if permitted/available; otherwise document absence of labels, tiny/duplicated effective variety, and limits on validation. Privacy audit. |
+| **S19 Fri Nov 27** | Make **public-safe EDA and model comparison** plots/tables; optional lightweight notebook referencing existing tested Python modules instead of recoding model logic. Add notebook only if it helps the 40-point rubric and is finished on time. |
+| **S20 Sat Nov 28** | Student interpretation: describe business utility, limitations, all three approaches, and actionable **human-review-only** implications; check notebook/script execution and explainability. |
+| **Sun Nov 29** | **Rest — no sprint.** |
+| **S21 Mon Nov 30** | Rubric evidence checklist (40/30/20/10); verify one-page summary, Python script or notebook, citations, AI-use restrictions, and source provenance. |
+| **S22 Tue Dec 1** | Improve short, legible visuals/slides and notes; demonstrate data exploration → feature engineering → model comparison → limitations. Plan talk for **8–9 minutes**, leaving margin under hard **10-minute maximum**. |
+| **S23 Wed Dec 2** | Reproduce analysis/scripts, full pytest, optional notebook **Run All** if present, check files open and contain only public-safe synthetic aggregates. |
+| **S24 Thu Dec 3** | **Timed full rehearsal** with 10-minute stopwatch, Q&A on contamination and LOF; check PowerPoint/offline backup and D2L upload requirements. |
+| **S25 Fri Dec 4** | Freeze models/data/figures/presentation and record reproducible Git SHA and versions. No new modeling features after this point unless necessary to correct errors. |
+| **S26 Sat Dec 5** | Timed mock talk and Q&A; reduce content if talk exceeds **10 minutes**. |
+| **Sun Dec 6** | **Rest — no sprint.** |
+| **S27 Mon Dec 7** | Final timed rehearsal, citations, backup check, and presenter-specific date/time confirmation. |
+| **S28 Tue Dec 8** | **Presentation readiness target only**, not verified official presentation date. Present only if instructor confirms this day; otherwise keep frozen slides ready for the official Week 6 slot (course outline lists Dec 9). |
+| **S29 Wed Dec 9** | Official outline's Week 6 presentation marker; give presentation here if scheduled and record non-sensitive feedback, otherwise use day for final corrections. |
+| **S30 Thu Dec 10** | Validate required submission items, repo/scripts or notebook, one-pager, deck, APA and GAI citations, model caveats, privacy; test D2L upload readiness. |
+| **S31 Fri Dec 11** | Upload the **completed paper/one-pager and presentation** to D2L Mini capstone project dropbox (include script/notebook as required by assignment/submission UI); verify deadline time and retain private confirmation. |
+
+**Priority gate:** 40-point ML interpretation/validation evidence first; 30-point clean/tested code next; 20-point **<10 minute** presentation; 10-point one-page related-work summary. A notebook may improve examiner visibility but must **not** replace the accepted script option or displace needed evidence/rehearsal. Continue human review and privacy safeguards. Git commits must use `Refs #7`, `Refs #8`, `Refs #9`, `Refs #10` as applicable and record verifiable test outcomes and AI assistance.
