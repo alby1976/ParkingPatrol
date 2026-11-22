@@ -6,13 +6,17 @@ Use this file to **record assistance transparently**. AI assistants following [A
 
 | Item | Answer |
 | --- | --- |
-| Assignment or learning activity | DATA120 mini capstone — confirm exact title |
-| Instructor AI instructions checked? | **Pending confirmation** |
-| Permitted tasks / limits | **Pending confirmation** |
-| Required disclosure/citation format | **Pending confirmation** |
-| Instructor clarification (if needed) | Not yet recorded |
+| Assignment or learning activity | *Practical Machine Learning for Business (DAT 120 - 008), Fall 2026* — individual mini capstone project: machine learning project and presentation (100%), due December 11, 2026; source: student-uploaded five-page course outline, pp. 1–2 |
+| Course-outline AI policy reviewed? | **Yes — 2026-11-22**, student provided official course outline. Page 3 states that GAI may be used only according to each instructor-defined assignment/activity's instructions; GAI should support rather than replace individual work and analysis. |
+| Instructor/assignment-specific AI instructions checked? | **Pending** — the course outline directs students to the Assignment Details module in D2L (p. 2); the specific capstone instructions and any instructor clarifications have not been supplied or verified. |
+| Permitted tasks / limits | **Conditional, not blanket permission.** Page 3 permits GAI in accordance with assignment/activity instructions, requires appropriate references/citations, cautions about privacy/security and bias, and requires fact-checking. Do not represent detailed uses (coding, slide generation, analysis drafting) as confirmed permitted until the D2L assignment-specific rules are checked. |
+| Required disclosure/citation format | **Still pending assignment-specific verification.** The outline requires citing GAI use and points to https://conted.ucalgary.ca/info/writing.jsp (p. 3); APA is recommended for cited material (p. 3), but the exact GAI citation format for this capstone has not been verified. |
+| Submission / presentation scheduling | Individual mini capstone **due December 11, 2026** (p. 2). Schedule lists final presentation during **Week 6, December 9** (p. 5), whereas the student's project plan uses a **December 8** presentation target. Confirm actual presentation appointment in D2L or with the instructor; do not treat December 8 as verified by the outline. |
+| Instructor clarification (if needed) | Pending: verify D2L mini-capstone AI-use boundaries, required GAI citations/disclosure and presentation date; consult instructor where ambiguous. |
 
-**Until confirmed:** Treat AI-drafted assignment material as a planning aid, not automatically as acceptable submitted work.
+**Source reviewed:** Student-uploaded *DAT 120 Course Outline1.docx*, *Practical Machine Learning for Business (DAT 120 - 008), Fall 2026*, pp. 1–5 (reviewed 2026-11-22). The outline emphasizes industry use cases, implementing ML techniques and layperson-facing visual storytelling (pp. 1–2); it does not substitute for the D2L assignment rubric.
+
+**Until D2L-specific rules are checked:** Keep AI-assisted assessment material clearly logged and student-reviewed, but do not assert that every AI-assisted output is approved for submission. Student acceptance of changes records review; it does not establish instructor permission.
 
 ## Assistance history
 
@@ -91,6 +95,8 @@ Use this file to **record assistance transparently**. AI assistants following [A
 | 2026-11-22 | ChatGPT (OpenAI, GPT-6) | Guided test-first implementation of reproducible, editable comparison cards and horizontal bars for Slide 7; PR #21 squash-merged as `8348299` (Refs #8); documented hardcoded synthetic-source and LOF limits for future Issues #18–#20 | Student supplied initial RED failure and GREEN pass, 52/52 full pytest passes, regenerated an eight-slide PowerPoint and provided a visual check. Student explicitly confirmed reading and acceptance of all AI-assisted changes on 2026-11-22. Results remain synthetic; the deck is not proof of real-world accuracy. | Course-specific disclosure/citation format pending confirmation |
 | 2026-11-22 | ChatGPT (OpenAI, GPT-6) | Updated the AI assistance-history and student-acceptance register for the synthetic sensitivity analysis through PR #23, squash-merged as `00f3422` (Refs #7); audited missing presentation-related log entries | Student reviewed PR #23 and explicitly approved its merge; student subsequently explicitly confirmed reading and accepting all AI-assisted changes. This entry records the administrative log update, not new model validation. | Course-specific disclosure/citation format pending confirmation |
 
+| 2026-11-22 | ChatGPT (OpenAI, GPT-6) | Reviewed all five pages of student-uploaded Fall 2026 DAT 120 course outline against ParkingPatrol's learning outcomes, assignment deadline, AI policy, citation guidance and presentation schedule; updated this permission gate on `main` (Refs #8, #10). | Student authorized the review and log update. Course-outline permissions and deadlines were read directly; the D2L assignment-specific AI restrictions, citation format and actual presentation date are **not yet verified**. This update itself awaits separate student reading/acceptance after publication. | Cite/refer to course outline as appropriate; D2L-specific GAI citation requirements pending |
+
 ## Copy this row for each future use
 
 | YYYY-MM-DD | Tool and model/version (if known) | Precise prompt/task and output used | What I independently verified/changed | In-text citation or appendix location |
@@ -163,6 +169,8 @@ AI-generated material must receive two **explicit student confirmations** before
 | presentation-pr17-20261122 | Accepted | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | Eight-slide DATA120 PowerPoint, presentation generator and tests, PR #17, squash commit `c6acbec`; related #8 | Student explicitly confirmed on 2026-11-22 that all changes had been read and accepted. Presentation was opened and checked; student-reported full suite 51 passed. Confirmation time not invented. |
 | reproducible-slide7-pr21-20261122 | Accepted | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | TDD implementation of editable/reproducible Slide 7, PR #21, squash commit `8348299`, Refs #8 | Student explicitly confirmed on 2026-11-22 that all changes had been read and accepted. Student-reported full suite 52 passed and rebuilt eight-slide deck visually reviewed. Synthetic counts, LOF status and source caveats remain. |
 | ai-log-pr23-20261122 | Accepted | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | 2026-11-22 (exact time unavailable) | AI log history and acceptance entry for synthetic sensitivity analysis, PR #23, squash commit `00f3422`, Refs #7 | Student explicitly stated they reviewed PR #23 and accepted its merge, and later confirmed reading and accepting all AI-assisted changes. This is student approval, not confirmation of instructor AI-use permissions. |
+
+| course-outline-audit-20261122 | Awaiting student reading and acceptance | 2026-11-22 (exact time unavailable) | Pending | Pending | Review of *DAT 120 Course Outline1.docx*, five pages; AI policy, learning outcomes, due date and presentation scheduling; updated AI_USE_LOG.md directly on main (Refs #8, #10) | Student authorized reviewing the outline and updating the log. This does **not** count as an explicit post-update read-and-accept confirmation. D2L assignment-specific AI instructions remain unverified. |
 
 ## Draft disclosure wording — customize only if the use was permitted
 
