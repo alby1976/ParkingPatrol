@@ -114,6 +114,13 @@ These features provide consistent inputs for the rule-based and machine-learning
 
 ## Slide 7 — Model Comparison and Findings
 
+### Presentation Highlights
+
+- Two-check rule: 133 flagged vehicle-day rows
+- Isolation Forest: 32 flagged vehicle-day rows
+- LOF: Not scored due to duplicate feature patterns
+- Synthetic data only; flags are not confirmed violations
+
 ### Synthetic Dataset Results
 
 | Method | Flagged Vehicle-Day Rows | Interpretation |
