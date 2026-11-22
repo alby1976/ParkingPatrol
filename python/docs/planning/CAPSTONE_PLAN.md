@@ -247,3 +247,13 @@ The student accepted the *original* schedule on November 6, 2026. The revised No
 The historical S01–S31 session allocation appears in prior Git history and grouped GitHub issues; current session tasks are in [GUIDED_SPRINT_SESSIONS.md](GUIDED_SPRINT_SESSIONS.md).
 
 **No new Python code, live data access, fitted ML comparison or tests are claimed by this documentation update.**
+
+## 14. Assignment-rubric priority update — November 22, 2026
+
+**Verified source:** Student-uploaded D2L *6. DAT 120 Mini Capstone Project* (2 pages). Point allocation: **ML model 40, coding 30, presentation 20, one-page summary 10**. The instructions call for data exploration and visualization, model training/validation and business interpretation, and accept a **Python script OR notebook**. A clearly documented **optional Jupyter notebook** could improve traceability for evaluators; it must reuse existing tested modules and should be dropped if it threatens the **December 4 freeze**. The presentation **must not exceed 10 minutes**; rehearse at 8–9 minutes as a planning margin. The completed paper and presentation go to the D2L *Mini capstone project* dropbox; verify whether code/notebook must be uploaded separately in the interface.
+
+**Immediate evidence goals:** audit model evaluations and synthetic 10d/30d sensitivity; distinguish Isolation Forest's preset ~10% contamination from independent evidence of performance; document LOF's 20-neighbor duplicate-group safeguard, unscored versus zero anomalies, absent verified labels, correlated vehicle-day rows and inability to infer parking duration or illegal use. Add public-safe EDA charts and concise interpretations. Avoid synthetic-data inflation or unsupported accuracy, precision and recall claims.
+
+**Dates:** retain Dec 4 internal freeze and Dec 11 assignment submission. Dec 8 is an **internal readiness target**; the five-page course outline places final presentations in Week 6, **December 9**. Confirm instructor's actual presentation appointment rather than asserting Dec 8. Sundays remain off. See the [updated guided sprint calendar](GUIDED_SPRINT_SESSIONS.md) and Issues #7–#10.
+
+**Integrity:** Instructor-specific permitted GAI uses and required in-submission citation format remain unconfirmed. Log AI support, retain individual student analysis and verification, and keep raw identifiers out of public deliverables.
