@@ -1,4 +1,3 @@
-
 """Build the DATA120 ParkingPatrol presentation.
 
 Create an editable PowerPoint presentation from the approved outline
@@ -16,13 +15,14 @@ Typical Usage:
         python reports/build_presentation.py
 """
 
+import re
 from pathlib import Path
 from typing import Any
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.util import Inches, Pt
-
 
 REPORTS_DIR = Path(__file__).resolve().parent
 
@@ -78,12 +78,12 @@ def add_slide(presentation: Presentation, title: str):
 
 
 def add_bullets(
-    slide,
-    bullet_points: list[str],
-    left: float = 0.9,
-    top: float = 1.5,
-    width: float = 11.4,
-    height: float = 5.2,
+        slide,
+        bullet_points: list[str],
+        left: float = 0.9,
+        top: float = 1.5,
+        width: float = 11.4,
+        height: float = 5.2,
 ) -> None:
     """Add bullet points inside a configurable slide area.
 
@@ -206,10 +206,10 @@ def parse_outline(path: Path) -> list[dict[str, object] | None]:
             current_section = text[4:].strip()
 
         elif (
-            text.startswith("![")
-            and "](" in text
-            and text.endswith(")")
-            and current_slide is not None
+                text.startswith("![")
+                and "](" in text
+                and text.endswith(")")
+                and current_slide is not None
         ):
             alt, image_path = text[2:-1].split("](", maxsplit=1)
 
@@ -222,14 +222,13 @@ def parse_outline(path: Path) -> list[dict[str, object] | None]:
     return slides
 
 
-
 def add_slide_image(
-    slide,
-    image_path: Path,
-    left_inches: float | None = None,
-    top_inches: float | None = None,
-    max_width_inches: float = 11.3,
-    max_height_inches: float = 5.5,
+        slide,
+        image_path: Path,
+        left_inches: float | None = None,
+        top_inches: float | None = None,
+        max_width_inches: float = 11.3,
+        max_height_inches: float = 5.5,
 ) -> None:
     """Fit an image inside a slide without distorting it.
 
@@ -289,10 +288,134 @@ def add_slide_image(
     )
 
 
+def build_model_comparison_slide(slide, highlights: list[str]) -> None:
+    """Build an editable visual comparison of parking detection methods.
+
+    Args:
+        slide: Existing PowerPoint slide with its title already added.
+        highlights: Model findings extracted from the Markdown outline.
+
+    Notes:
+        Flags are anomaly signals, not confirmed parking violations.
+        LOF is deliberately marked as unscored when the safeguard applies.
+    """
+
+    def add_text(text, x, y, w, h, size=16, bold=False,
+                 color=(30, 55, 85)):
+        shape = slide.shapes.add_textbox(
+            Inches(x), Inches(y), Inches(w), Inches(h)
+        )
+        frame = shape.text_frame
+        frame.word_wrap = True
+        frame.margin_left = Inches(0.05)
+        frame.margin_top = Inches(0.03)
+
+        p = frame.paragraphs[0]
+        p.text = str(text)
+        p.font.name = "Aptos"
+        p.font.size = Pt(size)
+        p.font.bold = bold
+        p.font.color.rgb = RGBColor(*color)
+        return shape
+
+    def rectangle(x, y, w, h, color):
+        shape = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            Inches(x), Inches(y), Inches(w), Inches(h)
+        )
+        shape.fill.solid()
+        shape.fill.fore_color.rgb = RGBColor(*color)
+        shape.line.fill.background()
+        return shape
+
+    def get_count(keyword):
+        for line in highlights:
+            if keyword.lower() in line.lower():
+                match = re.search(r"\b(\d+)\s+flagged\b", line, re.I)
+                if match:
+                    return int(match.group(1))
+        return None
+
+    rule_count = get_count("Two-check rule")
+    forest_count = get_count("Isolation Forest")
+
+    add_text(
+        "Flag counts (not accuracy)",
+        0.8, 1.25, 10, 0.4, size=18, bold=True
+    )
+
+    cards = [
+        ("TWO-CHECK RULE", rule_count, (34, 105, 155)),
+        ("ISOLATION FOREST", forest_count, (36, 140, 115)),
+        ("LOCAL OUTLIER FACTOR", None, (105, 115, 135)),
+    ]
+
+    for i, (name, count, color) in enumerate(cards):
+        x = 0.8 + i * 4.2
+
+        rectangle(x, 1.85, 3.9, 1.65, (238, 243, 249))
+
+        add_text(name, x + 0.2, 2.05, 3.5, 0.35,
+                 size=13, bold=True, color=color)
+
+        value = str(count) if count is not None else "Not scored"
+
+        add_text(
+            value, x + 0.2, 2.48, 3.5, 0.65,
+            size=28 if count is not None else 20,
+            bold=True
+        )
+
+    maximum = max(
+        (count for count in (rule_count, forest_count)
+         if count is not None),
+        default=0
+    )
+
+    for index, (name, count, color) in enumerate(cards[:2]):
+        y = 3.9 + index * 0.65
+
+        add_text(name, 0.8, y, 3.0, 0.35, size=13)
+
+        rectangle(3.9, y, 7.4, 0.27, (225, 231, 237))
+
+        if maximum > 0 and count is not None and count > 0:
+            rectangle(
+                3.9, y,
+                7.4 * count / maximum,
+                0.27, color
+            )
+
+        add_text(
+            str(count) if count is not None else "N/A",
+            11.5, y - 0.05, 0.9, 0.4, size=15, bold=True
+        )
+
+    add_text(
+        "LOF: Scoring withheld because duplicate feature patterns "
+        "exceeded the configured neighborhood size.",
+        0.8, 5.3, 11.8, 0.55, size=14
+    )
+
+    rectangle(0.8, 6.0, 11.8, 0.85, (232, 240, 248))
+
+    add_text(
+        "KEY TAKEAWAY",
+        1.05, 6.08, 2.5, 0.3,
+        size=13, bold=True
+    )
+
+    add_text(
+        "Synthetic data only. Flags are not accuracy measures "
+        "or confirmed violations; human verification is required.",
+        1.05, 6.38, 11.1, 0.37,
+        size=12
+    )
+
 
 def build_slides(
-    presentation: Presentation,
-    slide_data: list[dict[str, object]],
+        presentation: Presentation,
+        slide_data: list[dict[str, object]],
 ) -> None:
     """Create slides from Markdown with separate text and image areas.
 
@@ -302,6 +425,15 @@ def build_slides(
     """
     for item in slide_data:
         slide = add_slide(presentation, item["title"])
+
+        # Use the specialized layout for the model comparison slide.
+        if item["title"].strip().lower() == "model comparison and findings":
+            add_speaker_notes(slide, item.get("bullets", []))
+            build_model_comparison_slide(
+                slide,
+                item.get("highlights", []) or item.get("bullets", []),
+            )
+            continue
 
         bullets = item.get("bullets", [])
         images = item.get("images", [])
@@ -330,7 +462,7 @@ def build_slides(
 
             for image_info in images:
                 image_path = (
-                    Path(item["source_dir"]) / image_info["path"]
+                        Path(item["source_dir"]) / image_info["path"]
                 )
 
                 add_slide_image(

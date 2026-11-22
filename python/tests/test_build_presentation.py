@@ -368,3 +368,43 @@ def test_build_slides_displays_explicit_highlights():
 
     assert "Background detail one" in notes_text
     assert "Background detail two" in notes_text
+
+def test_model_comparison_uses_visual_cards():
+    """Model comparison must use reproducible visual cards."""
+    from build_presentation import build_slides, create_presentation
+
+    presentation = create_presentation()
+
+    build_slides(
+        presentation,
+        [{
+            "title": "Model Comparison and Findings",
+            "bullets": [
+                "Two-check rule: 133 flagged vehicle-day rows",
+                "Isolation Forest: 32 flagged vehicle-day rows",
+                "LOF: Not scored due to duplicate feature patterns",
+                "Synthetic data only; flags are not confirmed violations",
+            ],
+            "highlights": [
+                "Two-check rule: 133 flagged vehicle-day rows",
+                "Isolation Forest: 32 flagged vehicle-day rows",
+                "LOF: Not scored due to duplicate feature patterns",
+                "Synthetic data only; flags are not confirmed violations",
+            ],
+            "images": [],
+        }],
+    )
+
+    slide = presentation.slides[0]
+
+    visible_text = "\n".join(
+        shape.text
+        for shape in slide.shapes
+        if shape.has_text_frame
+    )
+
+    assert "133" in visible_text
+    assert "32" in visible_text
+    assert "LOF" in visible_text
+    assert "Flag counts (not accuracy)" in visible_text
+    assert "KEY TAKEAWAY" in visible_text
