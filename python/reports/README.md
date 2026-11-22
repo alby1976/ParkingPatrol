@@ -38,3 +38,10 @@ parking violations or model accuracy.
 Do not commit confidential real-data exports, raw licence plates, secret
 credentials or copyrighted third-party slides/images. Cite sources and
 permitted GAI assistance according to the instructor's assignment rules.
+
+
+## Generative AI assistance and disclosure
+
+Generative AI tools (ChatGPT and, for documented repository workflows, Codex) assisted with project planning, Python implementation and test suggestions, data-cleaning and model-comparison guidance, interpretation of synthetic-data results, presentation generation and layout, and GitHub documentation. The student reviewed the suggestions, ran and checked reported automated tests and synthetic experiments, and reviewed the slides and analysis. The student remains responsible for independent evaluation, interpretation and conclusions. Details, acceptance records and proposed APA-style tool citations are in [AI_USE_LOG.md](../docs/ai/AI_USE_LOG.md).
+
+**Course permission caveat:** The course outline requires AI citations and limits use to instructor-approved assignment activities. The mini-capstone assignment PDF does not explicitly approve each specific AI-assisted activity. Verify any further instructor restrictions and required disclosure placement before submitting; the log and this statement do not establish permission. No real parking violations were inferred from synthetic anomaly flags.
