@@ -84,3 +84,9 @@ Run locally from repository root:
 ```
 
 Source references: [scikit-learn IsolationForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html), [pandas](https://pandas.pydata.org/docs/), and [project architecture](../architecture/ARCHITECTURE.md).
+
+## November 22, 2026 — Operational clarification for the rule and model
+
+Each staff-performed lot round is complete. Normal first round: ~10:15–10:30; optional second: ~12:30 (can be skipped for staff workload); additional third: ~15:30 if time/parking complaints warrant. **A missing round is unperformed, not incomplete.** A positive plate sighting at a performed round establishes presence *at that observation*. If the plate is absent at a later performed completed round, staff may operationally mark **assumed departed before the later round**, but there is no observed departure timestamp and no proof of continuous occupancy or return history. Without a later completed check, departure stays unknown.
+
+Continue counting **distinct same-day inspection IDs** for the rule (≥2 sightings is a review signal, not a violation). A vehicle seen twice with an intervening completed check in which it was absent can have left/re-entered; that is not continuous parking evidence. Optional complaint-driven checks alter opportunities and may bias both rule flags and ML features. Existing synthetic runs use old 09:00/15:00 two-round/incomplete-check simulation and must not be described as faithful to the revised clinic workflow until the generator and tests are updated (Issue #7).
