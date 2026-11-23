@@ -257,3 +257,14 @@ The historical S01–S31 session allocation appears in prior Git history and gro
 **Dates:** retain Dec 4 internal freeze and Dec 11 assignment submission. Dec 8 is an **internal readiness target**; the five-page course outline places final presentations in Week 6, **December 9**. Confirm instructor's actual presentation appointment rather than asserting Dec 8. Sundays remain off. See the [updated guided sprint calendar](GUIDED_SPRINT_SESSIONS.md) and Issues #7–#10.
 
 **Integrity:** Instructor-specific permitted GAI uses and required in-submission citation format remain unconfirmed. Log AI support, retain individual student analysis and verification, and keep raw identifiers out of public deliverables.
+
+## 15. Student-confirmed inspection schedule and analysis correction (November 22, 2026)
+
+- **First inspection:** normally 10:15–10:30 AM.
+- **Second:** around 12:30 PM when inspector workload allows; sometimes **not performed**.
+- **Third:** around 3:30 PM when time allows or parking-space complaints prompt it.
+- **Completion:** every inspection that is actually performed completes its lot round. **A skipped check is not an incomplete check.**
+- **Observed-absence operational convention:** a plate observed at an earlier completed inspection but not recorded at a later **completed** inspection is **assumed to have left by that later check**. It is not a verified departure time or parking duration; departure is unknown without a subsequent check, and a vehicle can leave/re-enter between checks.
+- **Bias:** complaint-triggered and discretionary third checks are not random; same-day flagged counts must be interpreted relative to opportunities for inspection.
+
+**Evidence gap / no automatic code changes:** Existing synthetic generator models one/two rounds at 09:00/15:00 with 5% incomplete checks, unlike the real workflow; historical published synthetic 10d/30d results and Slide 7 still reflect that earlier generator. Preserve them as historical baselines. Scheduled correction: S15 analyze assumptions; S16–S17 TDD of configurable 1–3 complete inspection rounds and optional simulation triggers if essential to the 40-point ML rubric; S18 compare results/coverage with earlier simulation; S19–S20 revise interpretation and public-safe visualizations if warranted. Use new output folders and do not silently overwrite accepted artifacts. Keep Dec 4 analysis freeze, rest Sundays, Dec 11 submission, and an under-10-minute presentation. Related: Issue #7; no sample-level real data to public GitHub.
