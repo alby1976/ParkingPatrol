@@ -24,10 +24,7 @@ class SyntheticConfig:
     capacity: int = 38
     occupancy_rate: float = 0.65
     one_check_probability: float = 0.25
-    third_check_probability: float = 0.0
-    # Every performed inspection is complete under normal clinic practice.
-    # A skipped inspection is not recorded as an incomplete inspection.
-    incomplete_probability: float = 0.0
+    incomplete_probability: float = 0.05
     seed: int = 120
     start_date: date = date(2026, 11, 1)
 
@@ -36,12 +33,7 @@ class SyntheticConfig:
             raise ValueError("days must be a positive integer")
         if not isinstance(self.capacity, int) or not 1 <= self.capacity <= 38:
             raise ValueError("capacity must be between 1 and 38")
-        for name in (
-                "occupancy_rate",
-                "one_check_probability",
-                "third_check_probability",
-                "incomplete_probability",
-        ):
+        for name in ("occupancy_rate", "one_check_probability", "incomplete_probability"):
             value = getattr(self, name)
             if not 0 <= value <= 1:
                 raise ValueError(f"{name} must be between zero and one")
@@ -74,19 +66,11 @@ def generate_synthetic_data(config: SyntheticConfig = SyntheticConfig()) -> Synt
     sight_rows: list[dict] = []
     for day_index in range(config.days):
         current = config.start_date + timedelta(days=day_index)
-        # First inspection always takes place.
-        round_times = [time(10, rng.randint(15, 30))]
-
-        # Second inspection may be skipped because of workload.
-        if rng.random() >= config.one_check_probability:
-            round_times.append(time(12, 30))
-
-        # Third inspection is optional and independent of the second.
-        if rng.random() < config.third_check_probability:
-            round_times.append(time(15, 30))
+        n_checks = 1 if rng.random() < config.one_check_probability else 2
         previous_vehicles: list[str] = []
-        for round_number, at_time in enumerate(round_times):
+        for round_number in range(n_checks):
             check_id = f"CHK_{day_index + 1:03d}_{round_number + 1}"
+            at_time = time(9, 0) if round_number == 0 else time(15, 0)
             checked_at = datetime.combine(current, at_time, tzinfo=EDMONTON)
             complete = rng.random() >= config.incomplete_probability
             check_rows.append({
@@ -141,12 +125,6 @@ def main() -> None:
     parser.add_argument("--days", type=int, default=10)
     parser.add_argument("--seed", type=int, default=120)
     parser.add_argument("--one-check-probability", type=float, default=0.25)
-    parser.add_argument(
-        "--third-check-probability",
-        type=float,
-        default=0.0,
-        help="Probability of an optional 3:30 PM inspection",
-    )
     parser.add_argument("--occupancy-rate", type=float, default=0.65)
     parser.add_argument(
         "--output", type=Path,
@@ -154,10 +132,8 @@ def main() -> None:
     )
     args = parser.parse_args()
     data = generate_synthetic_data(SyntheticConfig(
-        days=args.days,
-        seed=args.seed,
+        days=args.days, seed=args.seed,
         one_check_probability=args.one_check_probability,
-        third_check_probability=args.third_check_probability,
         occupancy_rate=args.occupancy_rate,
     ))
     args.output.mkdir(parents=True, exist_ok=True)
