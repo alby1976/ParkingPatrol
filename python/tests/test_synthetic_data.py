@@ -1,4 +1,5 @@
 """Synthetic fixture tests, without production or identifiable parking data."""
+from datetime import time
 from pathlib import Path
 import sys
 
@@ -28,7 +29,16 @@ def test_capacity_and_one_or_two_checks_each_day():
 
 def test_schema_and_edmonton_times_and_join_keys():
     output = generate_synthetic_data(SyntheticConfig(days=10))
-    assert list(output.checks.columns) == ["check_id", "area_id", "check_at", "check_complete"]
+
+    assert list(output.checks.columns) == [
+        "check_id",
+        "area_id",
+        "check_at",
+        "check_complete",
+        "duration_minutes",
+        "inspection_reason",
+        "complaint_at",
+    ]
     assert list(output.sightings.columns) == ["vehicle_id", "check_id", "area_id", "observed_at"]
     assert str(output.checks["check_at"].dt.tz) == "America/Edmonton"
     assert str(output.sightings["observed_at"].dt.tz) == "America/Edmonton"
@@ -165,3 +175,367 @@ def test_cli_supports_optional_third_inspection(tmp_path, monkeypatch):
 
     assert len(checks) == 6
     assert checks["check_complete"].all()
+
+
+def test_vehicle_observations_within_thirty_minutes():
+    """Vehicle observations occur within 30 minutes of inspection start."""
+    config = SyntheticConfig(days=10, seed=120)
+    result = generate_synthetic_data(config)
+
+    sightings = result.sightings.merge(
+        result.checks[["check_id", "check_at"]],
+        on="check_id",
+        validate="many_to_one",
+    )
+
+    elapsed = sightings["observed_at"] - sightings["check_at"]
+
+    assert (elapsed >= pd.Timedelta(0)).all()
+    assert (elapsed <= pd.Timedelta(minutes=30)).all()
+
+    # The generator must record each inspection's duration.
+    assert "duration_minutes" in result.checks.columns
+
+    durations = result.checks["duration_minutes"]
+
+    assert durations.between(1, 30).all()
+    assert 12 <= durations.mean() <= 18
+
+    # No vehicle observation may occur after its inspection finishes.
+    sightings = result.sightings.merge(
+        result.checks[["check_id", "check_at", "duration_minutes"]],
+        on="check_id",
+        validate="many_to_one",
+    )
+
+    elapsed = (
+        sightings["observed_at"] - sightings["check_at"]
+    ).dt.total_seconds() / 60
+
+    assert (elapsed <= sightings["duration_minutes"]).all()
+
+
+def test_occasional_long_inspections():
+    """Long inspections can occur without exceeding 30 minutes."""
+    config = SyntheticConfig(
+        days=365,
+        seed=120,
+    )
+
+    result = generate_synthetic_data(config)
+    durations = result.checks["duration_minutes"]
+
+    assert durations.between(1, 30).all()
+    assert 12 <= durations.mean() <= 18
+
+    # Some inspections should take longer than 20 minutes.
+    assert (durations > 20).any()
+
+
+def test_customer_complaint_always_triggers_inspection():
+    """Every simulated complaint creates one additional complete inspection."""
+    config = SyntheticConfig(
+        days=5,
+        seed=120,
+        one_check_probability=1.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+    checks = result.checks.copy()
+    checks["day"] = checks["check_at"].dt.date
+
+    # One morning inspection plus one complaint inspection daily.
+    assert checks.groupby("day").size().eq(2).all()
+
+    assert "inspection_reason" in checks.columns
+
+    for _, group in checks.groupby("day"):
+        assert set(group["inspection_reason"]) == {
+            "routine",
+            "customer_complaint",
+        }
+        assert group["check_complete"].all()
+
+
+def test_complaint_inspections_occur_at_variable_times():
+    """Every complaint is recorded, including those handled by routine rounds."""
+    config = SyntheticConfig(
+        days=30,
+        seed=120,
+        one_check_probability=1.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+    checks = result.checks.copy()
+
+    # Exactly one simulated complaint occurs on each of 30 days.
+    complaints = checks.loc[checks["complaint_at"].notna()].copy()
+
+    assert len(complaints) == 30
+
+    # Complaint times should vary, not always be 2:00 PM.
+    times = complaints["complaint_at"].dt.strftime("%H:%M")
+    assert times.nunique() > 1
+
+    # Provisional simulation window: 9:00 AM through 4:59 PM.
+    assert complaints["complaint_at"].dt.hour.between(9, 16).all()
+
+    # Every complaint must be associated with a completed inspection.
+    assert complaints["check_complete"].all()
+
+
+def test_inspection_rounds_do_not_overlap():
+    """An inspection must finish before the next one starts."""
+    config = SyntheticConfig(
+        days=365,
+        seed=120,
+        one_check_probability=0.0,
+        third_check_probability=1.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+    checks = result.checks.copy()
+    checks["day"] = checks["check_at"].dt.date
+
+    for _, group in checks.groupby("day"):
+        group = group.sort_values("check_at")
+
+        finish_times = (
+            group["check_at"]
+            + pd.to_timedelta(group["duration_minutes"], unit="m")
+        )
+
+        next_starts = group["check_at"].shift(-1)
+
+        # Every inspection must finish before the next begins.
+        assert (
+            finish_times.iloc[:-1].to_numpy()
+            <= next_starts.iloc[:-1].to_numpy()
+        ).all()
+
+
+
+def test_complaint_during_active_inspection_reuses_that_inspection():
+    """A complaint during an inspection reuses that inspection."""
+    from synthetic_data import find_active_inspection
+
+    start = pd.Timestamp("2026-11-09 10:15", tz="America/Edmonton")
+
+    checks = [
+        {
+            "check_id": "CHK_001_1",
+            "check_at": start,
+            "duration_minutes": 20,
+            "inspection_reason": "routine",
+        }
+    ]
+
+    # Customer complains 10 minutes into the inspection.
+    complaint_at = start + pd.Timedelta(minutes=10)
+
+    existing = find_active_inspection(checks, complaint_at)
+
+    # Use the current inspection; do not require another.
+    assert existing is checks[0]
+    assert existing["inspection_reason"] == "routine"
+
+    # A complaint after the inspection ends has no active round.
+    later_complaint = start + pd.Timedelta(minutes=25)
+    assert find_active_inspection(checks, later_complaint) is None
+
+
+def test_generator_reuses_active_inspection_for_complaint(monkeypatch):
+    """A complaint during a morning inspection creates no extra round."""
+    import synthetic_data
+
+    # Force the morning inspection to start at 10:15 AM.
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_morning_time",
+        lambda rng: time(10, 15),
+        raising=False,
+    )
+
+    # Force the customer complaint to occur at 10:20 AM.
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_complaint_time",
+        lambda rng: time(10, 20),
+        raising=False,
+    )
+
+    config = SyntheticConfig(
+        days=1,
+        seed=120,
+        one_check_probability=1.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+    checks = result.checks
+
+    # The morning inspection should satisfy the complaint.
+    assert len(checks) == 1
+    assert checks.iloc[0]["inspection_reason"] == "routine"
+
+    # The complaint time must be retained separately.
+    assert "complaint_at" in checks.columns
+    assert pd.notna(checks.iloc[0]["complaint_at"])
+
+
+def test_delayed_complaint_preserves_original_timestamp(monkeypatch):
+    """A complaint received before an inspection retains its original time."""
+    import synthetic_data
+
+    # Complaint occurs five minutes before the midday routine inspection.
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_complaint_time",
+        lambda rng: time(12, 25),
+    )
+
+    config = SyntheticConfig(
+        days=1,
+        seed=120,
+        one_check_probability=0.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+
+    complaints = result.checks.loc[
+        result.checks["complaint_at"].notna()
+    ]
+
+    assert len(complaints) == 1
+
+    complaint = complaints.iloc[0]
+
+    # Preserve the actual customer complaint time.
+    assert complaint["complaint_at"].strftime("%H:%M") == "12:25"
+
+    # An inspection must not begin before the complaint occurs.
+    assert complaint["check_at"] >= complaint["complaint_at"]
+
+    # The complaint should be satisfied by an inspection that starts
+    # at or after 12:25, without fabricating another complaint.
+    assert complaint["check_complete"]
+
+
+def test_complaint_before_routine_inspection_starts_promptly(monkeypatch):
+    """A complaint outside an active round starts an inspection promptly."""
+    import synthetic_data
+
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_complaint_time",
+        lambda rng: time(12, 25),
+    )
+
+    config = SyntheticConfig(
+        days=1,
+        seed=120,
+        one_check_probability=0.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+    checks = result.checks.sort_values("check_at")
+
+    complaints = checks.loc[
+        checks["inspection_reason"] == "customer_complaint"
+    ]
+
+    assert len(complaints) == 1
+
+    complaint = complaints.iloc[0]
+
+    assert complaint["complaint_at"].strftime("%H:%M") == "12:25"
+    assert complaint["check_at"].strftime("%H:%M") == "12:25"
+
+    # Both the complaint and the routine inspection remain represented.
+    assert len(checks) == 3
+
+    # Inspections must not overlap.
+    finish_times = (
+        checks["check_at"]
+        + pd.to_timedelta(checks["duration_minutes"], unit="m")
+    )
+    next_starts = checks["check_at"].shift(-1)
+
+    assert (
+        finish_times.iloc[:-1].to_numpy()
+        <= next_starts.iloc[:-1].to_numpy()
+    ).all()
+
+
+def test_reused_complaint_does_not_skip_inspection_ids(monkeypatch):
+    """Reusing an inspection must not create gaps in check IDs."""
+    import synthetic_data
+
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_morning_time",
+        lambda rng: time(10, 15),
+    )
+
+    monkeypatch.setattr(
+        synthetic_data,
+        "generate_complaint_time",
+        lambda rng: time(10, 20),
+    )
+
+    config = SyntheticConfig(
+        days=1,
+        seed=120,
+        one_check_probability=0.0,
+        third_check_probability=0.0,
+        complaint_probability=1.0,
+    )
+
+    result = generate_synthetic_data(config)
+
+    checks = result.checks.sort_values("check_at")
+
+    assert len(checks) == 2
+
+    assert checks["check_id"].tolist() == [
+        "CHK_001_1",
+        "CHK_001_2",
+    ]
+
+    assert checks["check_id"].is_unique
+
+
+def test_cli_supports_complaint_probability(tmp_path, monkeypatch):
+    """Allow complaint frequency to be configured through the CLI."""
+    from synthetic_data import main
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "synthetic_data.py",
+            "--days", "2",
+            "--seed", "120",
+            "--one-check-probability", "1",
+            "--third-check-probability", "0",
+            "--complaint-probability", "1",
+            "--output", str(tmp_path),
+        ],
+    )
+
+    main()
+
+    checks = pd.read_csv(tmp_path / "synthetic_checks.csv")
+
+    assert "complaint_at" in checks.columns
+    assert checks["complaint_at"].notna().sum() == 2
