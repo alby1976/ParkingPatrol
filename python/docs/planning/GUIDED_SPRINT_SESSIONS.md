@@ -119,3 +119,18 @@ See [CAPSTONE_PLAN.md](CAPSTONE_PLAN.md), [SPRINT_PROGRESS.md](SPRINT_PROGRESS.m
 | **S31 Fri Dec 11** | Upload the **completed paper/one-pager and presentation** to D2L Mini capstone project dropbox (include script/notebook as required by assignment/submission UI); verify deadline time and retain private confirmation. |
 
 **Priority gate:** 40-point ML interpretation/validation evidence first; 30-point clean/tested code next; 20-point **<10 minute** presentation; 10-point one-page related-work summary. A notebook may improve examiner visibility but must **not** replace the accepted script option or displace needed evidence/rehearsal. Optional notebook: [Issue #24](https://github.com/alby1976/ParkingPatrol/issues/24). Continue human review and privacy safeguards. Git commits must use `Refs #7`, `Refs #8`, `Refs #9`, `Refs #10` as applicable and record verifiable test outcomes and AI assistance.
+
+## November 22 inspection-workflow correction — revised S15–S20 tasks (supersedes conflicting synthetic assumptions above)
+
+The student confirmed that **all performed inspection rounds finish**, the first is **10:15–10:30**, second **around 12:30 when feasible** (sometimes skipped because inspector is busy), and third **around 15:30 optionally** when time allows or a parking complaint occurs. **Not performed ≠ incomplete.** Previous generator settings (09:00/15:00, 1–2/day, 5% incomplete) and 10d/30d model results are historical simulated baselines, not corrected-clinic results.
+
+| Sprint/date | Revised targeted work and proof |
+| --- | --- |
+| **S15 Mon Nov 23** | Review the real inspection process versus existing synthetic assumptions and coverage; record mismatch, selection bias, and unperformed-vs-incomplete distinction. **Documentation/data audit**, no untested changes. |
+| **S16 Tue Nov 24** | **TDD RED first:** design tests for morning time range, conditional midday inspection, optional 15:30 third, all performed checks complete, skipped checks absent, deterministic seed and no fabricated arrival/departure times. Then minimal implementation if priority/time permits. |
+| **S17 Wed Nov 25** | Complete GREEN/REFACTOR, test capacity/empty round, DST and same-day repeated-sighting behavior; full pytest; generate **new** scenario-specific 10d/30d fictional exports in separate directories (never overwrite historical baseline). |
+| **S18 Thu Nov 26** | Compare revised synthetic coverage, one/two/three-round frequencies, feature patterns, two-check/IF/LOF statuses and limitations against original experiment. If no safe implementation, document limitations and keep original artifacts. |
+| **S19 Fri Nov 27** | Produce public-safe exploratory coverage/inspection-bias figures and update narrative/slide only if new runs are verified; distinguish complaint-triggered checks from random sampling. |
+| **S20 Sat Nov 28** | Student-owned scientific interpretation, validation caveats, notebook only if there is room, and rehearsal of results; obtain read/accept and evidence for any actual implementation. |
+
+**Interpretation rule:** missing a plate at the next *performed and completed* same-area round supports only an **assumed departure before that observation**, not an observed departure event or continuous parking duration. A missed inspection yields no departure evidence. Preserve December 4 freeze, December 11 D2L deadline, **<10-minute** presentation rehearsal, and Sunday rest. December 8 remains a readiness target pending confirmation of the official Week 6 date.
