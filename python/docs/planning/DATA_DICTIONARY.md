@@ -143,3 +143,11 @@ The Python research code only provides a representation of these decisions; it c
 - [ ] Whether worksheet access and API quotas support the intended refresh frequency
 
 This dictionary is a design aid, not proof that all fields are already collected.
+
+## November 22, 2026 — Confirmed inspection-round semantics
+
+- **Actual practice (student-confirmed):** first full-lot round is approximately 10:15–10:30; second ~12:30 can be skipped for workload; third ~15:30 may occur if time permits or complaints arise. Every **performed** round is complete; absence of a round means **not performed**, not `check_complete=False`.
+- **Schema mapping:** each performed round gets a distinct `check_id`, `check_at`, `area_id`, and `check_complete=True`. Existing nullable/False `check_complete` remains useful for exception handling/tests but does not describe the normal workflow. A completed empty round has a check row and zero sightings; a skipped round has **no check row**.
+- **Vehicle interpretation:** positive sighting = present at observation; if not recorded in the next performed completed same-area round, derive **assumed departed before that round** as a separate operational inference, not a departure timestamp or confirmed length of stay. If there was no next round, departure status = unknown. Reappearance later may indicate a separate visit but exact visit boundaries are unobserved.
+- **Selection bias:** an optional/complaint-driven third round increases observation opportunities nonrandomly; an inspection reason should be recorded only when actually collected and authorized, **not fabricated** in real data.
+- **Current gap:** fictional generator still uses 09:00/15:00, 1–2 rounds/day and occasional incomplete checks. Regenerate after TDD as a **new scenario**, preserve historical 10d/30d results, and re-evaluate features and flags before changing conclusions.
