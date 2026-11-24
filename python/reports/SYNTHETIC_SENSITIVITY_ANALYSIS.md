@@ -39,3 +39,91 @@ Anomaly flags do not establish unauthorized parking. No detection accuracy, prec
 ## Conclusion
 
 Increasing the synthetic observation period alone did not resolve LOF's duplicate-neighborhood limitation. Future experiments should prioritize meaningful feature variation and sensitivity to inspection conditions rather than simply increasing the number of observations.
+
+
+---
+
+## November 23, 2026 — S18 Realistic Inspection Sensitivity Analysis
+
+### Objective
+
+Evaluate how adding a complaint-triggered inspection affects rule-based detection, Isolation Forest and Local Outlier Factor (LOF).
+
+The revised dataset simulates 10 days of activity in a 38-stall customer-only parking lot.
+
+### Dataset
+
+- Random seed: 120
+- Completed inspections: 20
+- Routine inspections: 19
+- Complaint-triggered inspections: 1
+- Vehicle sightings: 480
+- Vehicle-day records: 321
+- Unique feature patterns: 66
+- Largest identical feature group: 57
+
+### Model comparison
+
+| Metric | Routine only | All inspections |
+| --- | ---: | ---: |
+| Inspections | 19 | 20 |
+| Vehicle-day records | 315 | 321 |
+| Rule-based flags | 118 | 137 |
+| Isolation Forest flags | 32 | 30 |
+| LOF | Unscored | Unscored |
+
+Isolation Forest used contamination=0.10. The two scenarios were fitted separately.
+
+### Rule-based findings
+
+Including the complaint-triggered inspection produced:
+
+- 19 newly flagged vehicle-day records
+- 0 previously flagged records losing their flag
+- 118 records flagged in both scenarios
+
+All 19 newly flagged records already existed in the routine-only dataset.
+
+This demonstrates sensitivity to inspection frequency rather than evidence of additional parking violations.
+
+### Isolation Forest findings
+
+Comparing the two separately fitted models:
+
+- 22 vehicle-day records remained flagged.
+- 8 existing records became flagged.
+- 10 existing records lost their flags.
+- 0 newly observed records became flagged.
+
+Thus, 18 classifications changed, even though the total number of flags decreased by only two.
+
+The Jaccard agreement between the flagged sets was 22/40 = 55%.
+
+These differences reflect changed observation features and model refitting. Their separate contributions have not been isolated.
+
+### LOF findings
+
+LOF remained unscored because identical feature patterns overwhelmed its configured neighbourhood.
+
+The realistic dataset contained 66 unique feature patterns among 321 vehicle-day records, with a largest identical group of 57.
+
+An unscored model is not equivalent to a model detecting zero anomalies.
+
+### Interpretation and limitations
+
+- Customer complaints and extra inspections create nonrandom observation opportunities.
+- Repeated sightings do not establish continuous parking duration.
+- Model flags are candidates for human review, not confirmed violations.
+- No independently verified violation labels were available for estimating precision, recall or accuracy.
+- Simulation probabilities are assumptions, not measured clinic frequencies.
+- Additional seeds and inspection schedules are needed to assess stability.
+
+### Preliminary conclusion
+
+Adding one complaint-triggered inspection increased rule-based flags from 118 to 137.
+
+Isolation Forest changed 18 individual classifications despite producing similar total flag counts.
+
+The experiment demonstrates inspection-sampling sensitivity, not predictive accuracy.
+
+Related GitHub issue: #7
