@@ -184,7 +184,7 @@ The student reported:
 - Five-seed evaluation test: passed
 - Reproducibility test: passed
 - Flag-count validation test: passed
-- Full Python regression suite: 70 passed in 6.85 seconds
+- Full Python regression suite: 71 passed in 5.75 seconds
 
 ### Limitations
 

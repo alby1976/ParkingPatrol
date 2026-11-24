@@ -1,4 +1,3 @@
-
 """Evaluate synthetic parking observations across random seeds.
 
 Generate reproducible synthetic observations and compare review methods
