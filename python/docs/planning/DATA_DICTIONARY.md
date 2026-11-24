@@ -25,7 +25,7 @@ The connector should read both vehicle sightings and completed/empty area checks
 | `check_id` | string | Identifier for each staff inspection/check | Used to deduplicate observations |
 | `area_id` | string | Part of lot inspected | Checks in another area cannot establish absence |
 | `observed_at` | timezone-aware datetime | When a staff member observed the vehicle | **Not** arrival time |
-| `check_at` | timezone-aware datetime | Timestamp associated with a check | A completed check can have zero observed vehicles |
+| `check_at` | timezone-aware datetime | **Start** of an inspection/check | Not a vehicle arrival time; a completed check can have zero observed vehicles |
 | `check_complete` | nullable boolean | Whether area survey is confirmed complete | Null/incomplete is not evidence of absence |
 | `record_source` | string | Origin, e.g. Form response vs reviewed export | Record lineage; confirm actual source columns |
 | `operational_status` | string, optional | Existing assumed/potential/most-likely/confirmed review label | **Not** independently verified model target |
@@ -33,7 +33,7 @@ The connector should read both vehicle sightings and completed/empty area checks
 
 ### Linked research tables (recommended)
 
-**`checks`** (one row per check, including empty completed checks): `check_id`, `area_id`, `check_at`, `check_complete`.
+**`checks`** (one row per check, including empty completed checks): normalized required fields `check_id`, `area_id`, `check_at`, `check_complete`. The **S17 synthetic export** additionally contains `duration_minutes`, `inspection_reason`, and `complaint_at`. These additional columns are simulation metadata, not confirmed Google Sheet source fields and not guaranteed to survive the current `normalize_observations()` pipeline.
 
 **`sightings`** (one row per vehicle/check/area after deduplication): `vehicle_id`, `check_id`, `area_id`, `observed_at`.
 
@@ -150,4 +150,25 @@ This dictionary is a design aid, not proof that all fields are already collected
 - **Schema mapping:** each performed round gets a distinct `check_id`, `check_at`, `area_id`, and `check_complete=True`. Existing nullable/False `check_complete` remains useful for exception handling/tests but does not describe the normal workflow. A completed empty round has a check row and zero sightings; a skipped round has **no check row**.
 - **Vehicle interpretation:** positive sighting = present at observation; if not recorded in the next performed completed same-area round, derive **assumed departed before that round** as a separate operational inference, not a departure timestamp or confirmed length of stay. If there was no next round, departure status = unknown. Reappearance later may indicate a separate visit but exact visit boundaries are unobserved.
 - **Selection bias:** an optional/complaint-driven third round increases observation opportunities nonrandomly; an inspection reason should be recorded only when actually collected and authorized, **not fabricated** in real data.
-- **Current gap:** fictional generator still uses 09:00/15:00, 1–2 rounds/day and occasional incomplete checks. Regenerate after TDD as a **new scenario**, preserve historical 10d/30d results, and re-evaluate features and flags before changing conclusions.
+- **S16/S17 implementation update (November 23, 2026):** the fictional generator now models a morning round beginning 10:15–10:30, an optional ~12:30 round, and an optional ~15:30 round. Performed inspections are complete by default. S17 adds simulated durations, complaint-triggered inspections, recorded complaint times and inspection reasons; a complaint received during an ongoing inspection is satisfied by that same inspection, with no duplicate round. Historical 10-day and 30-day synthetic exports must remain unchanged; export revised scenarios to a **new output directory** before re-evaluating detection results.
+
+## November 23, 2026 — S17 synthetic inspection and complaint fields
+
+The following are **implemented or under local S17 development** in `src/synthetic_data.py` on `feature/s17-realistic-dataset` and verified so far by the user's **67-test local regression run**. They are **not** confirmed operational Google Sheet columns. The S17 branch changes have not yet been merged into `main`.
+
+| Field / setting | Type / values | Definition and limitations |
+| --- | --- | --- |
+| `check_at` | timezone-aware datetime (`America/Edmonton`) | **Actual simulated inspection start**, not the time the vehicle arrived or departed. Existing core field, clarified semantics. |
+| `duration_minutes` | integer, 10–30 in present synthetic model | Simulated length of one completed staff inspection. Current assumption: 90% uniformly 10–20 minutes; 10% uniformly 21–30 minutes. Expected average is about 16 minutes; the clinic describes **approximately 15 minutes on average, sometimes up to 30**. This is an assumed distribution, not measured frequencies. |
+| `observed_at` | timezone-aware datetime | Vehicle sighting generated between `check_at` and `check_at + duration_minutes` (inclusive). **Not** parking duration, arrival time or departure time. |
+| `inspection_reason` | `routine` or `customer_complaint` | Identifies what caused the inspection to be created. A routine inspection **remains `routine`** even if it also satisfies a complaint. |
+| `complaint_at` | timezone-aware datetime or empty | Time the customer complaint was simulated. If it occurs during an active inspection, it is attached to that inspection rather than creating a duplicate. It must not be confused with `check_at`. Current design stores at most one complaint timestamp on a check, and does not constitute an independent event log. |
+| `complaint_probability` | float 0.0–1.0 | Probability of **one** simulated complaint occurring on a given day; default `0.0`. This is not a count of complaints or an observed clinic rate. Exposed via the `--complaint-probability` CLI option in local S17 code. |
+| `one_check_probability` | float 0.0–1.0 | Probability the optional midday routine inspection is skipped; default `0.25` in the synthetic scenario, not an empirical rate. |
+| `third_check_probability` | float 0.0–1.0 | Probability of the optional 15:30 routine inspection; default `0.0`, not an empirical rate. |
+
+**Scheduling and event semantics:** A simulated complaint time currently falls in a **provisional 09:00–16:59 window**; clinic operating hours have not been verified for that assumption. If no inspection is underway, the generator creates a complaint-triggered round. If staff are already inspecting, the ongoing round handles the complaint. The generator prevents overlap by moving a later inspection start if necessary, and gives actual inspections consecutive IDs. Because this is a synthetic simulation, no real complaint or inspection should be asserted from it.
+
+**Known limitations before analysis:** The present model supports **at most one complaint per day** and one `complaint_at` value per check; multiple real complaints may need their own linked `complaints` event table. The current normalizer's documented output retains only the four core check fields, so additional fields need explicit treatment in downstream feature-building and reporting. Complaint-triggered checks create **nonrandom extra observation opportunities**: compare anomaly results with routine-only checks or adjust for check coverage before drawing conclusions. Neither repeated sightings nor customer complaints prove an unauthorized vehicle or justify automatic enforcement.
+
+**Reproducibility and safety:** Retain the random seed and CLI parameters for each run, keep the original 10-day and 30-day exports unchanged, write new files under a separate ignored `generated/` subdirectory, and never commit actual licence plates, raw Google Sheet rows, or clinic enforcement information.
