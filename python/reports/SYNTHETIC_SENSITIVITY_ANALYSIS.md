@@ -127,3 +127,81 @@ Isolation Forest changed 18 individual classifications despite producing similar
 The experiment demonstrates inspection-sampling sensitivity, not predictive accuracy.
 
 Related GitHub issue: #7
+
+
+---
+
+## November 24, 2026 — S19 Multi-Seed Stability Analysis
+
+### Objective
+
+Examine whether rule-based detection, Isolation Forest and LOF behave consistently across five fictional parking datasets generated with different random seeds.
+
+### Experimental configuration
+
+- Random seeds: 120, 121, 122, 123, 124
+- Observation period: 10 simulated days per seed
+- Parking capacity: 38 stalls
+- Midday inspection skip probability: 0.25
+- Optional afternoon inspection probability: 0.25
+- Customer complaint probability: 0.25
+- Simulated occupancy rate: 0.65
+- Isolation Forest contamination: 0.10
+
+All probabilities are experimental assumptions, not measured clinic frequencies.
+
+### Results
+
+| Seed | Inspections | Sightings | Vehicle-days | Rule flags | Isolation Forest flags | LOF scored |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 120 | 20 | 480 | 321 | 137 | 30 | 0 |
+| 121 | 21 | 526 | 341 | 161 | 34 | 0 |
+| 122 | 19 | 499 | 354 | 113 | 35 | 0 |
+| 123 | 23 | 567 | 354 | 185 | 33 | 0 |
+| 124 | 22 | 551 | 358 | 158 | 33 | 0 |
+
+### Flag-rate stability
+
+| Statistic | Rule-based | Isolation Forest |
+| --- | ---: | ---: |
+| Mean | 43.6% | 9.5% |
+| Minimum | 31.9% | 9.2% |
+| Maximum | 52.3% | 10.0% |
+| Range | 20.4 percentage points | 0.8 percentage points |
+
+Rule-based review flags varied considerably across the five synthetic scenarios.
+
+Isolation Forest flagged approximately 10% of vehicle-day records, consistent with its configured contamination parameter. This does not establish predictive accuracy or stability of individual flagged vehicles.
+
+LOF scored zero records across the five scenarios. It should be reported as **unscored**, not as detecting zero anomalies.
+
+### Reproducibility
+
+The multi-seed evaluator returned identical summary DataFrames when run twice with seeds 120–124.
+
+The student reported:
+
+- Five-seed evaluation test: passed
+- Reproducibility test: passed
+- Flag-count validation test: passed
+- Full Python regression suite: 71 passed in 5.75 seconds
+
+### Limitations
+
+- The five datasets are synthetic, not independent real-world samples.
+- Changing the random seed affects inspection scheduling and vehicle observations together.
+- The experiment does not isolate inspection-frequency effects from other simulation changes.
+- Isolation Forest contamination influences its overall flag rate.
+- LOF could not provide anomaly predictions on these datasets.
+- No independently verified violation labels were used.
+- Accuracy, precision, recall and enforcement effectiveness cannot be established.
+
+### Conclusion
+
+The five-seed experiment found substantial variation in rule-based flag rates, while Isolation Forest's overall flag rate remained close to its configured contamination level.
+
+LOF remained unscored in every scenario.
+
+These results support further investigation of inspection-adjusted statistical methods and better observation data, rather than claims of demonstrated violation-detection accuracy.
+
+Related GitHub issue: #7
