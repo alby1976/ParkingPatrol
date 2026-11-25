@@ -186,3 +186,13 @@ However, synthetic-data results cannot establish real-world effectiveness or jus
 ### Final Takeaway
 
 ParkingPatrol can help prioritize parking observations for human review, but it cannot independently determine whether a vehicle violated parking rules.
+
+
+### S20 Student-Approved Interpretation (November 24, 2026)
+
+- Rule-based detection depends on inspection opportunities and observed vehicle patterns.
+- Isolation Forest flags unusual patterns, but its approximately 10% flag rate is influenced by the contamination setting and does not demonstrate accuracy.
+- LOF remained unscored because duplicated feature neighbourhoods triggered the reliability safeguard.
+- Suspicious observations must undergo human verification using independent evidence before any enforcement decision.
+
+**Limitations:** The experiments use synthetic data without independently verified violation labels. Actual parking durations remain unknown.

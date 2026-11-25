@@ -17,7 +17,7 @@ LOG = Path(__file__).resolve().parent / "docs" / "ai" / "AI_USE_LOG.md"
 HISTORY = "## Assistance history"
 NEXT = "## Copy this row for each future use"
 GATE = "## AI material reading and acceptance register"
-GATE_END = "## Draft disclosure wording"
+GATE_END = "## Project-specific GAI disclosure wording"
 ZONE = ZoneInfo("America/Edmonton")
 
 
@@ -85,8 +85,12 @@ def add(args: argparse.Namespace) -> None:
             "Citation/disclosure pending",
         )
     ) + " |\n"
-    before, after = text.split(NEXT, 1)
-    text = before.rstrip() + "\n" + history_row + "\n" + NEXT + after
+
+    # Insert the entry before the citation section, inside the
+    # assistance-history table rather than near the template.
+    history_end = "## Proposed APA-style citations"
+    before, after = text.split(history_end, 1)
+    text = before.rstrip() + "\n" + history_row + "\n\n" + history_end + after
     register_row = "| " + " | ".join(
         clean(x) for x in (
             ident, "Pending reading", logged_at,
@@ -97,6 +101,51 @@ def add(args: argparse.Namespace) -> None:
     text = before.rstrip() + "\n" + register_row + "\n" + GATE_END + after
     LOG.write_text(text, encoding="utf-8")
     print("CREATED:", ident, "— stop and present this material to the student.")
+
+
+def update_history_status(
+    text: str, entry_id: str, action: str
+) -> str:
+    """Synchronize a history entry with its review decision."""
+    statuses = {
+        "read": "Reading confirmed; awaiting acceptance",
+        "accept": "Reading and acceptance confirmed",
+        "reject": "Revision requested",
+        "revise": "Reading and acceptance pending",
+    }
+
+    start = text.index(HISTORY)
+    end = text.index("## Proposed APA-style citations", start)
+
+    history = text[start:end]
+    lines = history.splitlines(keepends=True)
+
+    matches = [
+        i for i, line in enumerate(lines)
+        if line.startswith("| ")
+        and f"({entry_id})" in line
+    ]
+
+    if len(matches) != 1:
+        raise ValueError(
+            f"Expected one assistance-history entry: {entry_id}"
+        )
+
+    index = matches[0]
+
+    cells = [
+        cell.strip()
+        for cell in lines[index].strip().strip("|").split("|")
+    ]
+
+    if len(cells) != 5:
+        raise ValueError("Invalid assistance-history row")
+
+    cells[3] = f"{statuses[action]} ({entry_id})"
+    newline = "\r\n" if lines[index].endswith("\r\n") else "\n"
+    lines[index] = "| " + " | ".join(cells) + " |" + newline
+
+    return text[:start] + "".join(lines) + text[end:]
 
 
 def confirm(args: argparse.Namespace) -> None:
@@ -130,7 +179,11 @@ def confirm(args: argparse.Namespace) -> None:
         r[3] = "—"
         r[4] = "—"
         r[6] = clean(args.note or "Revised material submitted for renewed review")
-    LOG.write_text(replace_row(text, args.id, r), encoding="utf-8")
+    updated = replace_row(text, args.id, r)
+    updated = update_history_status(
+        updated, args.id, args.action
+    )
+    LOG.write_text(updated, encoding="utf-8")
     print(args.action.upper(), args.id, "recorded at", now())
 
 
