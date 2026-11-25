@@ -94,13 +94,13 @@ def add(args: argparse.Namespace) -> None:
     register_row = "| " + " | ".join(
         clean(x) for x in (
             ident, "Pending reading", logged_at,
-            "—", "—", args.activity, "—",
+            "Pending", "Pending", args.activity, "Pending",
         )
     ) + " |\n"
     before, after = text.split(GATE_END, 1)
     text = before.rstrip() + "\n" + register_row + "\n" + GATE_END + after
     LOG.write_text(text, encoding="utf-8")
-    print("CREATED:", ident, "— stop and present this material to the student.")
+    print("CREATED:", ident, "- stop and present this material to the student.")
 
 
 def update_history_status(
@@ -176,8 +176,8 @@ def confirm(args: argparse.Namespace) -> None:
         if r[1] != "Revision requested":
             raise SystemExit("Only rejected material can be resubmitted for reading.")
         r[1] = "Pending reading"
-        r[3] = "—"
-        r[4] = "—"
+        r[3] = "Pending"
+        r[4] = "Pending"
         r[6] = clean(args.note or "Revised material submitted for renewed review")
     updated = replace_row(text, args.id, r)
     updated = update_history_status(

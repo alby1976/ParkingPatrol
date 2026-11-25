@@ -132,3 +132,34 @@ def test_read_and_accept_update_both_tables(tmp_path, monkeypatch):
     assert f"Reading and acceptance confirmed ({entry_id})" in history
     assert f"Reading and acceptance pending ({entry_id})" not in history
     assert f"| {entry_id} | Accepted |" in after_accept
+
+
+def test_new_ai_log_records_use_ascii(tmp_path, monkeypatch):
+    """New AI-use records must contain ASCII-only characters."""
+    from types import SimpleNamespace
+
+    content = (
+        "## Assistance history\n\n"
+        "| Date | Tool | Task | Review | Citation |\n"
+        "| --- | --- | --- | --- | --- |\n"
+        "## Proposed APA-style citations\n\n"
+        "## Copy this row for each future use\n\n"
+        "## AI material reading and acceptance register\n\n"
+        "| Entry ID | Status | Logged at | Read confirmed at | "
+        "Decision at | Material / scope | Student response |\n"
+        "| --- | --- | --- | --- | --- | --- | --- |\n"
+        "## Project-specific GAI disclosure wording\n"
+    )
+
+    path = tmp_path / "AI_USE_LOG.md"
+    path.write_text(content, encoding="utf-8")
+    monkeypatch.setattr(log_ai_use, "LOG", path)
+
+    log_ai_use.add(
+        SimpleNamespace(tool="Test AI", activity="ASCII test")
+    )
+
+    result = path.read_text(encoding="utf-8")
+
+    assert result.isascii()
+    assert "Pending" in result
